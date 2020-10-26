@@ -1,0 +1,10 @@
+{
+  "short_name": "HACC 2020",
+  "name": "HACC 2020",
+  "icons": [
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
