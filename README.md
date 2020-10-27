@@ -2,20 +2,10 @@
 ## Table of contents
 
 * [Overview](#overview)
-* [Functionality](#functionality)
-* [Screens](#screens)
 * [How to Run](#how-to-run)
 
-## Overview 
-A solution to provide an IT portfolio & roadmap visualization of all the State of Hawai'i department's projects and applications, for the State's Office of Enterprise Technology Services (ETS). 
 
-## Functionality 
-
-
-## Screens 
-
-
-## How To Run 
+## How To Run
 
 In order to run this application on your machine, you will need Node, which can be installed [here](https://nodejs.org/en/download/).
 
@@ -28,7 +18,7 @@ Make your way into the project directory:
 cd hacc2020
 ```
 
-You will then need to install the dependecies: 
+You will then need to install the dependencies:
 
 ```
 npm install
@@ -40,4 +30,4 @@ Finally, start the application typing:
 npm start
 ```
 
-If everything went well, you will see the app running on localhost:3000 
+If everything went well, you will see the app running on localhost:3000
