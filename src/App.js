@@ -1,6 +1,15 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import axios from 'axios';
 import './App.css';
+
+// Import Pages
+import Dashboard from './components/Dashboard/Dashboard.js';
 
 const styles= {
   tableStyles: {
@@ -29,15 +38,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        HACC 2020
-      </header>
+      <Dashboard/>
       <div style={{display:'flex'}}>
         <div >
           <h1>Departments/Agencies</h1>
           { departments.map(record => {
             return <table style={{...styles.tableStyles, borderCollapse:'collapse',
-              backgroundColor:`${record._id % 2 == 0 ? 'grey' : 'white'}`}}>
+              backgroundColor:`${record._id % 2 === 0 ? 'grey' : 'white'}`}}>
                 <tr>
                   <td style={styles.tableStyles}><b>id</b></td> 
                   <td style={styles.tableStyles}>{record.id}</td>
@@ -57,7 +64,7 @@ function App() {
           <h1>IT Applications</h1>
           { applications.map(record => {
             return <table style={{...styles.tableStyles, borderCollapse:'collapse',
-            backgroundColor:`${record._id % 2 == 0 ? 'grey' : 'white'}`}}>
+            backgroundColor:`${record._id % 2 === 0 ? 'grey' : 'white'}`}}>
               {applicationFields.map(field => {
                 return <tr>
                   <td style={styles.tableStyles}><b>{field.id}</b></td>
@@ -71,7 +78,7 @@ function App() {
           <h1>IT Projects</h1>
           { projects.map(record => {
             return <table style={{...styles.tableStyles, borderCollapse:'collapse',
-            backgroundColor:`${record._id % 2 == 0 ? 'grey' : 'white'}`}}>
+            backgroundColor:`${record._id % 2 === 0 ? 'grey' : 'white'}`}}>
               {projectFields.map(field => {
                 return <tr>
                   <td style={styles.tableStyles}><b>{field.id}</b></td>
