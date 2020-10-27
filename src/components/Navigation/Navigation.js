@@ -5,8 +5,8 @@ import './Navigation.css';
 const Navigation = () => {
     return (
         <nav>
-          <Link id = "navbarLink"  to="/">Dashboard</Link>
-          <Link id = "navbarLink"  to="/data">Raw Data</Link>
+          <Link id="navbarLink" to="/">Dashboard</Link>
+          <Link id="navbarLink" to="/data">Raw Data</Link>
         </nav>
     );
 };
