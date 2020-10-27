@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useData } from '../../providers/DataProvider';
 
 const styles= {
@@ -14,24 +14,32 @@ const Data = () => {
         projects, projectFields
     } = useData();
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setIsLoading(false);
+    })
+
+    const datasets = 
+        <div style={{display:'flex'}}>
+            <Dataset 
+                headerTitle="Departments/Agencies"
+                flexValue={1} 
+                data={departments} 
+                dataFields={departmentFields}/>
+            <Dataset 
+                headerTitle="IT Applications"
+                flexValue={4} 
+                data={applications} 
+                dataFields={applicationFields}/>
+            <Dataset 
+                headerTitle="IT Projects"
+                flexValue={4} 
+                data={projects} 
+                dataFields={projectFields}/>
+        </div>;
     return (
-    <div style={{display:'flex'}}>
-        <Dataset 
-            headerTitle="Departments/Agencies"
-            flexValue={1} 
-            data={departments} 
-            dataFields={departmentFields}/>
-        <Dataset 
-            headerTitle="IT Applications"
-            flexValue={4} 
-            data={applications} 
-            dataFields={applicationFields}/>
-        <Dataset 
-            headerTitle="IT Projects"
-            flexValue={4} 
-            data={projects} 
-            dataFields={projectFields}/>
-    </div>
+        <>{ isLoading ? <h1>Loading...</h1> : datasets }</>
     );
 };
 
