@@ -6,7 +6,7 @@ import './App.css';
 import { DataProvider } from './providers/DataProvider';
 
 // Import Pages
-import Header from './components/Header/Header.js';
+import Navigation from './components/Navigation/Navigation.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Data from './components/Data/Data.js';
 
@@ -16,7 +16,7 @@ function App() {
     <DataProvider>
       <Router>
         <div className="App">
-          <Header/>
+          <Navigation/>
           <Route exact path="/" component={Dashboard}/>
           <Route exact path="/data" component={Data}/>
         </div>
