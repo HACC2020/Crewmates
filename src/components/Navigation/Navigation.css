@@ -1,0 +1,16 @@
+nav {
+  height: 1em;
+  background-color: #282c34;
+  padding: 1em;
+}
+
+#navbarLink {
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+}
+
+#navbarLink:hover {
+  background-color: white;
+  color: black;
+}
