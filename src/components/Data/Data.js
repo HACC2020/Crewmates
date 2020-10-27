@@ -18,7 +18,7 @@ const Data = () => {
 
     useEffect(() => {
         setIsLoading(false);
-    })
+    }, []);
 
     const datasets = 
         <div style={{display:'flex'}}>
