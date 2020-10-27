@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 
 // Import Pages
+import Header from './components/Header/Header.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Data from './components/Data/Data.js';
-
-
 
 function App() {
 
   return (
     <Router>
       <div className="App">
-        <header style={{height:'1em', padding:'1em', backgroundColor:'#282c34'}}>
-          <Link style={{padding:'1em', color:'white'}} to="/">Dashboard</Link>
-          <Link style={{padding:'1em', color:'white'}} to="/data">Raw Data</Link>
-        </header>
+        <Header/>
         <Route exact path="/" component={Dashboard}/>
         <Route exact path="/data" component={Data}/>
       </div>
