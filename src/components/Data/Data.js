@@ -15,55 +15,87 @@ const Data = () => {
     } = useData();
 
     const [isLoading, setIsLoading] = useState(true);
+    const [tableView, setTableView] = useState({
+        showDepartments: false,
+        showApplications: true,
+        showProjects: true
+    });
 
     useEffect(() => {
         setIsLoading(false);
     }, []);
 
     const datasets = 
+        <>
+        <button onClick={() => setTableView({...tableView, showDepartments: !tableView.showDepartments})}>
+            Departments/Agencies</button>
+        <button onClick={() => setTableView({...tableView, showApplications: !tableView.showApplications})}>
+            IT Applications</button>
+        <button onClick={() => setTableView({...tableView, showProjects: !tableView.showProjects})}>
+            IT Projects</button>
         <div style={{display:'flex'}}>
-            <Dataset 
-                headerTitle="Departments/Agencies"
-                flexValue={1} 
-                data={departments} 
-                dataFields={departmentFields}/>
-            <Dataset 
-                headerTitle="IT Applications"
-                flexValue={4} 
-                data={applications} 
-                dataFields={applicationFields}/>
-            <Dataset 
-                headerTitle="IT Projects"
-                flexValue={4} 
-                data={projects} 
-                dataFields={projectFields}/>
-        </div>;
+            {
+                tableView.showDepartments 
+                ? 
+                <Dataset 
+                    headerTitle="Departments/Agencies"
+                    flexValue={1} 
+                    data={departments} 
+                    dataFields={departmentFields}/>
+                : null
+            }
+            {
+                tableView.showApplications 
+                ? 
+                <Dataset 
+                    headerTitle="IT Applications"
+                    flexValue={4} 
+                    data={applications} 
+                    dataFields={applicationFields}/>
+                : null
+            }
+            {
+                tableView.showProjects 
+                ? 
+                <Dataset 
+                    headerTitle="IT Projects"
+                    flexValue={4} 
+                    data={projects} 
+                    dataFields={projectFields}/>
+                : null
+            }
+        </div>
+        </>;
     return (
         <>{ isLoading ? <h1>Loading...</h1> : datasets }</>
     );
 };
 
-const Dataset = ({headerTitle, flexValue, data, dataFields}) => {
+const Dataset = ({headerTitle, data, dataFields}) => {
     return (
-        <div style={{flex: flexValue}}>
+        <div>
           <h1>{headerTitle}</h1>
           { data.map(record => {
-            return <table style={{...styles.tableStyles, borderCollapse:'collapse',
-            backgroundColor:`${record._id % 2 === 0 ? 'grey' : 'white'}`}}>
-              {dataFields.map(field => {
-                let row;
-                if(field.id === '_id') {
-                    row = null;
-                } else {
-                    row = 
-                        <tr>
-                            <td style={styles.tableStyles}><b>{field.id}</b></td>
-                            <td style={styles.tableStyles}>{record[field.id]}</td>
-                        </tr>
-                }
-                return (row)
-              })}
-              </table>;
+            return (
+                <table key={record.id} style={{...styles.tableStyles, borderCollapse:'collapse',
+                    backgroundColor:`${record._id % 2 === 0 ? 'grey' : 'white'}`}}>
+                    <tbody>
+                    {dataFields.map(field => {
+                        let row;
+                        if(field.id === '_id') {
+                            row = null;
+                        } else {
+                            row = 
+                                <tr key={field.id}>
+                                    <td style={styles.tableStyles}><b>{field.id}</b></td>
+                                    <td style={styles.tableStyles}>{record[field.id]}</td>
+                                </tr>
+                        }
+                        return (row)
+                    })}
+                    </tbody>
+                </table>
+              );
           })}
         </div>
     )
