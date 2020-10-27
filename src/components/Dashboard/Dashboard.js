@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 
 const Dashboard = () => {
-    const { applications } = useData();
+    const { applications, projects } = useData();
 
     //const [ TIMEMetric, setTIMEMetric] = useState(null);
 
     //setTIMEMetric(calculateTIMEMetric(applications));
 
-    // Appliations Metrics
+    // Applications Metrics
     const TIMEMetric = calculateTIMEMetric(applications);
     const functionalFitMetric = calculateFunctionalFitMetric(applications);
     const technicalFitMetric = calculateTechnicalFitMetric(applications);
     const businessCriticalityMetric = calculateBusinessCriticalityMetric(applications);
     const hostingTypeMetric = calculateHostingTypeMetric(applications);
     const majorInformationSystemsCount = calculateMajorInformationSystems(applications);
+
+    // Projectst Metrics
+    const projectStatusMetric = calculateProjectStatusMetric(projects);
+    const projectBusinessValueMetric = calculateBusinessValueMetric(projects);
+    const projectRiskMetric = calculateProjectRiskMetric(projects);
 
     return (
         <>
@@ -83,7 +88,45 @@ const Dashboard = () => {
             <p>#Major Information Systems: {majorInformationSystemsCount}</p>
         </div>
 
-        <div><h1>TODO: Projects Metrics</h1></div>
+        <div>
+            <h2>Projects - Associated Applications</h2>
+            <ul>
+                <li>Average: </li>
+                <li>Projects with no associated applications: </li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Projects - Status</h2>
+            <ul>
+                <li>Green: {projectStatusMetric.green}</li>
+                <li>Yellow: {projectStatusMetric.yellow}</li>
+                <li>Red: {projectStatusMetric.red}</li>
+                <li>n/a: {projectStatusMetric.missing}</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Projects - Business Value</h2>
+            <ul>
+                <li>Green: {projectBusinessValueMetric.marginal}</li>
+                <li>Yellow: {projectBusinessValueMetric.little}</li>
+                <li>Red: {projectBusinessValueMetric.large}</li>
+                <li>Red: {projectBusinessValueMetric.significant}</li>
+                <li>n/a: {projectBusinessValueMetric.missing}</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Projects - Risk</h2>
+            <ul>
+                <li>Low Risk: {projectRiskMetric.low}</li>
+                <li>Moderate Risk: {projectRiskMetric.moderate}</li>
+                <li>High Risk: {projectRiskMetric.high}</li>
+                <li>Severe Risk: {projectRiskMetric.severe}</li>
+                <li>n/a: {projectRiskMetric.missing}</li>
+            </ul>
+        </div>
         </>
     );
 };
@@ -95,8 +138,8 @@ const calculateTIMEMetric = applications => {
     let tolerate = 0;
     let missing = 0;
 
-    applications.forEach(element => {
-        switch (element.timeTag) {
+    applications.forEach(app => {
+        switch (app.timeTag) {
             case 'Tolerate':
                 tolerate++;
                 break;
@@ -125,8 +168,8 @@ const calculateFunctionalFitMetric = applications => {
     let poor = 0;
     let missing = 0;
 
-    applications.forEach(element => {
-        switch (element.functionalFit) {
+    applications.forEach(app => {
+        switch (app.functionalFit) {
             case 'excellent':
                 excellent++;
                 break;
@@ -155,8 +198,8 @@ const calculateTechnicalFitMetric = applications => {
     let poor = 0;
     let missing = 0;
 
-    applications.forEach(element => {
-        switch (element.technicalFit) {
+    applications.forEach(app => {
+        switch (app.technicalFit) {
             case 'excellent':
                 excellent++;
                 break;
@@ -185,8 +228,8 @@ const calculateBusinessCriticalityMetric = applications => {
     let missionCritical = 0;
     let missing = 0;
 
-    applications.forEach(element => {
-        switch (element.businessCriticality) {
+    applications.forEach(app => {
+        switch (app.businessCriticality) {
             case 'administrativeService':
                 administrativeService++;
                 break;
@@ -222,8 +265,8 @@ const calculateHostingTypeMetric = applications => {
     let SaaS = 0;
     let missing = 0;
 
-    applications.forEach(element => {
-        switch (element.hostingTypeTag) {
+    applications.forEach(app => {
+        switch (app.hostingTypeTag) {
             case '@On Premise':
                 onPremise++;
                 break;
@@ -258,13 +301,99 @@ const calculateHostingTypeMetric = applications => {
 const calculateMajorInformationSystems = applications => {
     let count = 0;
 
-    applications.forEach(element => {
-        if(element.majorInformationSystemsTag === 'Major Information Systems') {
+    applications.forEach(app => {
+        if(app.majorInformationSystemsTag === 'Major Information Systems') {
             count++;
         }
     });
 
     return count;
 }
+
+const calculateProjectStatusMetric = projects => {
+    let green = 0;
+    let yellow = 0;
+    let red = 0;
+    let missing = 0;
+
+    projects.forEach(project => {
+        switch (project.projectStatus) {
+            case 'green':
+                green++;
+                break;
+            case 'yellow':
+                yellow++;
+                break;
+            case 'red':
+                red++;
+                break;
+            default:
+                missing++;
+                break;
+        }
+    });
+
+    return { green, yellow, red, missing };
+};
+
+const calculateBusinessValueMetric = projects => {
+    let marginal = 0;
+    let little = 0;
+    let large = 0;
+    let significant = 0;
+    let missing = 0;
+
+    projects.forEach(project => {
+        switch (project.businessValue) {
+            case 'marginalBusinessBenefit':
+                marginal++;
+                break;
+            case 'littleBusinessBenefit':
+                little++;
+                break;
+            case 'largeBusinessBenefit':
+                large++;
+                break;
+            case 'significantBusinessBenefit':
+                significant++;
+                break;
+            default:
+                missing++;
+                break;
+        }
+    });
+
+    return { marginal, little, large, significant, missing };
+};
+
+const calculateProjectRiskMetric = projects => {
+    let low = 0;
+    let moderate = 0;
+    let high = 0;
+    let severe = 0;
+    let missing = 0;
+
+    projects.forEach(project => {
+        switch (project.projectRisk) {
+            case 'lowProjectRisk':
+                low++;
+                break;
+            case 'moderateProjectRisk':
+                moderate++;
+                break;
+            case 'highProjectRisk':
+                high++;
+                break;
+            case 'severeProjectRisk':
+                severe++;
+                break;
+            default:
+                missing++;
+                break;
+        }
+    });
+
+    return { low, moderate, high, severe, missing };
+};
 
 export default Dashboard;
