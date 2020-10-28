@@ -9,6 +9,7 @@ import { DataProvider } from './providers/DataProvider';
 import Navigation from './components/Navigation/Navigation.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Data from './components/Data/Data.js';
+import Footer from './components/Footer.js';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Navigation/>
           <Route exact path="/" component={Dashboard}/>
           <Route exact path="/data" component={Data}/>
+          <Footer/>
         </div>
       </Router>
     </DataProvider>
