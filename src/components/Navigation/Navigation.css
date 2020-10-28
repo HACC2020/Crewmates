@@ -9,8 +9,8 @@ nav {
   padding: 1em;
   color: white;
   text-decoration: none;
-  font-family: Helvetica,arial,courier;
   font-weight: bold;
+  font: Helvetica;
 
 }
 
