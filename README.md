@@ -1,11 +1,14 @@
 # HACC 2020
-## Table of contents
+
+## Team Crewmates
+
+### Table of contents
 
 * [Overview](#overview)
 * [How to Run](#how-to-run)
 
 
-## How To Run
+#### How To Run
 
 In order to run this application on your machine, you will need Node, which can be installed [here](https://nodejs.org/en/download/).
 
