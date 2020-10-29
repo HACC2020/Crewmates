@@ -21,7 +21,7 @@ const ProjectsDashboard = () => {
             projectBusinessValueMetric: calculateBusinessValueMetric(projects),
             projectRiskMetric: calculateProjectRiskMetric(projects)
         });
-    }, [projects]);
+    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric]);
 
     // Projectst Metrics
     const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric } = projectsMetrics;
