@@ -1,13 +1,16 @@
 nav {
   height: 1em;
-  background-color: #282c34;
+  background-color: var(--indigo-dye);
   padding: 1em;
-}
+ }
 
 #navbarLink {
   padding: 1em;
   color: white;
   text-decoration: none;
+  font-weight: bold;
+  font: Helvetica;
+
 }
 
 #navbarLink:hover {

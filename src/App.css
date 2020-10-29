@@ -13,7 +13,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #040404;
   min-height: 40vh;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-size: 90px;
+  font-weight: 245;
+  font: Arial;
 }
 
 .App-link {
@@ -34,4 +37,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h2 {
+  color: var(--prussian-blue);
+  font: Arial;
 }
