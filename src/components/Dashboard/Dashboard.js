@@ -109,10 +109,10 @@ const Dashboard = () => {
         <div>
             <h2>Projects - Business Value</h2>
             <ul>
-                <li>Green: {projectBusinessValueMetric.marginal}</li>
-                <li>Yellow: {projectBusinessValueMetric.little}</li>
-                <li>Red: {projectBusinessValueMetric.large}</li>
-                <li>Red: {projectBusinessValueMetric.significant}</li>
+                <li>Marginal: {projectBusinessValueMetric.marginal ? projectBusinessValueMetric.marginal : 'loading...'}</li>
+                <li>Little: {projectBusinessValueMetric.little}</li>
+                <li>Large: {projectBusinessValueMetric.large}</li>
+                <li>Significant: {projectBusinessValueMetric.significant}</li>
                 <li>n/a: {projectBusinessValueMetric.missing}</li>
             </ul>
         </div>
