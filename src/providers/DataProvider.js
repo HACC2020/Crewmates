@@ -47,6 +47,8 @@ const DataProvider = ({children}) => {
         });
     };
 
+    /********************APPLICATIONS METRICS CALCULATION FUNCTIONS *************************/
+
     const calculateTIMEMetric = applications => {
         let eliminate = 0;
         let invest = 0;
@@ -214,6 +216,105 @@ const DataProvider = ({children}) => {
         };
     };
 
+    /********************PROJECTS METRICS CALCULATION FUNCTIONS *************************/
+    const calculateProjectStatusMetric = projects => {
+        let green = 0;
+        let yellow = 0;
+        let red = 0;
+        let missing = 0;
+    
+        projects.forEach(project => {
+            switch (project.projectStatus) {
+                case 'green':
+                    green++;
+                    break;
+                case 'yellow':
+                    yellow++;
+                    break;
+                case 'red':
+                    red++;
+                    break;
+                default:
+                    missing++;
+                    break;
+            }
+        });
+    
+        return { green, yellow, red, missing };
+    };
+    
+    const calculateBusinessValueMetric = projects => {
+        let marginal = 0;
+        let little = 0;
+        let large = 0;
+        let significant = 0;
+        let missing = 0;
+    
+        projects.forEach(project => {
+            switch (project.businessValue) {
+                case 'marginalBusinessBenefit':
+                    marginal++;
+                    break;
+                case 'littleBusinessBenefit':
+                    little++;
+                    break;
+                case 'largeBusinessBenefit':
+                    large++;
+                    break;
+                case 'significantBusinessBenefit':
+                    significant++;
+                    break;
+                default:
+                    missing++;
+                    break;
+            }
+        });
+    
+        return { marginal, little, large, significant, missing };
+    };
+
+    const calculateProjectRiskMetric = projects => {
+        let low = 0;
+        let moderate = 0;
+        let high = 0;
+        let severe = 0;
+        let missing = 0;
+    
+        projects.forEach(project => {
+            switch (project.projectRisk) {
+                case 'lowProjectRisk':
+                    low++;
+                    break;
+                case 'moderateProjectRisk':
+                    moderate++;
+                    break;
+                case 'highProjectRisk':
+                    high++;
+                    break;
+                case 'severeProjectRisk':
+                    severe++;
+                    break;
+                default:
+                    missing++;
+                    break;
+            }
+        });
+    
+        return { low, moderate, high, severe, missing };
+    };
+
+    const calculateMajorInformationSystems = applications => {
+        let count = 0;
+    
+        applications.forEach(app => {
+            if(app.majorInformationSystemsTag === 'Major Information Systems') {
+                count++;
+            }
+        });
+    
+        return count;
+    };
+
     return (
         <DataContext.Provider
             value={{
@@ -227,7 +328,11 @@ const DataProvider = ({children}) => {
                 calculateFunctionalFitMetric,
                 calculateTechnicalFitMetric,
                 calculateBusinessCriticalityMetric,
-                calculateHostingTypeMetric 
+                calculateHostingTypeMetric,
+                calculateProjectStatusMetric,
+                calculateBusinessValueMetric,
+                calculateProjectRiskMetric,
+                calculateMajorInformationSystems
             }}
         >
             {children}

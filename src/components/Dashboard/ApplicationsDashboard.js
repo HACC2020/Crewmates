@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -25,7 +25,7 @@ const ApplicationsDashboard = () => {
         justifyContent: 'center',
     };
 
-    const [applicationMetrics, setApplicationsMetrics] = React.useState({
+    const [applicationMetrics, setApplicationsMetrics] = useState({
         TIMEMetric: calculateTIMEMetric(applications),
         functionalFitMetric: calculateFunctionalFitMetric(applications),
         technicalFitMetric: calculateTechnicalFitMetric(applications),
@@ -33,7 +33,7 @@ const ApplicationsDashboard = () => {
         hostingTypeMetric: calculateHostingTypeMetric(applications)
     })
 
-    React.useEffect(() => {
+    useEffect(() => {
         setApplicationsMetrics({
             TIMEMetric: calculateTIMEMetric(applications),
             functionalFitMetric: calculateFunctionalFitMetric(applications),

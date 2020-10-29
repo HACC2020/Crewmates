@@ -2,22 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col, Badge, Button } from 'react-bootstrap';
 import ApplicationsDashboard from './ApplicationsDashboard';
+import ProjectsDashboard from './ProjectsDashboard';
+import MISDashboard from './MISDashboard';
 
 const Dashboard = () => {
-    const { applications, projects } = useData();
-
-    const [currentDashboard, setCurrentDashboard] = useState({
-        apps: true,
-        projects: false,
-        mis: false
-    });
-
-    const majorInformationSystemsCount = calculateMajorInformationSystems(applications);
-
-    // Projectst Metrics
-    const projectStatusMetric = calculateProjectStatusMetric(projects);
-    const projectBusinessValueMetric = calculateBusinessValueMetric(projects);
-    const projectRiskMetric = calculateProjectRiskMetric(projects);
+    // To display the chosen dashboard
+    const [currentDashboard, setCurrentDashboard] = useState(0);
 
     const colors = {
         powderblue: {backgroundColor:'powderblue'},
@@ -32,6 +22,9 @@ const Dashboard = () => {
         justifyContent: 'center',
     };
 
+    const dashboards = [<ApplicationsDashboard/>, <ProjectsDashboard/>, <MISDashboard/>];
+    const visibleDashboard = dashboards[currentDashboard];
+
     return (
         <>
         <header className="App-header">
@@ -41,129 +34,30 @@ const Dashboard = () => {
                 <Row>
                     <Col md={1}></Col>
                     <Col sm={4} md={3}>
-                        <Button variant="link" style={{ padding: '1em' }}>
+                        <Button variant="link" style={{ padding: '1em' }}
+                            onClick={()=>setCurrentDashboard(0)}>
                             IT Applications
                         </Button>
                     </Col>
                     <Col sm={4} md={3}>
-                        <Button variant="link" style={{ padding: '1em' }}>
+                        <Button variant="link" style={{ padding: '1em' }}
+                            onClick={()=>setCurrentDashboard(1)}>
                             IT Projects
-                        <Badge variant="secondary">{projects.length}</Badge>
                         </Button>
                     </Col>
                     <Col sm={4} md={4}>
-                        <Button variant="link" style={{ padding: '1em' }}>
+                        <Button variant="link" style={{ padding: '1em' }}
+                            onClick={()=>setCurrentDashboard(2)}>
                             Major Information Systems
-                        <Badge variant="secondary">{majorInformationSystemsCount}</Badge>
                         </Button>
                     </Col>
                     <Col md={1}></Col>
                 </Row>
             </Container>
 
-        <ApplicationsDashboard/>
+        {visibleDashboard}
         </>
     );
-};
-
-
-
-const calculateMajorInformationSystems = applications => {
-    let count = 0;
-
-    applications.forEach(app => {
-        if(app.majorInformationSystemsTag === 'Major Information Systems') {
-            count++;
-        }
-    });
-
-    return count;
-}
-
-const calculateProjectStatusMetric = projects => {
-    let green = 0;
-    let yellow = 0;
-    let red = 0;
-    let missing = 0;
-
-    projects.forEach(project => {
-        switch (project.projectStatus) {
-            case 'green':
-                green++;
-                break;
-            case 'yellow':
-                yellow++;
-                break;
-            case 'red':
-                red++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { green, yellow, red, missing };
-};
-
-const calculateBusinessValueMetric = projects => {
-    let marginal = 0;
-    let little = 0;
-    let large = 0;
-    let significant = 0;
-    let missing = 0;
-
-    projects.forEach(project => {
-        switch (project.businessValue) {
-            case 'marginalBusinessBenefit':
-                marginal++;
-                break;
-            case 'littleBusinessBenefit':
-                little++;
-                break;
-            case 'largeBusinessBenefit':
-                large++;
-                break;
-            case 'significantBusinessBenefit':
-                significant++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { marginal, little, large, significant, missing };
-};
-
-const calculateProjectRiskMetric = projects => {
-    let low = 0;
-    let moderate = 0;
-    let high = 0;
-    let severe = 0;
-    let missing = 0;
-
-    projects.forEach(project => {
-        switch (project.projectRisk) {
-            case 'lowProjectRisk':
-                low++;
-                break;
-            case 'moderateProjectRisk':
-                moderate++;
-                break;
-            case 'highProjectRisk':
-                high++;
-                break;
-            case 'severeProjectRisk':
-                severe++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { low, moderate, high, severe, missing };
 };
 
 export default Dashboard;
