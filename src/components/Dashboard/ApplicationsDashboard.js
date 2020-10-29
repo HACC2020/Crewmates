@@ -1,9 +1,16 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
-import { Container, Row, Col, Badge, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
-const ApplicationsDashboard = ({}) => {
-    const { applications } = useData();
+const ApplicationsDashboard = () => {
+    const { 
+        applications, 
+        calculateTIMEMetric,
+        calculateFunctionalFitMetric,
+        calculateTechnicalFitMetric,
+        calculateBusinessCriticalityMetric,
+        calculateHostingTypeMetric 
+    } = useData();
 
     const colors = {
         powderblue: {backgroundColor:'powderblue'},
@@ -18,15 +25,31 @@ const ApplicationsDashboard = ({}) => {
         justifyContent: 'center',
     };
 
+    const [applicationMetrics, setApplicationsMetrics] = React.useState({
+        TIMEMetric: calculateTIMEMetric(applications),
+        functionalFitMetric: calculateFunctionalFitMetric(applications),
+        technicalFitMetric: calculateTechnicalFitMetric(applications),
+        businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
+        hostingTypeMetric: calculateHostingTypeMetric(applications)
+    })
+
+    React.useEffect(() => {
+        setApplicationsMetrics({
+            TIMEMetric: calculateTIMEMetric(applications),
+            functionalFitMetric: calculateFunctionalFitMetric(applications),
+            technicalFitMetric: calculateTechnicalFitMetric(applications),
+            businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
+            hostingTypeMetric: calculateHostingTypeMetric(applications)
+        })
+    }, [applications]);
+
     // Applications Metrics
-    const TIMEMetric = calculateTIMEMetric(applications);
-    const functionalFitMetric = calculateFunctionalFitMetric(applications);
-    const technicalFitMetric = calculateTechnicalFitMetric(applications);
-    const businessCriticalityMetric = calculateBusinessCriticalityMetric(applications);
-    const hostingTypeMetric = calculateHostingTypeMetric(applications);
+
+    const { TIMEMetric, functionalFitMetric, technicalFitMetric, 
+        businessCriticalityMetric, hostingTypeMetric } = applicationMetrics;
 
     return (
-<>
+    <>
         <Container style={{height:'100vh'}} fluid>
             <Row style={{height:'33vh'}}>
                 <Col xs={4} md={2} style={{...colors.powderblue, ...centerInBox, margin:'.5em'}}>
@@ -138,175 +161,8 @@ const ApplicationsDashboard = ({}) => {
                 </Col>
             </Row>
         </Container>
-        </>
+    </>
     );
-};
-
-const calculateTIMEMetric = applications => {
-    let eliminate = 0;
-    let invest = 0;
-    let migrate = 0;
-    let tolerate = 0;
-    let missing = 0;
-
-    applications.forEach(app => {
-        switch (app.timeTag) {
-            case 'Tolerate':
-                tolerate++;
-                break;
-            case 'Invest':
-                invest++;
-                break;
-            case 'Migrate':
-                migrate++;
-                break;
-            case 'Eliminate':
-                eliminate++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { eliminate, invest, migrate, tolerate, missing};
-};
-
-const calculateFunctionalFitMetric = applications => {
-    let excellent = 0;
-    let adequate = 0;
-    let insufficient = 0;
-    let poor = 0;
-    let missing = 0;
-
-    applications.forEach(app => {
-        switch (app.functionalFit) {
-            case 'excellent':
-                excellent++;
-                break;
-            case 'adequate':
-                adequate++;
-                break;
-            case 'insufficient':
-                insufficient++;
-                break;
-            case 'poor':
-                poor++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { excellent, adequate, insufficient, poor, missing};
-};
-
-const calculateTechnicalFitMetric = applications => {
-    let excellent = 0;
-    let adequate = 0;
-    let insufficient = 0;
-    let poor = 0;
-    let missing = 0;
-
-    applications.forEach(app => {
-        switch (app.technicalFit) {
-            case 'excellent':
-                excellent++;
-                break;
-            case 'adequate':
-                adequate++;
-                break;
-            case 'insufficient':
-                insufficient++;
-                break;
-            case 'poor':
-                poor++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { excellent, adequate, insufficient, poor, missing};
-};
-
-const calculateBusinessCriticalityMetric = applications => {
-    let administrativeService = 0;
-    let businessOperational = 0;
-    let businessCritical = 0;
-    let missionCritical = 0;
-    let missing = 0;
-
-    applications.forEach(app => {
-        switch (app.businessCriticality) {
-            case 'administrativeService':
-                administrativeService++;
-                break;
-            case 'businessOperational':
-                businessOperational++;
-                break;
-            case 'businessCritical':
-                businessCritical++;
-                break;
-            case 'missionCritical':
-                missionCritical++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { 
-        administrativeService, 
-        businessOperational, 
-        businessCritical, 
-        missionCritical, 
-        missing
-    };
-};
-
-const calculateHostingTypeMetric = applications => {
-    let onPremise = 0;
-    let coLocated = 0;
-    let IaaS = 0;
-    let PaaS = 0;
-    let SaaS = 0;
-    let missing = 0;
-
-    applications.forEach(app => {
-        switch (app.hostingTypeTag) {
-            case '@On Premise':
-                onPremise++;
-                break;
-            case 'Co-Located':
-                coLocated++;
-                break;
-            case 'IaaS':
-                IaaS++;
-                break;
-            case 'PaaS':
-                PaaS++;
-                break;
-            case 'SaaS':
-                SaaS++;
-                break;
-            default:
-                missing++;
-                break;
-        }
-    });
-
-    return { 
-        onPremise, 
-        coLocated, 
-        IaaS, 
-        PaaS, 
-        SaaS,
-        missing
-    };
 };
 
 export default ApplicationsDashboard;
