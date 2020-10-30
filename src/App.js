@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/variables.css';
 
 // How we give data to entirety of app
 import { DataProvider } from './providers/DataProvider';
