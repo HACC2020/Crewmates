@@ -3,14 +3,10 @@ import React from 'react';
 const styles = {
   backgroundColor: `#282c34`,
   padding: `1em 2em`,
-  color: 'white',
+  color: `white`,
   textDecoration: `none`,
   fontSize: `2vh`,
 }
-
-// move styling to app.css
-// add links to accesibility, terms, privacy, about
-
 
 const Footer = () => {
     return (
