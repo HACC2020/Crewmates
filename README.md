@@ -7,6 +7,11 @@
 * [Overview](#overview)
 * [How to Run](#how-to-run)
 
+#### Overview
+
+We chose the State of Hawaii Executive Branch IT Portfolio & Roadmap Visualization challenge for this years HACC2020.
+This challenge asks us to make the State of Hawaii IT porfolio visible to the public.
+We plan on creating a user friendly visualization from the data provided. 
 
 #### How To Run
 
