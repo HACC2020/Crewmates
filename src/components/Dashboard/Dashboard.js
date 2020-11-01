@@ -15,7 +15,7 @@ const Dashboard = () => {
         <header className="App-header">
             Dashboards
         </header>
-            <Container>
+            {/* <Container>
                 <Row>
                     <Col md={1}></Col>
                     <Col sm={4} md={3}>
@@ -38,7 +38,7 @@ const Dashboard = () => {
                     </Col>
                     <Col md={1}></Col>
                 </Row>
-            </Container>
+            </Container> */}
 
             {dashboards[currentDashboard]}
         </>
