@@ -50,37 +50,36 @@ const ApplicationsDashboard = () => {
 
     return (
     <>
-        <Container style={{height:'100vh'}} fluid>
-            <Row style={{height:'33vh'}}>
-                <Col xs={4} md={2} style={{...colors.powderblue, ...centerInBox, margin:'.5em'}}>
-                    <span style={{fontWeight:'bold', fontSize:'3em'}}>{applications.length}</span>
-                    <h4>Apps</h4>
-                </Col>
-                <Col xs={8} md style={{...colors.skyblue, margin:'.5em .5em .5em 0'}}>
+        <Container fluid>
+            <Row>
+                <Col xs={8} md style={{...colors.skyblue}}>
                     <span style={{fontWeight:'normal', fontSize:'2em'}}>
                         Functional Fit
                     </span>
-                    <ul>
+                    {/* <ul>
                         <li>Excellent: {functionalFitMetric.excellent}</li>
                         <li>Adequate: {functionalFitMetric.adequate}</li>
                         <li>Insufficient: {functionalFitMetric.insufficient}</li>
                         <li>Poor: {functionalFitMetric.poor}</li>
                         <li>Missing Data: {functionalFitMetric.missing}</li>
-                    </ul>
+                    </ul> */}
                 </Col>
-                <Col xs={12} md style={{...colors.steelblue, margin:'.5em .5em .5em 0'}}>
+                <Col xs={12} md style={{...colors.steelblue}}>
                      <span style={{fontWeight:'normal', fontSize:'2em'}}>
                         Technical Fit
                     </span>
-                    <ul>
+                    {/* <ul>
                         <li>Excellent: {technicalFitMetric.excellent}</li>
                         <li>Adequate: {technicalFitMetric.adequate}</li>
                         <li>Insufficient: {technicalFitMetric.insufficient}</li>
                         <li>Poor: {technicalFitMetric.poor}</li>
                         <li>Missing Data: {technicalFitMetric.missing}</li>
-                    </ul>
+                    </ul> */}
                 </Col>
-                <Col xs={12} md style={{...colors.powderblue, margin:'.5em .5em .5em 0'}}>
+
+            </Row>
+            <Row>
+                <Col xs={12} md={6} style={{...colors.powderblue}}>
                     <span style={{fontWeight:'normal', fontSize:'2em'}}>
                         Business Criticality
                     </span>
@@ -92,9 +91,7 @@ const ApplicationsDashboard = () => {
                         <li>Missing Data: {businessCriticalityMetric.missing}</li>
                     </ul>
                 </Col>
-            </Row>
-            <Row style={{height:`42vh`}}>
-                <Col xs={12} md={4} style={{...colors.steelblue, padding:'1em'}}>
+                <Col xs={12} md={5} style={{...colors.steelblue, padding:'1em'}}>
                     <span style={{fontWeight:'normal', fontSize:'1.5em'}}>
                         Calculated TIME Model Suggestion 
                     </span>
@@ -108,8 +105,8 @@ const ApplicationsDashboard = () => {
                 </Col>
                 <Col xs={12} md={8}></Col>
             </Row>
-            <Row style={{height:`${25}vh`}}>
-                <Col xs={12} md style={{...colors.powderblue, margin:'.5em'}}>
+            <Row>
+                <Col xs={12} md style={{...colors.skyblue}}>
                     <div style={{display:'flex', flexDirection:'row-reverse'}}>
                         <span style={{fontWeight:'normal', fontSize:'1em'}}>
                             On Premise
@@ -119,7 +116,7 @@ const ApplicationsDashboard = () => {
                         <span style={{fontWeight:'bold', fontSize:'2em'}}>{hostingTypeMetric.onPremise}</span>
                     </div>
                </Col>
-                <Col xs={12} md style={{...colors.skyblue, margin:'.5em .5em .5em 0'}}>
+                <Col xs={12} md style={{...colors.skyblue}}>
                     <div style={{display:'flex', flexDirection:'row-reverse'}}>
                         <span style={{fontWeight:'normal', fontSize:'1em'}}>
                             Co-Located
@@ -129,7 +126,7 @@ const ApplicationsDashboard = () => {
                         <span style={{fontWeight:'bold', fontSize:'2em'}}>{hostingTypeMetric.coLocated}</span>
                     </div>
                 </Col>
-                <Col xs={12} md style={{...colors.powderblue, margin:'.5em .5em .5em 0'}}>
+                <Col xs={12} md style={{...colors.powderblue}}>
                     <div style={{display:'flex', flexDirection:'row-reverse'}}>
                         <span style={{fontWeight:'normal', fontSize:'1em'}}>
                             IaaS
@@ -139,7 +136,7 @@ const ApplicationsDashboard = () => {
                         <span style={{fontWeight:'bold', fontSize:'2em'}}>{hostingTypeMetric.IaaS}</span>
                     </div>
                 </Col>
-                <Col xs={12} md style={{...colors.skyblue, margin:'.5em .5em .5em 0'}}>
+                <Col xs={12} md style={{...colors.skyblue}}>
                     <div style={{display:'flex', flexDirection:'row-reverse'}}>
                         <span style={{fontWeight:'normal', fontSize:'1em'}}>
                             PaaS
@@ -149,7 +146,7 @@ const ApplicationsDashboard = () => {
                         <span style={{fontWeight:'bold', fontSize:'2em'}}>{hostingTypeMetric.PaaS}</span>
                     </div>
                 </Col>
-                <Col xs={12} md style={{...colors.steelblue, margin:'.5em .5em .5em 0'}}>
+                <Col xs={12} md style={{...colors.steelblue}}>
                     <div style={{display:'flex', flexDirection:'row-reverse'}}>
                         <span style={{fontWeight:'normal', fontSize:'1em'}}>
                             SaaS
