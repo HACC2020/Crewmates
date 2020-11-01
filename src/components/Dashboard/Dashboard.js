@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import ApplicationsDashboard from './ApplicationsDashboard';
 import ProjectsDashboard from './ProjectsDashboard';
 import MISDashboard from './MISDashboard';
+import './Dashboard.css';
 
 const Dashboard = () => {
     // To display the chosen dashboard
@@ -15,7 +16,7 @@ const Dashboard = () => {
         <header className="App-header">
             Dashboards
         </header>
-            <Container>
+            {/* <Container>
                 <Row>
                     <Col md={1}></Col>
                     <Col sm={4} md={3}>
@@ -38,7 +39,7 @@ const Dashboard = () => {
                     </Col>
                     <Col md={1}></Col>
                 </Row>
-            </Container>
+            </Container> */}
 
             {dashboards[currentDashboard]}
         </>
