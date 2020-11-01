@@ -57,11 +57,11 @@ const ApplicationsDashboard = () => {
         <Container fluid>
             <Row>
                 <Col xs={0} md={1}></Col>
-                <Col style={{...colors.powderblue, padding:'4em'}}>
+                <Col style={{padding:'4em'}}>
                     <h1 style={{fontWeight:'600'}}>Applications</h1>
                     <p> are software programs or a group of programs owned and managed by a department, and used by the department's employees or by citizens/constituents</p>
                 </Col>
-                <Col style={{...colors.skyblue, padding:'4em'}}>
+                <Col style={{padding:'4em'}}>
                     <h1 style={{fontWeight:'600'}}>Projects</h1>
                     <p> A project is an effort to create, modify or maintain a specific application, infrastructure or service.</p>
                 </Col>

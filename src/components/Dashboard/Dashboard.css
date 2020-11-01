@@ -1,0 +1,24 @@
+.queen-blue-background {
+    background-color: var(--queen-blue);
+}
+
+.blue-sapphire-background {
+    background-color: var(--blue-sapphire);
+
+}
+.indigo-dye-background {
+    background-color: var(--indigo-dye);
+
+} 
+.deep-blue-background {
+    background-color: var(--deep-blue);
+
+}
+.prussian-blue-background {
+    background-color: var(--prussian-blue);
+
+}
+.rich-black-background {
+    background-color: var(--rich-black);
+
+}
