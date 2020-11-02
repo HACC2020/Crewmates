@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
+import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
+
+
 
 const ApplicationsDashboard = () => {
     const { 
@@ -69,21 +72,10 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={6} style={{...colors.steelblue, padding:'3em'}}>
-                    <span style={{fontWeight:'normal', fontSize:'1.5em'}}>
-                        Calculated TIME Model Suggestion 
-                    </span>
-                    <ul>
-                        <li>Tolerate: {TIMEMetric.tolerate}</li>
-                        <li>Invest: {TIMEMetric.invest}</li>
-                        <li>Migrate: {TIMEMetric.migrate}</li>
-                        <li>Eliminate: {TIMEMetric.eliminate}</li>
-                        <li>Missing Data: {TIMEMetric.missing}</li>
-                    </ul>
-
-                    <p>Pretend there's a graph here</p>
+                <Col xs={12} md={6}>
+                    <TIMEModelChart/>
                 </Col>
-                <Col style={{padding:'3em'}}>
+                <Col style={{...colors.steelblue, padding:'3em'}}>
                     <h1>TIME Model</h1>
 
                     <p>
