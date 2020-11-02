@@ -16,9 +16,9 @@ const TIMEModelChart = () => {
         {name:'Missing', value:missing, color:'gray'}
     ];
 
-    const width = 150;
+    const width = 200;
     const height = 150;
-    const margin = {top: 10, right: 5, bottom: 15, left: 5};
+    const margin = {top: 10, right: 5, bottom: 15, left: 20};
     const xRange = [margin.left, width - margin.right]; // Plotting on the x-axis starts from 40-500
     const yRange = [height - margin.bottom, margin.top]; // Plotting on the x-axis starts from 470-20
 

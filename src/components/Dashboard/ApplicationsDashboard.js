@@ -4,8 +4,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 
-
-
 const ApplicationsDashboard = () => {
     const {
         applications,
@@ -73,33 +71,34 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={6}>
-                    <TIMEModelChart/>
-                </Col>
-                <Col style={{...colors.steelblue, padding:'3em'}}>
-                    <h1>TIME Model</h1>
 
+                <Col xs={12} md={4} style={{...colors.steelblue, padding:'4em', paddingBottom:'2em'}}>
+                    <h1 style={{marginBottom:'1em'}}>TIME Model</h1>
                     <p>
-                        <em><b style={timeModel}>T</b>olerate: </em>
+                        <span className="firstcharacter">T</span>olerate:
                         An application with high technical quality, but sub-optimal functional business value. The applications should be redesigned for better business alignment.
                     </p>
 
                     <p>
-                        <em><b style={timeModel}>I</b>nvest: </em>
+                        <span className="firstcharacter">I</span>nvest:
+
                           An application with high technical and business value. There is an attributable and recognizable value - and high and/or critical usage. The application is worth continued investment to get even better returns or reduce more costs.
 
                     </p>
 
                     <p>
-                        <em><b style={timeModel}>M</b>igrate: </em>
+                        <span className="firstcharacter">M</span>igrate:
                          An application has high business value, but a poor technical fit. Discard the application but migrate its data and users to a new application or to a better-fit existing application.
                     </p>
 
                     <p>
-                        <em><b style={timeModel}>E</b>liminate: </em>
+                        <span className="firstcharacter">E</span>liminate:
                          Eliminate useless applications with low business value and a poor technical fit (possible reasons; no business value, not used, low utility, based on obsolete software)
                     </p>
                 </Col>
+                <Col xs={12} md={7}>
+                    <TIMEModelChart/>
+                </Col>            
             </Row>
 
             <Row>
@@ -137,12 +136,6 @@ const ApplicationsDashboard = () => {
                 <Col style={{...colors.skyblue, padding:'3em'}}>
                     <h1>Application Timeline</h1>
                     <p>This is a plot of the current active applications and the year in which they were created.</p>
-                    <p>
-                    Curabitur blandit mi lacus, id aliquet nisi pharetra quis. Pellentesque eu lobortis dolor. Quisque eget ipsum volutpat, scelerisque nibh et, sagittis ante. Maecenas a quam at orci sollicitudin suscipit. Sed tempus, risus sit amet volutpat sodales, urna justo iaculis libero, in varius lectus tellus non erat. Nam semper auctor arcu vitae elementum. Nam dictum ex lorem, condimentum porttitor felis sollicitudin non. Etiam vehicula volutpat accumsan. Suspendisse molestie dui eu massa fermentum accumsan. Ut sagittis purus metus, vel ornare elit pellentesque ac. Cras ultrices odio ac sapien imperdiet, a tristique turpis dapibus. Fusce metus lorem, finibus ac tellus eu, ultrices suscipit urna. Cras in luctus orci, et euismod sapien. Donec sodales, massa a sollicitudin dapibus, nibh risus blandit mauris, ut viverra lacus ex tincidunt ligula.
-
-Vivamus convallis leo nec odio pharetra posuere. Donec eu elit vitae arcu pulvinar scelerisque vitae a ipsum. Nullam ipsum justo, scelerisque in vulputate a, ultricies vitae nulla. Mauris porttitor enim at ultricies tempus. Donec efficitur, enim sed feugiat pretium, quam risus lobortis odio, ut vestibulum erat ante non nisi. Maecenas placerat ac tortor quis malesuada. Suspendisse dapibus sodales hendrerit. Sed et vehicula felis. Proin molestie turpis non tellus vehicula malesuada. Pellentesque interdum egestas tellus vitae mollis. Pellentesque tempus tellus a lacus bibendum porttitor.
-
-                    </p>
                 </Col>
             </Row>
         </Container>
@@ -151,3 +144,4 @@ Vivamus convallis leo nec odio pharetra posuere. Donec eu elit vitae arcu pulvin
 };
 
 export default ApplicationsDashboard;
+
