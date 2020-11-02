@@ -6,13 +6,13 @@ import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 
 
 const ApplicationsDashboard = () => {
-    const { 
-        applications, 
+    const {
+        applications,
         calculateTIMEMetric,
         calculateFunctionalFitMetric,
         calculateTechnicalFitMetric,
         calculateBusinessCriticalityMetric,
-        calculateHostingTypeMetric 
+        calculateHostingTypeMetric
     } = useData();
 
     const colors = {
@@ -52,7 +52,7 @@ const ApplicationsDashboard = () => {
 
     // Applications Metrics
 
-    const { TIMEMetric, functionalFitMetric, technicalFitMetric, 
+    const { TIMEMetric, functionalFitMetric, technicalFitMetric,
         businessCriticalityMetric, hostingTypeMetric } = applicationMetrics;
 
     return (
@@ -79,7 +79,7 @@ const ApplicationsDashboard = () => {
                     <h1>TIME Model</h1>
 
                     <p>
-                        <em><b style={timeModel}>T</b>olerate: </em> 
+                        <em><b style={timeModel}>T</b>olerate: </em>
                         An application with high technical quality, but sub-optimal functional business value. The applications should be redesigned for better business alignment.
                     </p>
 
@@ -103,10 +103,29 @@ const ApplicationsDashboard = () => {
 
             <Row>
                 <Col xs={12} md={6} style={{padding:'3em'}}>
-                    <h1>Business Criticality Metric</h1>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut odio lacus. Fusce laoreet tellus vel turpis tincidunt euismod. Pellentesque ullamcorper odio id neque dignissim, quis venenatis nunc vestibulum. Aliquam aliquet vel risus in gravida. Aliquam fermentum in tortor et rhoncus. Nunc laoreet massa vel malesuada rhoncus. Proin et molestie urna, quis cursus dolor. Aliquam sollicitudin nunc quis est laoreet elementum. Donec sodales orci at est hendrerit dictum.
-                    </p>
+                <h1>Business Criticality Metric</h1>
+                <p style={{fontWeight:'bold'}}>
+                What is Business Criticality?
+                </p>
+                <p>
+                Business criticality identifies the department's mission and ability to function effectively.
+                </p>
+                
+                <ul>
+                  <li>
+                  Mission Critical: The application is fundamentally necessary for the success of a specific operation. Any breaks in service are intolerable and will be immediately significantly damaging.
+                  </li>
+                  <li>
+                  Business Critical: The application is relied on by the business to carry out normal business operations to keep them running successfully. Short breaks in service are not catastrophic in the short-term.
+                  </li>
+                  <li>
+                  Business Operational: The application contributes to an efficient business operation but isn't in the direct line of service to customers.
+                  </li>
+                  <li>
+                  Administrative Service: The application's failures can be tolerated a little more and do not affect customers.
+                  </li>
+                </ul>
+
                 </Col>
                 <Col xs={12} md={6} style={{...colors.powderblue, padding:'3em'}}>
                     <ul>
