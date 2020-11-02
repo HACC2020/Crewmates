@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
+import Timeline from './Timeline';
 
 const ApplicationsDashboard = () => {
     const {
@@ -136,6 +137,10 @@ const ApplicationsDashboard = () => {
                 <Col style={{...colors.skyblue, padding:'3em'}}>
                     <h1>Application Timeline</h1>
                     <p>This is a plot of the current active applications and the year in which they were created.</p>
+<<<<<<< HEAD
+=======
+                    <Timeline width={400} height={200} data={[10, 40, 30, 20, 50, 10, 100]} indi={[1990, 1995, 2000, 2005, 2007, 2008, 2009]} />
+>>>>>>> backbone of the chart and data
                 </Col>
             </Row>
         </Container>

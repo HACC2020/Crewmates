@@ -217,6 +217,62 @@ const DataProvider = ({children}) => {
         };
     };
 
+    // return years[]: {'year': num} where num is how many active apps from that year
+    const calculateTimelineMetric = applications => {
+        let retVal = [];
+        let years = [];
+        let plan = 0;
+        let end = 0;
+        let missing = 0;
+
+        let appActive;  // date the application is active
+        let appEOL;
+        let yearMin = '2020';   // arbitrary dates
+        let yearMax = '2020';
+        let numYears = 0;   // year max - min
+
+        let today = new Date();
+        let todayYear = today.getFullYear();
+        let todayMonth = String(today.getMonth() + 1).padStart(2, '0');
+        let todayDay = String(today.getDate()).padStart(2, '0');
+        today = todayYear + '-' + todayMonth + '-' + todayDay;
+
+        applications.forEach(app => {
+            appActive = app['lifecycle:active'];
+            appEOL = app['lifecycle:endOfLife'];
+
+            if (appActive < today && (appEOL >= today || appEOL === null)) {
+                years.push(appActive.slice(0, 4));
+                if (appActive.slice(0, 4) < yearMin) { yearMin = appActive.slice(0, 4) }
+                if (appActive.slice(0, 4) > yearMax) { yearMax = appActive.slice(0, 4) }
+            } else if (app['lifecycle:plan'] !== null || appActive > today) {
+                plan++;
+            } else if (app['lifecycle:endOfLife'] < today) {
+                end++;
+            } else if (app['lifecycle:endOfLife'] === null) {
+                missing++;
+            }
+        });
+
+        // make an array of year objects
+        // populate each year with the numbers found
+
+        // REMEMBER TO CHANGE IT TO INTEGER
+        numYears = yearMax - yearMin;
+        retVal.push({yearMin: 0});
+        for (let i = 1; i < numYears; i++) {
+            //yearMin.toINT
+            yearMin += 1;
+            //yearMin.toString
+            retVal.push({yearMin: 0});
+        }
+
+        // for each year found, look into the years array and increment object with that year
+
+        return { years, plan, end, missing };
+    };
+
+
     /********************PROJECTS METRICS CALCULATION FUNCTIONS *************************/
     const calculateProjectStatusMetric = projects => {
         let green = 0;
