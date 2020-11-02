@@ -37,10 +37,15 @@ const Timeline = () => {
 export default Timeline;
 */
 
+// move over to graphs folder
+// move over to react-dom d3-math
+// have this file call in the data instead of passing as props
+// finish the data function in dataprovider
+
 import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
 
-// width/height of the chart bounds, data the data
+// width/height of the chart bounds, data the data, indi the x values
 function Timeline({ width, height, data, indi }){
     const ref = useRef();
 
