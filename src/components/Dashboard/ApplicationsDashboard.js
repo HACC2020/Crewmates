@@ -3,8 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
-
-
+import Timeline from './Timeline';
 
 const ApplicationsDashboard = () => {
     const {
@@ -137,12 +136,7 @@ const ApplicationsDashboard = () => {
                 <Col style={{...colors.skyblue, padding:'3em'}}>
                     <h1>Application Timeline</h1>
                     <p>This is a plot of the current active applications and the year in which they were created.</p>
-                    <p>
-                    Curabitur blandit mi lacus, id aliquet nisi pharetra quis. Pellentesque eu lobortis dolor. Quisque eget ipsum volutpat, scelerisque nibh et, sagittis ante. Maecenas a quam at orci sollicitudin suscipit. Sed tempus, risus sit amet volutpat sodales, urna justo iaculis libero, in varius lectus tellus non erat. Nam semper auctor arcu vitae elementum. Nam dictum ex lorem, condimentum porttitor felis sollicitudin non. Etiam vehicula volutpat accumsan. Suspendisse molestie dui eu massa fermentum accumsan. Ut sagittis purus metus, vel ornare elit pellentesque ac. Cras ultrices odio ac sapien imperdiet, a tristique turpis dapibus. Fusce metus lorem, finibus ac tellus eu, ultrices suscipit urna. Cras in luctus orci, et euismod sapien. Donec sodales, massa a sollicitudin dapibus, nibh risus blandit mauris, ut viverra lacus ex tincidunt ligula.
-
-Vivamus convallis leo nec odio pharetra posuere. Donec eu elit vitae arcu pulvinar scelerisque vitae a ipsum. Nullam ipsum justo, scelerisque in vulputate a, ultricies vitae nulla. Mauris porttitor enim at ultricies tempus. Donec efficitur, enim sed feugiat pretium, quam risus lobortis odio, ut vestibulum erat ante non nisi. Maecenas placerat ac tortor quis malesuada. Suspendisse dapibus sodales hendrerit. Sed et vehicula felis. Proin molestie turpis non tellus vehicula malesuada. Pellentesque interdum egestas tellus vitae mollis. Pellentesque tempus tellus a lacus bibendum porttitor.
-
-                    </p>
+                    <Timeline width={400} height={200} data={[10, 40, 30, 20, 50, 10, 100]} indi={[1990, 1995, 2000, 2005, 2007, 2008, 2009]} />
                 </Col>
             </Row>
         </Container>
