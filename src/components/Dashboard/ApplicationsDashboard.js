@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
+import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 
 
 
@@ -102,7 +103,7 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={6} style={{padding:'3em'}}>
+                <Col xs={12} md={5} style={{...colors.powderblue, padding:'3em'}}>
                 <h1>Business Criticality Metric</h1>
                 <p style={{fontWeight:'bold'}}>
                 What is Business Criticality?
@@ -127,14 +128,8 @@ const ApplicationsDashboard = () => {
                 </ul>
 
                 </Col>
-                <Col xs={12} md={6} style={{...colors.powderblue, padding:'3em'}}>
-                    <ul>
-                        <li>Administrative Service: {businessCriticalityMetric.administrativeService}</li>
-                        <li>Business Operational: {businessCriticalityMetric.businessOperational}</li>
-                        <li>Business Critical: {businessCriticalityMetric.businessCritical}</li>
-                        <li>Mission Critical: {businessCriticalityMetric.missionCritical}</li>
-                        <li>Missing Data: {businessCriticalityMetric.missing}</li>
-                    </ul>
+                <Col xs={12} md={7} >
+                    <BusinessCriticalityChart/>
                 </Col>
             </Row>
 
