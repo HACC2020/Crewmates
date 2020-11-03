@@ -46,7 +46,10 @@ import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
 
 // width/height of the chart bounds, data the data, indi the x values
-function Timeline({ width, height, data, indi }){
+function ActiveAppTimeline({ width, height, data }){
+
+    const { ticks, xValues } = data;
+
     const ref = useRef();
 
     useEffect(() => {
@@ -58,14 +61,14 @@ function Timeline({ width, height, data, indi }){
         const svg = d3.select(ref.current)
 
         const xScale = d3.scaleLinear()
-            .domain([0, data.length - 1])   // how many ticks
+            .domain([0, ticks.length - 1])   // how many ticks
             .range([0, width]);   // how long the x axis is
 
         const yScale = d3.scaleLinear()
-            .domain([0, 100])   // input values
+            .domain([0, Math.max(...xValues)])   // input values
             .range([height, 0]);   // how long the y axis is
 
-        const xAxis = d3.axisBottom(xScale).ticks(data.length).tickFormat(index => indi[index]);
+        const xAxis = d3.axisBottom(xScale).ticks(ticks.length).tickFormat(index => ticks[index]%5 === 0 ? ticks[index] : '');
         svg.select('.x-axis').style('transform', 'translateY(200px)').call(xAxis);
 
         const yAxis = d3.axisLeft(yScale);
@@ -78,7 +81,7 @@ function Timeline({ width, height, data, indi }){
 
         svg
             .selectAll('.line')
-            .data([data])
+            .data([xValues])
             .join('path')
             .attr('class', 'line')
             .attr('d', myLine)
@@ -99,4 +102,4 @@ function Timeline({ width, height, data, indi }){
 
 }
 
-export default Timeline;
+export default ActiveAppTimeline;

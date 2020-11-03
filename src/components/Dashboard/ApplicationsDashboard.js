@@ -3,7 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
-import Timeline from './Timeline';
+import ActiveAppTimeline from '../../graphs/ActiveAppTimelineChart/ActiveAppTimeline';
 
 const ApplicationsDashboard = () => {
     const {
@@ -12,7 +12,8 @@ const ApplicationsDashboard = () => {
         calculateFunctionalFitMetric,
         calculateTechnicalFitMetric,
         calculateBusinessCriticalityMetric,
-        calculateHostingTypeMetric
+        calculateHostingTypeMetric,
+        calculateTimelineMetric
     } = useData();
 
     const colors = {
@@ -37,7 +38,8 @@ const ApplicationsDashboard = () => {
         functionalFitMetric: calculateFunctionalFitMetric(applications),
         technicalFitMetric: calculateTechnicalFitMetric(applications),
         businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
-        hostingTypeMetric: calculateHostingTypeMetric(applications)
+        hostingTypeMetric: calculateHostingTypeMetric(applications),
+        timeline: calculateTimelineMetric(applications)
     })
 
     useEffect(() => {
@@ -46,14 +48,15 @@ const ApplicationsDashboard = () => {
             functionalFitMetric: calculateFunctionalFitMetric(applications),
             technicalFitMetric: calculateTechnicalFitMetric(applications),
             businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
-            hostingTypeMetric: calculateHostingTypeMetric(applications)
+            hostingTypeMetric: calculateHostingTypeMetric(applications),
+            timeline: calculateTimelineMetric(applications)
         })
     }, [applications]);
 
     // Applications Metrics
 
     const { TIMEMetric, functionalFitMetric, technicalFitMetric,
-        businessCriticalityMetric, hostingTypeMetric } = applicationMetrics;
+        businessCriticalityMetric, hostingTypeMetric, timeline } = applicationMetrics;
 
     return (
     <>
@@ -137,10 +140,11 @@ const ApplicationsDashboard = () => {
                 <Col style={{...colors.skyblue, padding:'3em'}}>
                     <h1>Application Timeline</h1>
                     <p>This is a plot of the current active applications and the year in which they were created.</p>
-<<<<<<< HEAD
-=======
-                    <Timeline width={400} height={200} data={[10, 40, 30, 20, 50, 10, 100]} indi={[1990, 1995, 2000, 2005, 2007, 2008, 2009]} />
->>>>>>> backbone of the chart and data
+                    <p>There are currently {timeline.active} applications that are active right now.</p>
+                    <p>{timeline.missing} applications have no data provided on whether they are in planning, active, or have been retired.</p>
+                    <p></p>
+                    <p></p>
+                    <ActiveAppTimeline width={500} height={200} data={timeline} />
                 </Col>
             </Row>
         </Container>

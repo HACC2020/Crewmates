@@ -217,19 +217,21 @@ const DataProvider = ({children}) => {
         };
     };
 
-    // return years[]: {'year': num} where num is how many active apps from that year
+    // return   ticks, xValues - data for the chart
+    //          active, plan, end, missing - count of how many apps are in this stage
     const calculateTimelineMetric = applications => {
-        let retVal = [];
-        let years = [];
-        let plan = 0;
-        let end = 0;
-        let missing = 0;
+        let ticks = [];     // ticks for the x axis
+        let years = [];     // initial array with the active years from the data
+        let xValues = [];   // count of the number of apps active from each year
+        let active = 0;     // number of apps currently active
+        let plan = 0;       // number of apps in the planning stage
+        let end = 0;        // number of apps past their end of life
+        let missing = 0;    // number of apps with missing data for their lifecycle
 
-        let appActive;  // date the application is active
-        let appEOL;
-        let yearMin = '2020';   // arbitrary dates
-        let yearMax = '2020';
+        let appActive;      // date the application is active
+        let appEOL;         // date of the applications eof
         let numYears = 0;   // year max - min
+        let count = 0;      // how many active apps in each year
 
         let today = new Date();
         let todayYear = today.getFullYear();
@@ -242,34 +244,32 @@ const DataProvider = ({children}) => {
             appEOL = app['lifecycle:endOfLife'];
 
             if (appActive < today && (appEOL >= today || appEOL === null)) {
-                years.push(appActive.slice(0, 4));
-                if (appActive.slice(0, 4) < yearMin) { yearMin = appActive.slice(0, 4) }
-                if (appActive.slice(0, 4) > yearMax) { yearMax = appActive.slice(0, 4) }
+                years.push(parseInt(appActive.slice(0, 4)));
             } else if (app['lifecycle:plan'] !== null || appActive > today) {
                 plan++;
-            } else if (app['lifecycle:endOfLife'] < today) {
+            } else if (appEOL < today) {
                 end++;
-            } else if (app['lifecycle:endOfLife'] === null) {
+            } else if (appEOL === null) {
                 missing++;
             }
         });
 
-        // make an array of year objects
-        // populate each year with the numbers found
+        active = years.length;
+        years.sort();
+        numYears = years[years.length - 1] - years[0];
 
-        // REMEMBER TO CHANGE IT TO INTEGER
-        numYears = yearMax - yearMin;
-        retVal.push({yearMin: 0});
-        for (let i = 1; i < numYears; i++) {
-            //yearMin.toINT
-            yearMin += 1;
-            //yearMin.toString
-            retVal.push({yearMin: 0});
+        // gets the tick values
+        for (let i = 0; i <= numYears; i++) {
+            ticks.push(years[0] + i);
         }
 
-        // for each year found, look into the years array and increment object with that year
+        // actual values per year
+        for (let i = 0; i <= numYears; i++) {
+            count = years.filter(year => year === ticks[i]).length;
+            xValues.push(count);
+        }
 
-        return { years, plan, end, missing };
+        return { ticks, xValues, active, plan, end, missing };
     };
 
 
@@ -389,7 +389,8 @@ const DataProvider = ({children}) => {
                 calculateProjectStatusMetric,
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
-                calculateMajorInformationSystems
+                calculateMajorInformationSystems,
+                calculateTimelineMetric
             }}
         >
             {children}
