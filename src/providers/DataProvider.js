@@ -13,9 +13,10 @@ const DataProvider = ({children}) => {
 
     const url = 'https://opendata.hawaii.gov/api/3/action/datastore_search';
       
+    // Resource IDs for all three datasets
     const departments_rid = '50e32460-83ff-4c01-a40c-bcea5e76ae8d';
     const applications_rid = '9468a555-8d1f-42fb-b1a9-c3ae0d5c756d';
-    const projects_rid = '3fb50c21-a7b2-4449-8368-d9061e001fb2';
+    const projects_rid = '63c0030c-a8ff-419b-9139-990c475cc6e8';
 
     useEffect(() => {
         // Get all records from all three datasets
