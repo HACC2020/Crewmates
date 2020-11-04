@@ -231,11 +231,11 @@ const DataProvider = ({children}) => {
         let numYears = 0;   // year max - min
         let count = 0;      // how many active apps in each year
 
-        const today = new Date();
-        const todayYear = today.getFullYear();
-        const todayMonth = String(today.getMonth() + 1).padStart(2, '0');
-        const todayDay = String(today.getDate()).padStart(2, '0');
-        today = todayYear + '-' + todayMonth + '-' + todayDay;
+        const todayDateObject = new Date();
+        const todayYear = todayDateObject.getFullYear();
+        const todayMonth = String(todayDateObject.getMonth() + 1).padStart(2, '0');
+        const todayDay = String(todayDateObject.getDate()).padStart(2, '0');
+        const today = todayYear + '-' + todayMonth + '-' + todayDay;
 
         applications.forEach(app => {
             let appActive;      // date the application is active
