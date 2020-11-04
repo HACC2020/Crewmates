@@ -228,18 +228,18 @@ const DataProvider = ({children}) => {
         let end = 0;        // number of apps past their end of life
         let missing = 0;    // number of apps with missing data for their lifecycle
 
-        let appActive;      // date the application is active
-        let appEOL;         // date of the applications eof
         let numYears = 0;   // year max - min
         let count = 0;      // how many active apps in each year
 
-        let today = new Date();
-        let todayYear = today.getFullYear();
-        let todayMonth = String(today.getMonth() + 1).padStart(2, '0');
-        let todayDay = String(today.getDate()).padStart(2, '0');
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = String(today.getMonth() + 1).padStart(2, '0');
+        const todayDay = String(today.getDate()).padStart(2, '0');
         today = todayYear + '-' + todayMonth + '-' + todayDay;
 
         applications.forEach(app => {
+            let appActive;      // date the application is active
+            let appEOL;         // date of the applications eof
             appActive = app['lifecycle:active'];
             appEOL = app['lifecycle:endOfLife'];
 
