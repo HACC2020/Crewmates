@@ -42,11 +42,11 @@ const ProjectsDashboard = () => {
         <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
         <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
         </Col>
-        <Col xs={12} md={5} style={{...colors.skyblue, padding: '3em', paddingBottom:'2em'}}>
+        <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-3)', padding: '3em', paddingBottom:'2em'}}>
         <h1 >Business Criticality Metric</h1>
         <Row>
         <Col md={6} style={{paddingBottom:'2em'}}>
-        <h4 style={{color: 'white'}}>What is Business Value </h4>
+        <h4 style={{color: 'white'}}>What is Business Value?</h4>
         </Col>
         <Col md={6} style={{paddingBottom:'2em'}}>
         <h4 style={{color: 'white'}}>What is Project Risk?</h4>
@@ -56,8 +56,8 @@ const ProjectsDashboard = () => {
         </Row>
 
         <Row>
-        <Col xs={12} md={12} style={{...colors.powderblue, padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em'}}>Mini Project Metric Cards</h1>
+        <Col xs={12} md={12} style={{backgroundColor: 'var(--theme-color-1)', padding:'4em', paddingBottom:'2em'}}>
+        <h1 style={{marginBottom:'1em', color:'white'}}>Mini Project Metric Cards</h1>
         </Col>
         </Row>
 
@@ -65,6 +65,11 @@ const ProjectsDashboard = () => {
         <Col xs={12} md={6} style={{...colors.steelblue, padding:'4em', paddingBottom:'2em'}}>
         <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
         </Col>
+
+        <Col xs={12} md={6} style={{padding:'4em', paddingBottom:'2em'}}>
+        <h1 style={{marginBottom:'1em'}}># Number of Projects Missing Data</h1>
+        </Col>
+
         </Row>
 
 
