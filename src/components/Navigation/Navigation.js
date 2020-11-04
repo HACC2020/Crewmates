@@ -1,12 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = () => {
+    
+   const activeStyle = {
+     textDecoration: 'underline',
+     fontWeight:'bold'
+   }
+
     return (
         <nav>
-          <Link id="navbarLink" to="/">Dashboard</Link>
-          <Link id="navbarLink" to="/data">Raw Data</Link>
+          <NavLink exact activeStyle={activeStyle} id="navbarLink" to="/">Dashboard</NavLink>
+          <NavLink activeStyle={activeStyle} id="navbarLink" to="/reports">Reports</NavLink>
+          <NavLink activeStyle={activeStyle} id="navbarLink" to="/filter">Filter</NavLink>
+          <NavLink activeStyle={activeStyle} id="navbarLink" to="/data">Raw Data</NavLink>
         </nav>
     );
 };

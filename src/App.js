@@ -10,6 +10,8 @@ import { DataProvider } from './providers/DataProvider';
 // Import Pages
 import Navigation from './components/Navigation/Navigation.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
+import Reports from './components/Reports/Reports.js';
+import Filter from './components/Filter/Filter.js';
 import Data from './components/Data/Data.js';
 import Footer from './components/Footer.js';
 
@@ -21,6 +23,8 @@ function App() {
         <div className="App">
           <Navigation/>
           <Route exact path="/" component={Dashboard}/>
+          <Route exact path="/reports" component={Reports}/>
+          <Route exact path="/filter" component={Filter}/>
           <Route exact path="/data" component={Data}/>
           <Footer/>
         </div>
