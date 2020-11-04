@@ -217,6 +217,62 @@ const DataProvider = ({children}) => {
         };
     };
 
+    // return   ticks, xValues - data for the chart
+    //          active, plan, end, missing - count of how many apps are in this stage
+    const calculateTimelineMetric = applications => {
+        let ticks = [];     // ticks for the x axis
+        let years = [];     // initial array with the active years from the data
+        let xValues = [];   // count of the number of apps active from each year
+        let active = 0;     // number of apps currently active
+        let plan = 0;       // number of apps in the planning stage
+        let end = 0;        // number of apps past their end of life
+        let missing = 0;    // number of apps with missing data for their lifecycle
+
+        let numYears = 0;   // year max - min
+        let count = 0;      // how many active apps in each year
+
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = String(today.getMonth() + 1).padStart(2, '0');
+        const todayDay = String(today.getDate()).padStart(2, '0');
+        today = todayYear + '-' + todayMonth + '-' + todayDay;
+
+        applications.forEach(app => {
+            let appActive;      // date the application is active
+            let appEOL;         // date of the applications eof
+            appActive = app['lifecycle:active'];
+            appEOL = app['lifecycle:endOfLife'];
+
+            if (appActive < today && (appEOL >= today || appEOL === null)) {
+                years.push(parseInt(appActive.slice(0, 4)));
+            } else if (app['lifecycle:plan'] !== null || appActive > today) {
+                plan++;
+            } else if (appEOL < today) {
+                end++;
+            } else if (appEOL === null) {
+                missing++;
+            }
+        });
+
+        active = years.length;
+        years.sort();
+        numYears = years[years.length - 1] - years[0];
+
+        // gets the tick values
+        for (let i = 0; i <= numYears; i++) {
+            ticks.push(years[0] + i);
+        }
+
+        // actual values per year
+        for (let i = 0; i <= numYears; i++) {
+            count = years.filter(year => year === ticks[i]).length;
+            xValues.push(count);
+        }
+
+        return { ticks, xValues, active, plan, end, missing };
+    };
+
+
     /********************PROJECTS METRICS CALCULATION FUNCTIONS *************************/
     const calculateProjectStatusMetric = projects => {
         let green = 0;
@@ -333,7 +389,8 @@ const DataProvider = ({children}) => {
                 calculateProjectStatusMetric,
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
-                calculateMajorInformationSystems
+                calculateMajorInformationSystems,
+                calculateTimelineMetric
             }}
         >
             {children}
