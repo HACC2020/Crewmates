@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-
+import AppMatrix from './AppMatrix';
 
 const sideNavStyle = {
     padding:'3em',
@@ -43,16 +43,6 @@ const SideNav = ({handleClick}) =>
         <Button onClick={() => handleClick(1)} style={linkStyle} variant="link">IT Roadmap</Button>
         <Button onClick={() => handleClick(2)} style={linkStyle} variant="link">Major Information Systems Roadmap</Button>
     </Col>;
-
-
-
-const AppMatrix = () => {
-
-    return(
-        <div>
-        App Matrix
-        </div>);
-};
 
 
 const ITRoadmap = () => {
