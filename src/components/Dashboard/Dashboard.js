@@ -9,7 +9,7 @@ const Dashboard = () => {
     // To display the chosen dashboard
     const [currentDashboard, setCurrentDashboard] = useState(0);
 
-    const dashboards = [<ApplicationsDashboard/>, <ProjectsDashboard/>, <MISDashboard/>];
+    const dashboards = [ <ProjectsDashboard/>, <MISDashboard/>];
 
     return (
         <>
