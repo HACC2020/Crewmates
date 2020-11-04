@@ -11,10 +11,10 @@ const Navigation = () => {
 
     return (
         <nav>
-          <NavLink exact activeStyle={activeStyle} id="navbarLink" to="/">Dashboard</NavLink>
-          <NavLink activeStyle={activeStyle} id="navbarLink" to="/reports">Reports</NavLink>
-          <NavLink activeStyle={activeStyle} id="navbarLink" to="/filter">Filter</NavLink>
-          <NavLink activeStyle={activeStyle} id="navbarLink" to="/data">Raw Data</NavLink>
+          <NavLink exact activeStyle={activeStyle} className="navbarLink" to="/">Dashboard</NavLink>
+          <NavLink activeStyle={activeStyle} className="navbarLink" to="/reports">Reports</NavLink>
+          <NavLink activeStyle={activeStyle} className="navbarLink" to="/filter">Filter</NavLink>
+          <NavLink activeStyle={activeStyle} className="navbarLink" to="/data">Raw Data</NavLink>
         </nav>
     );
 };

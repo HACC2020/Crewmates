@@ -1,26 +1,18 @@
-.queen-blue-background {
-    background-color: var(--queen-blue);
-}
-
-.blue-sapphire-background {
-    background-color: var(--blue-sapphire);
-
-}
-.indigo-dye-background {
-    background-color: var(--indigo-dye);
-
-} 
-.deep-blue-background {
-    background-color: var(--deep-blue);
-
-}
-.prussian-blue-background {
-    background-color: var(--prussian-blue);
-
-}
-.rich-black-background {
-    background-color: var(--rich-black);
-
+.dashboard-header{
+    background-color: white;
+    /* background: rgb(37,39,77);
+    background: linear-gradient(184deg, rgba(37,39,77,1) 0%, rgba(46,156,202,1) 100%); */
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* font-size: calc(10px + 2vmin); */
+    color: black;
+    font-size: 3.5em;
+    font-weight: 245;
+    font: Arial;
+    padding:3em;
 }
 
 .firstcharacter {
@@ -32,3 +24,24 @@
     padding-right: 8px;
     padding-left: 3px;
   }
+
+#dashboard-applications-projects {
+    background: var(--theme-color-1);
+ 
+}
+
+#TIME-description {
+    background: var(--theme-color-1);
+    color: white;
+}
+
+#dashboard-business-criticality {
+    background: var(--theme-color-5);
+    color: white;
+    font-size:1.5em
+}
+
+#dashboard-application-timeline {
+    background: var(--theme-color-3);
+    font-size: 1.5em;
+}
