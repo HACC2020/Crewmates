@@ -1,11 +1,12 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Table } from 'react-bootstrap';
-import _, { uniq } from 'lodash';
-import Divider from '@material-ui/core/Divider';
+import _ from 'lodash';
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
+
+    // Enumerate an array of all business caps., alphabeticall ordered and unique.
     const capabilities = enumerateBusinessCapabilities(applications);
 
     return(
@@ -14,9 +15,10 @@ const AppMatrix = () => {
         <Table striped bordered size="sm">
             <thead>
                 <tr>
-                    <th style={{borderWidth:'0'}}></th>
+                    <th></th>
                     <th>Missing Business Capability</th>
                     {capabilities.map(capability => {
+                        // Render top row headers that represent all the business capabilities
                         return (
                             <th>{capability}</th>
                         );
