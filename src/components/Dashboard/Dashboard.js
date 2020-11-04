@@ -9,7 +9,8 @@ const Dashboard = () => {
     // To display the chosen dashboard
     const [currentDashboard, setCurrentDashboard] = useState(0);
 
-    const dashboards = [<ApplicationsDashboard/>, <ProjectsDashboard/>, <MISDashboard/>];
+    const dashboards = [<ProjectsDashboard/>, <ApplicationsDashboard/>, <MISDashboard/>];
+
 
     return (
         <>
@@ -40,6 +41,7 @@ const Dashboard = () => {
                     <Col md={1}></Col>
                 </Row>
             </Container> */}
+
 
             {dashboards[currentDashboard]}
         </>
