@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useData } from '../../providers/DataProvider';
-import { Table } from 'react-bootstrap';
+import { Table, Dropdown, DropdownButton } from 'react-bootstrap';
 import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+
 
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
 
+    const [ viewField, setViewField ] = useState(0);
+    const viewOptions = [
+        'timeTag',
+        'businessCriticality',
+        'functionalFit',
+        'technicalFit',
+    ];
     // Enumerate an array of all business caps., alphabeticall ordered and unique.
     const capabilities = enumerateBusinessCapabilities(applications);
-
     return(
         <div>
         App Matrix
+
+        <DropdownButton id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
+            {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{option}</Dropdown.Item>)}
+        </DropdownButton>
         <Table striped bordered size="sm">
             <thead>
                 <tr>
