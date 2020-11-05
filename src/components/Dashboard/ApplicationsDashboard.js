@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 import ActiveAppTimeline from '../../graphs/ActiveAppTimelineChart/ActiveAppTimeline';
@@ -138,7 +138,7 @@ const ApplicationsDashboard = () => {
                 <p>
                 Business criticality identifies the department's mission and ability to function effectively.
                 </p>
-                
+
                 <ul>
                   <li>
                   Mission Critical: The application is fundamentally necessary for the success of a specific operation. Any breaks in service are intolerable and will be immediately significantly damaging.
@@ -234,4 +234,3 @@ const ApplicationsDashboard = () => {
 };
 
 export default ApplicationsDashboard;
-
