@@ -360,6 +360,44 @@ const DataProvider = ({children}) => {
         return { low, moderate, high, severe, missing };
     };
 
+    const calculateBusinessValueToRiskMetric = projects => {
+        // array values are of increasing project risk
+        let marginalValueRisks = [0, 0, 0, 0];
+        let littleValueRisks = [0, 0, 0, 0];
+        let largeValueRisks = [0, 0, 0, 0];
+        let significantValueRisks = [0, 0, 0, 0];
+        let missing = 0;
+
+        const projectRisks = ['lowProjectRisk', 'moderateProjectRisk' ,'highProjectRisk' ,'severeProjectRisk'];
+        //const businessValues = ['marginalBusinessBenefit', 'littleBusinessBenefit', 'largeBusinessBenefit', 'significantBusinessBenefit'];
+
+        projects.forEach(project => {
+            if (project.projectRisk !== null && project.businessValue !== null) {
+                switch (project.businessValue) {
+                    case 'marginalBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? marginalValueRisks[index]++ : '');
+                        break;
+                    case 'littleBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? littleValueRisks[index]++ : '');
+                        break;
+                    case 'largeBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? largeValueRisks[index]++ : '');
+                        break;
+                    case 'significantBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? significantValueRisks[index]++ : '');
+                        break;
+                    default:
+                        missing++;
+                        break;
+                }
+            } else {
+                missing++;
+            }
+        });
+    
+        return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
+    };
+
     const calculateMajorInformationSystems = applications => {
         let count = 0;
     
@@ -390,7 +428,8 @@ const DataProvider = ({children}) => {
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
                 calculateMajorInformationSystems,
-                calculateTimelineMetric
+                calculateTimelineMetric,
+                calculateBusinessValueToRiskMetric
             }}
         >
             {children}
