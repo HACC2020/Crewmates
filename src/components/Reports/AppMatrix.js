@@ -19,9 +19,9 @@ const AppMatrix = () => {
     ];
     // Enumerate an array of all business caps., alphabeticall ordered and unique.
     const capabilities = enumerateBusinessCapabilities(applications);
+
     return(
-        <div>
-        App Matrix
+        <div style={{padding:'1em'}}>
 
         <DropdownButton id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
             {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{option}</Dropdown.Item>)}
@@ -31,11 +31,13 @@ const AppMatrix = () => {
             <thead>
                 <tr>
                     <th></th>
-                    <th>Missing Business Capability</th>
                     {capabilities.map(capability => {
                         // Render top row headers that represent all the business capabilities
+                        let headerTitle = '';
+                        if(capability === null) headerTitle = 'Missing Capability';
+                            else headerTitle = capability;
                         return (
-                            <th key={capability}>{capability}</th>
+                            <th key={capability}>{headerTitle}</th>
                         );
                     })}
                 </tr>
@@ -46,9 +48,9 @@ const AppMatrix = () => {
                     let departmentName = dep.name;
                     let displayedName;
 
-                    let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
-                        return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
-                    });
+                    // let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
+                    //     return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
+                    // });
 
                     if(departmentName.length > MAX_DISPLAYED_CHARACTERS) {
                         displayedName = departmentName.slice(0,MAX_DISPLAYED_CHARACTERS-1);
@@ -58,14 +60,17 @@ const AppMatrix = () => {
                     return (
                         <tr key={dep.id}>
                             <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
-                            <td>{missingBusinessCapabilityApplications.map(o => <ApplicationCard key={o.id} appData={o}/>)}</td>
+                            {/* <td>{missingBusinessCapabilityApplications.map(o => 
+                                <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>)}
+                            </td> */}
                             {capabilities.map(capability => {
                                 const matchingApplications = _.filter(applications, (application) => {
                                     return (application.ownerAgencyName === departmentName) 
                                         && (application.leadingBusinessCapability === capability);
                                 });
 
-                                const matchingApplicationsEl = matchingApplications.map(o => <ApplicationCard key={o.id} appData={o}/>);
+                                const matchingApplicationsEl = matchingApplications.map(o => 
+                                    <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
 
                                 return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
                             })}
@@ -90,12 +95,24 @@ const enumerateBusinessCapabilities = applications => {
     return _.sortBy(capabilities, x => x);
 };
 
-const ApplicationCard = ({appData}) => {
+const ApplicationCard = ({appData, viewBy}) => {
     const { name } = appData;
 
+    const rating = fieldToRating(appData[viewBy]);
+
+    let chipColor = '';
+    if(rating === 1) chipColor = 'red';
+    if(rating === 2) chipColor = 'powderblue';
+    if(rating === 3) chipColor = 'palegreen';
+    if(rating === 4) chipColor = 'darkgreen';
+
+    const chipStyle = {
+        backgroundColor:`${chipColor}`,
+        color: `${rating === 4 ? 'white' : 'black'}`
+    }
     const handleClick = () => console.log(`App: ${name}`);
     return (
-            <Chip size="medium" label={name} onClick={handleClick} />
+            <Chip style={chipStyle} size="medium" label={name} onClick={handleClick} />
     );
 };
 
