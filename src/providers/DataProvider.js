@@ -360,7 +360,7 @@ const DataProvider = ({children}) => {
         return { low, moderate, high, severe, missing };
     };
 
-    const calculateBusinessValueToRiskMetric = projects => {
+    const calculateProjectRiskToValueMetric = projects => {
         // array values are of increasing project risk
         let marginalValueRisks = [0, 0, 0, 0];
         let littleValueRisks = [0, 0, 0, 0];
@@ -429,7 +429,7 @@ const DataProvider = ({children}) => {
                 calculateProjectRiskMetric,
                 calculateMajorInformationSystems,
                 calculateTimelineMetric,
-                calculateBusinessValueToRiskMetric
+                calculateProjectRiskToValueMetric
             }}
         >
             {children}
