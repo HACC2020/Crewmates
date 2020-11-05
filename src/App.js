@@ -15,10 +15,30 @@ import Filter from './components/Filter/Filter.js';
 import Data from './components/Data/Data.js';
 import Footer from './components/Footer.js';
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#504f79',
+      main: '#25274d',
+      dark: '#000025',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#dcddea',
+      main: '#aaabb8',
+      dark: '#7b7c88',
+      contrastText: '#f9f9f9',
+    },
+  },
+});
+
 function App() {
 
   return (
     <DataProvider>
+    <ThemeProvider theme={theme}>
       <Router>
         <div className="App">
           <Navigation/>
@@ -29,6 +49,7 @@ function App() {
           <Footer/>
         </div>
       </Router>
+    </ThemeProvider>
     </DataProvider>
   );
 }

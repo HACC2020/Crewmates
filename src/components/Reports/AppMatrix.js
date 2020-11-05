@@ -2,6 +2,9 @@ import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Table } from 'react-bootstrap';
 import _ from 'lodash';
+import Chip from '@material-ui/core/Chip';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
@@ -20,7 +23,7 @@ const AppMatrix = () => {
                     {capabilities.map(capability => {
                         // Render top row headers that represent all the business capabilities
                         return (
-                            <th>{capability}</th>
+                            <th key={capability}>{capability}</th>
                         );
                     })}
                 </tr>
@@ -43,16 +46,16 @@ const AppMatrix = () => {
                     return (
                         <tr key={dep.id}>
                             <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
-                            <td>{missingBusinessCapabilityApplications.map(o => <p>{o.name}</p>)}</td>
+                            <td>{missingBusinessCapabilityApplications.map(o => <ApplicationCard key={o.id} appData={o}/>)}</td>
                             {capabilities.map(capability => {
                                 const matchingApplications = _.filter(applications, (application) => {
                                     return (application.ownerAgencyName === departmentName) 
                                         && (application.leadingBusinessCapability === capability);
                                 });
 
-                                const matchingApplicationsEl = matchingApplications.map(o => <p>{o.name}</p>);
+                                const matchingApplicationsEl = matchingApplications.map(o => <ApplicationCard key={o.id} appData={o}/>);
 
-                                return (<td>{matchingApplicationsEl}</td>);
+                                return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
                             })}
                         </tr>
                         );
@@ -74,5 +77,14 @@ const enumerateBusinessCapabilities = applications => {
     });
     return _.sortBy(capabilities, x => x);
 };
+
+const ApplicationCard = ({appData}) => {
+    const { name } = appData;
+
+    const handleClick = () => console.log(`App: ${name}`);
+    return (
+            <Chip size="medium" label={name} onClick={handleClick} />
+    );
+}
 
 export default AppMatrix;
