@@ -4,7 +4,7 @@ import AppMatrix from './AppMatrix';
 
 const sideNavStyle = {
     padding:'3em',
-    height:'100vh',
+    height:'100%',
     backgroundColor:'skyblue',
     display:'flex',
     flexDirection:'column'
@@ -12,7 +12,8 @@ const sideNavStyle = {
 
 const linkStyle = {
     color:'black',
-    fontSize:'1em'
+    fontSize:'1em',
+    fontWeight:'500'
 };
 
 const Reports = () => {

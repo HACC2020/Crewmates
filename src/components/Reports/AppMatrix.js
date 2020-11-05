@@ -29,7 +29,7 @@ const AppMatrix = () => {
         </DropdownButton>
         <p>Categories:</p>
         {<CategoryChips field={viewOptions[viewField]}/>}
-
+        <div style={{overflowY:'scroll', overflowX:'scroll', height:'100vh'}}>
         <Table striped bordered size="sm">
             <thead>
                 <tr>
@@ -82,6 +82,7 @@ const AppMatrix = () => {
                 })}
             </tbody>
         </Table>
+        </div>
         </div>);
 };
 
