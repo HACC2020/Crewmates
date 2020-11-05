@@ -33,6 +33,20 @@ const ApplicationsDashboard = () => {
         fontSize:'3em'
     };
 
+    const portfolioHeader = {
+      backgroundColor: '#040404',
+      minHeight: '40vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 'calc(20px + 6vmin)',
+      color: 'white',
+      fontWeight: '245',
+      font: 'Arial',
+      textAlign: 'center',
+    }
+
     const whiteText = {
         color:'white'
     };
@@ -65,6 +79,9 @@ const ApplicationsDashboard = () => {
 
     return (
     <>
+        <header style={portfolioHeader}>
+            Hawai'i State Executive Branch Application Portfolio
+        </header>
         <Container fluid>
             <Row id="dashboard-applications-projects">
                 <Col xs={0} md={1} lg={2} xl={3}></Col>
@@ -80,8 +97,10 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row style={{minHeight:'100vh'}}>
-
-                <Col xs={12} md={4} lg={3} id="TIME-description" style={{ padding:'4em', paddingBottom:'2em'}}>
+                <Col xs={12} md={8} style={{backgroundColor: '#fbfbfd'}}>
+                    <TIMEModelChart/>
+                </Col>
+                <Col id="TIME-description" xs={12} md={4} lg={3} style={{ padding:'4em', paddingBottom:'2em'}}>
                     <h1 style={{marginBottom:'1em'}}>TIME Model</h1>
                     <p>
                         <span className="firstcharacter">T</span>olerate:
@@ -105,9 +124,6 @@ const ApplicationsDashboard = () => {
                          Eliminate useless applications with low business value and a poor technical fit (possible reasons; no business value, not used, low utility, based on obsolete software)
                     </p>
                 </Col>
-                <Col xs={12} md={8} lg={8} >
-                    <TIMEModelChart/>
-                </Col>            
             </Row>
 
             <Row>
@@ -150,8 +166,66 @@ const ApplicationsDashboard = () => {
                     <p>There are {timeline.plan} applications that are planned to be active sometime in the future.</p>
                     <p>The state has retired {timeline.end} applications.</p>
                 </Col>
-                <Col xs={12} md={6} style={{padding: '2em'}}>
+                <Col xs={12} md={6} style={{padding: '2em', backgroundColor: '#fbfbfd'}}>
                     <ActiveAppTimeline data={timeline} />
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={12} md={3}>
+                    <Container>
+                        <Col>
+                            <Row style={{backgroundColor: '#5D92BD'}}>
+                                <h1>graph</h1>
+                            </Row>
+                            <Row style={{...colors.steelblue}}>
+                                <h1>description</h1>
+                            </Row>
+                        </Col>
+                    </Container>
+                </Col>
+                <Col xs={12} md={3}>
+                    <Container>
+                        <Col>
+                            <Row style={{backgroundColor: '#BAE4E9'}}>
+                                <h1>graph</h1>
+                            </Row>
+                            <Row style={{...colors.powderblue}}>
+                                <h1>description</h1>
+                            </Row>
+                        </Col>
+                    </Container>
+                </Col>
+                <Col xs={12} md={3}>
+                    <Container>
+                        <Col>
+                            <Row style={{backgroundColor: '#96D4ED'}}>
+                                <h1>graph</h1>
+                            </Row>
+                            <Row style={{...colors.skyblue}}>
+                                <h1>description</h1>
+                            </Row>
+                        </Col>
+                    </Container>
+                </Col>
+                <Col xs={12} md={3}>
+                    <Container>
+                        <Col>
+                            <Row style={{backgroundColor: '#5D92BD'}}>
+                                <h1>graph</h1>
+                            </Row>
+                            <Row style={{...colors.steelblue}}>
+                                <h1>description</h1>
+                            </Row>
+                        </Col>
+                    </Container>
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={12} md={5} style={{backgroundColor: '#fbfbfd'}}>
+                    <h1>a graph</h1>
+                </Col>
+                <Col xs={12} md={7} style={{...colors.steelblue, padding:'3em'}}>
+                    <h1>Calculate End of Life Graph</h1>
                 </Col>
             </Row>
         </Container>
