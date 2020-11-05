@@ -4,16 +4,17 @@ import AppMatrix from './AppMatrix';
 
 const sideNavStyle = {
     padding:'3em',
-    height:'100%',
-    backgroundColor:'skyblue',
+    height:'100vh',
+    // backgroundColor:'var(--theme-color-1)',
     display:'flex',
     flexDirection:'column'
 };
 
 const linkStyle = {
-    color:'black',
+    color:'white',
     fontSize:'1em',
-    fontWeight:'500'
+    fontWeight:'500',
+    marginBottom:'1em'
 };
 
 const Reports = () => {
@@ -28,9 +29,9 @@ const Reports = () => {
     return (
     <>
         <Container fluid>
-            <Row>
+            <Row style={{backgroundColor:'var(--theme-color-1)'}}>
                 <SideNav handleClick={handleChangeReport}/>
-                <Col sm={12} md={8} lg={9} xl={10}>
+                <Col sm={12} md={8} lg={9} xl={10}  style={{backgroundColor:'white', padding:'2em'}}>
                     {reports[currentReport]}
                 </Col>
             </Row>

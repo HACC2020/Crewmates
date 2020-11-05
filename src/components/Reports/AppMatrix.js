@@ -24,8 +24,8 @@ const AppMatrix = () => {
     return(
         <div style={{padding:'1em'}}>
 
-        <DropdownButton id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
-            {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{option}</Dropdown.Item>)}
+        <DropdownButton style={{borderRadius:0}} id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
+            {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{_.startCase(option)}</Dropdown.Item>)}
         </DropdownButton>
         <p>Categories:</p>
         {<CategoryChips field={viewOptions[viewField]}/>}
