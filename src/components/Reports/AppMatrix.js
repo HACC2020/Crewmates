@@ -26,6 +26,7 @@ const AppMatrix = () => {
         <DropdownButton id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
             {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{option}</Dropdown.Item>)}
         </DropdownButton>
+
         <Table striped bordered size="sm">
             <thead>
                 <tr>
@@ -96,6 +97,85 @@ const ApplicationCard = ({appData}) => {
     return (
             <Chip size="medium" label={name} onClick={handleClick} />
     );
+};
+
+/* Given a field and an application return an integer representing 
+    a rating of that field.
+    
+    Ex: 
+    const field = 'timeTag';
+    const fieldValue = 'Invest';
+
+    const rating = fieldToRating(field, fieldValue);
+    // 4
+*/
+const fieldToRating = (fieldValue) => {
+    let rating = 0;
+    switch (fieldValue) {
+
+        // If it's a businessCriticality value
+        case 'administrativeService':
+            rating = 1;
+            break;
+        case 'businessOperational':
+            rating = 2;
+            break;
+        case 'businessCritical':
+            rating = 3;
+            break;
+        case 'missionCritical':
+            rating = 4;
+            break;
+
+        // If it's TIME tag
+        case 'Eliminate':
+            rating = 1;
+            break;
+        case 'Migrate':
+            rating = 2;
+            break;
+        case 'Tolerate':
+            rating = 3;
+            break;
+        case 'Invest':
+            rating = 4;
+            break;
+
+
+        // If it's functionalFit
+        case 'poor':
+            rating = 1;
+            break;
+        case 'insufficient':
+            rating = 2;
+            break;
+        case 'adequate':
+            rating = 3;
+            break;
+        case 'excellent':
+            rating = 4;
+            break;
+
+        // If it's technicalFit
+        case 'poor':
+            rating = 1;
+            break;
+        case 'insufficient':
+            rating = 2;
+            break;
+        case 'adequate':
+            rating = 3;
+            break;
+        case 'excellent':
+            rating = 4;
+            break;
+
+        default:
+            rating = 0;
+            break;
+    }
+
+    return rating;
 }
 
 export default AppMatrix;
