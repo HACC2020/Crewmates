@@ -3,9 +3,10 @@ import { scaleLinear, line, curveCardinal, axisBottom, axisLeft, select, max } f
 
 const ProjectRiskToValueChart = ({data}) => {
 
-    const { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing } = data;
-    const benefits = ['marginalBusinessBenefit', 'littleBusinessBenefit', 'largeBusinessBenefit', 'significantBusinessBenefit'];
+    const { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks } = data;
+    const benefits = ['significant', 'large', 'little', 'marginal'];
     const projectRisks = ['low', 'moderate' ,'high' ,'severe'];
+    const colors = ['green', 'lightgreen', 'orange', 'red'];
 
     const width = 475;
     const height = 250;
@@ -23,6 +24,22 @@ const ProjectRiskToValueChart = ({data}) => {
     const yScale = scaleLinear()
         .domain([0, yMax + 5])   // num y ticks
         .range(yRange);   // how long the y axis is
+
+    const legend = () => {
+        const x = 500;
+        const y = height / 4;
+        return (
+            <>
+            <text x={x - 1} y={y} fontSize={'13px'} >Business Value</text>
+            {colors.map((d, index) => 
+                <g fill={colors[index]}>
+                    <rect x={x} y={y + 12 + index * 15} height={10} width={10}/>
+                    <text x={x + 15} y={y + 21.5 + index * 15} fontSize={'12px'}>{benefits[index]}</text>
+                </g>
+            )}
+            </>
+        );
+    }
 
     // line
     const drawLine = () => {
@@ -44,7 +61,7 @@ const ProjectRiskToValueChart = ({data}) => {
                   className="line"
                   d={myLine(littleValueRisks)}
                   fill='none'
-                  stroke='yellow'
+                  stroke='orange'
                 />
                 <path
                   className="line"
@@ -94,10 +111,11 @@ const ProjectRiskToValueChart = ({data}) => {
 
     return (
         <div>
-            <svg fontSize={`2`} style={{overflow: 'visible'}} viewBox={`0, 0, ${width}, ${height}`}>
+            <svg fontSize={`2`} style={{overflow: 'visible'}} viewBox={`0, 0, ${width + 100}, ${height}`}>
                 {drawLine()}
                 {drawAxes()}
                 {title}
+                {legend()}
             </svg>
         </div>
         
