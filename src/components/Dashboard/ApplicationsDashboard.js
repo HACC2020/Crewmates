@@ -230,7 +230,7 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-           <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
+           <Col xs={12} md={7} style={{padding:'4em', paddingBottom:'2em'}}>
            <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
            </Col>
            <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
