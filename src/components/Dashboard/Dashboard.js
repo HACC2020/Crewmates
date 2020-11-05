@@ -13,8 +13,8 @@ const Dashboard = () => {
 
     return (
         <>
-        <header className="App-header">
-            Dashboards
+        <header className="dashboard-header">
+        State of Hawai'i Executive Branch ETS IT Portfolio
         </header>
             {/* <Container>
                 <Row>

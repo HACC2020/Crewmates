@@ -47,6 +47,11 @@ const ApplicationsDashboard = () => {
       textAlign: 'center',
     }
 
+    const whiteText = {
+        color:'white'
+    };
+
+
     const [applicationMetrics, setApplicationsMetrics] = useState({
         TIMEMetric: calculateTIMEMetric(applications),
         functionalFitMetric: calculateFunctionalFitMetric(applications),
@@ -78,24 +83,24 @@ const ApplicationsDashboard = () => {
             Hawai'i State Executive Branch Application Portfolio
         </header>
         <Container fluid>
-            <Row>
-                <Col xs={0} md={1}></Col>
+            <Row id="dashboard-applications-projects">
+                <Col xs={0} md={1} lg={2} xl={3}></Col>
                 <Col style={{padding:'4em'}}>
-                    <h1 style={{fontWeight: '600'}}>Applications</h1>
-                    <p> are software programs or a group of programs owned and managed by a department, and used by the department's employees or by citizens/constituents.</p>
+                    <h1 className="text" style={{fontWeight:'600', color:'white'}}>IT Applications</h1>
+                    <p style={whiteText}> are software programs or a group of programs owned and managed by a department, and used by the department's employees or by citizens/constituents</p>
                 </Col>
                 <Col style={{padding:'4em'}}>
-                    <h1 style={{fontWeight: '600'}}>Projects</h1>
-                    <p> A project is an effort to create, modify or maintain a specific application, infrastructure or service.</p>
+                    <h1 style={{...whiteText, fontWeight:'600'}}>IT Projects</h1>
+                    <p style={whiteText}> A project is an effort to create, modify or maintain a specific application, infrastructure or service.</p>
                 </Col>
-                <Col xs={0} md={1}></Col>
+                <Col xs={0} md={1} lg={2} xl={3}></Col>
             </Row>
 
-            <Row>
+            <Row style={{minHeight:'100vh'}}>
                 <Col xs={12} md={8} style={{backgroundColor: '#fbfbfd'}}>
                     <TIMEModelChart/>
                 </Col>
-                <Col xs={12} md={4} style={{...colors.steelblue, padding:'4em', paddingBottom:'2em'}}>
+                <Col id="TIME-description" xs={12} md={4} lg={3} style={{ padding:'4em', paddingBottom:'2em'}}>
                     <h1 style={{marginBottom:'1em'}}>TIME Model</h1>
                     <p>
                         <span className="firstcharacter">T</span>olerate:
@@ -122,7 +127,10 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={5} style={{...colors.powderblue, padding:'3em'}}>
+                <Col xs={12} md={9} lg={7} xl={6}>
+                    <BusinessCriticalityChart/>
+                </Col>
+                <Col id="dashboard-business-criticality" xs={12} md={3} lg={5} xl={6} style={{ padding:'3em'}}>
                 <h1>Business Criticality Metric</h1>
                 <p style={{fontWeight:'bold'}}>
                 What is Business Criticality?
@@ -147,13 +155,10 @@ const ApplicationsDashboard = () => {
                 </ul>
 
                 </Col>
-                <Col xs={12} md={7} >
-                    <BusinessCriticalityChart/>
-                </Col>
             </Row>
 
             <Row>
-                <Col xs={12} md={6} style={{...colors.skyblue, padding:'3em'}}>
+                <Col id="dashboard-application-timeline" xs={12} md={6} style={{ padding:'3em'}}>
                     <h1>Application Timeline</h1>
                     <p>This is a plot of the current active applications and the year in which they went active.</p>
                     <p>There are currently {timeline.active} applications that are active right now.</p>
