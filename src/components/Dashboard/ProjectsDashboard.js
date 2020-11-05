@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
-<<<<<<< HEAD
 import { Container, Row, Col, Card} from 'react-bootstrap';
-=======
-import { Container, Row, Col} from 'react-bootstrap';
->>>>>>> 5bf56c3e707c4ce610bfaa848a8adb5f544fbaab
+
 
 const ProjectsDashboard = () => {
     const {
@@ -42,67 +39,77 @@ const ProjectsDashboard = () => {
     <>
 
         <Container fluid>
-        <Row>
-        <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
-        </Col>
-<<<<<<< HEAD
-        <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
-        <h1 style={{color:'white'}}>Business Criticality Metric</h1>
-=======
-        <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-3)', padding: '3em', paddingBottom:'2em'}}>
-        <h1 >Business Criticality Metric</h1>
->>>>>>> 5bf56c3e707c4ce610bfaa848a8adb5f544fbaab
-        <Row>
-        <Col md={6} style={{paddingBottom:'2em'}}>
-        <h4 style={{color: 'white'}}>What is Business Value?</h4>
-        </Col>
-        <Col md={6} style={{paddingBottom:'2em'}}>
-        <h4 style={{color: 'white'}}>What is Project Risk?</h4>
-        </Col>
-        </Row>
-        </Col>
-        </Row>
 
         <Row>
-<<<<<<< HEAD
-        <Col xs={12} md={12} style={{backgroundColor: 'var(--theme-color-3)', padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em', color:'white'}}>Mini Project Metric Cards</h1>
-        <Card style={{ width: '18rem' }}>
+       <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
+       <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
+       </Col>
+       <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
+       <h1 style={{color:'white'}}>Business Criticality Metric</h1>
+       <Row>
+       <Col md={6} style={{paddingBottom:'2em'}}>
+       <h4 style={{color:'white'}}>What is Business Value?</h4>
+       </Col>
+       <Col md={6} style={{paddingBottom:'2em'}}>
+       <h4 style={{color:'white'}}>What is Project Risk?</h4>
+       </Col>
+       </Row>
+       </Col>
+       </Row>
+
+       <Row>
+       <Col xs={12} md={12} style={{backgroundColor:'var(--theme-color-3)', padding:'4em', paddingBottom:'2em'}}>
+       <h1 style={{marginBottom:'1em'}}>Mini Project Metric Cards</h1>
+       <Row>
+       <Col xs={12} md={4}>
+       <Card style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+            <Card.Title>Projects planned but not approved</Card.Title>
             <Card.Text>
               Some quick example text to build on the card title and make up the bulk of
               the card's content.
             </Card.Text>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
           </Card.Body>
         </Card>
-=======
-        <Col xs={12} md={12} style={{backgroundColor: 'var(--theme-color-1)', padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em', color:'white'}}>Mini Project Metric Cards</h1>
->>>>>>> 5bf56c3e707c4ce610bfaa848a8adb5f544fbaab
         </Col>
+        <Col xs={12} md={4}>
+        <Card style={{ width: '18rem' }}>
+           <Card.Body>
+             <Card.Title>Projects approved but not active</Card.Title>
+             <Card.Text>
+               Some quick example text to build on the card title and make up the bulk of
+               the card's content.
+             </Card.Text>
+           </Card.Body>
+         </Card>
+         </Col>
+         <Col xs={12} md={4}>
+         <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>Projects approved but no cancel or completed date</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          </Col>
         </Row>
+       </Col>
+       </Row>
 
-        <Row>
-<<<<<<< HEAD
-        <Col xs={12} md={6} style={{backgroundColor: 'var(--theme-color-1)', padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em', color:'white'}}>Canceled vs Completed projects</h1>
-=======
-        <Col xs={12} md={6} style={{...colors.steelblue, padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
->>>>>>> 5bf56c3e707c4ce610bfaa848a8adb5f544fbaab
+       <Row>
+
+       <Col xs={12} md={6} style={{backgroundColor:'var(--theme-color-1',padding:'4em', paddingBottom:'2em'}}>
+        <h1 style={{color: 'white', marginBottom:'1em'}}># Number of Projects Missing Data</h1>
         </Col>
 
-        <Col xs={12} md={6} style={{padding:'4em', paddingBottom:'2em'}}>
-        <h1 style={{marginBottom:'1em'}}># Number of Projects Missing Data</h1>
-        </Col>
+       <Col xs={12} md={6} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
+       <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
+       </Col>
 
-        </Row>
 
+       </Row>
 
 
 
