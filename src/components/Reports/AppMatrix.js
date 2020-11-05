@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Table, Dropdown, DropdownButton } from 'react-bootstrap';
 import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
+import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 
 
 
@@ -26,6 +27,8 @@ const AppMatrix = () => {
         <DropdownButton id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
             {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{option}</Dropdown.Item>)}
         </DropdownButton>
+        <p>Categories:</p>
+        {<CategoryChips field={viewOptions[viewField]}/>}
 
         <Table striped bordered size="sm">
             <thead>
@@ -115,6 +118,39 @@ const ApplicationCard = ({appData, viewBy}) => {
             <Chip style={chipStyle} size="medium" label={name} onClick={handleClick} />
     );
 };
+
+const fieldsValues = {
+    'timeTag': ['Missing Data', 'Eliminate', 'Migrate', 'Tolerate', 'Invest'],
+    'businessCriticality': ['Missing Data', 'administrativeService', 'businessOperational', 'businessCritical', 'missionCritical'],
+    'functionalFit': ['Missing Data', 'poor', 'insufficient', 'adequate', 'excellent'],
+    'technicalFit': ['Missing Data', 'poor', 'insufficient', 'adequate', 'excellent'],
+};
+
+const CategoryChips = ({field}) => {
+    const values = fieldsValues[field];
+
+    return (
+        <>
+        {values.map(val => {
+            const rating = fieldToRating(val);
+
+            let chipColor = '';
+            
+            if(rating === 1) chipColor = 'red';
+            if(rating === 2) chipColor = 'powderblue';
+            if(rating === 3) chipColor = 'palegreen';
+            if(rating === 4) chipColor = 'darkgreen';
+
+            const chipStyle = {
+                backgroundColor:`${chipColor}`,
+                color: `${rating === 4 ? 'white' : 'black'}`
+            };
+
+            return (<Chip style={chipStyle} size="medium" label={val}/>);
+        })}
+        </>
+    );
+}
 
 /* Given a field and an application return an integer representing 
     a rating of that field.
