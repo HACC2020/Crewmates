@@ -155,7 +155,7 @@ const ProjectsDashboard = () => {
           </Col>
 
           <Col xs={12} md={6} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
-            <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
+            <h1 style={{marginBottom:'1em'}}>Cancelled vs Completed projects</h1>
             <CancelledCompletedChart/>
           </Col>
       </Row>
