@@ -8,7 +8,8 @@ const ProjectsDashboard = () => {
         projects,
         calculateProjectStatusMetric,
         calculateBusinessValueMetric,
-        calculateProjectRiskMetric
+        calculateProjectRiskMetric,
+        calculateProjectDates
     } = useData();
 
     const colors = {
@@ -21,19 +22,21 @@ const ProjectsDashboard = () => {
     const [projectsMetrics, setProjectsMetrics] = useState({
         projectStatusMetric: calculateProjectStatusMetric(projects),
         projectBusinessValueMetric: calculateBusinessValueMetric(projects),
-        projectRiskMetric: calculateProjectRiskMetric(projects)
+        projectRiskMetric: calculateProjectRiskMetric(projects),
+        projectDateMetric: calculateProjectDates(projects)
     });
 
     useEffect(() => {
         setProjectsMetrics({
             projectStatusMetric: calculateProjectStatusMetric(projects),
             projectBusinessValueMetric: calculateBusinessValueMetric(projects),
-            projectRiskMetric: calculateProjectRiskMetric(projects)
+            projectRiskMetric: calculateProjectRiskMetric(projects),
+            projectDateMetric: calculateProjectDates(projects)
         });
-    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric]);
+    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectDates]);
 
     // Projectst Metrics
-    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric } = projectsMetrics;
+    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectDateMetric } = projectsMetrics;
 
     return (
     <>
@@ -43,7 +46,7 @@ const ProjectsDashboard = () => {
           <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
             <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
           </Col>
-          
+
           <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
               <Row>
                   <Col md={12} style={{}}>
@@ -52,36 +55,36 @@ const ProjectsDashboard = () => {
                         <li style={{color: 'white'}}>
                             Marginal Benefit: Small quality or financial improvements.
                         </li>
-                        
+
                         <li style={{color: 'white'}}>
                             Little Benefit: Some quality and financial improvements.
                         </li>
-                        
+
                         <li style={{color: 'white'}}>
                             Large Benefit: Remarkable quality and/or financial improvements.
                         </li>
-               
+
                         <li style={{color: 'white'}}>
                             Signifiant Benefit: Significant improvements in quality and/or financials.
                         </li>
                       </ul>
                   </Col>
-                  
+
                   <Col md={12} style={{}}>
                       <h3 style={{color:'black'}}>What is Project Risk?</h3>
                       <ul>
                           <li style={{color: 'white'}}>
                               Low Risk: No risks or a minor risk that can be easily mitigated.
                           </li>
-                   
-                          <li style={{color: 'white'}}>       
-                              Moderate risk - Some effects on quality, timeline or budget that can be mitigated by project management.       
+
+                          <li style={{color: 'white'}}>
+                              Moderate risk - Some effects on quality, timeline or budget that can be mitigated by project management.
                           </li>
-                          
-                          <li style={{color: 'white'}}>              
-                              High Risk: Remarkable effects on quality, timeline or budget require management support.              
+
+                          <li style={{color: 'white'}}>
+                              High Risk: Remarkable effects on quality, timeline or budget require management support.
                           </li>
-               
+
                           <li style={{color: 'white'}}>
                               Severe Risk: Intolerable effects on quality and/or timeline and/or budget of a project.
                           </li>
@@ -93,27 +96,14 @@ const ProjectsDashboard = () => {
 
        <Row>
           <Col xs={12} md={12} style={{backgroundColor:'var(--theme-color-3)', padding:'4em', paddingBottom:'2em'}}>
-          <h1 style={{marginBottom:'1em'}}>Additional Project Metric Cards</h1>
+          <h1 style={{marginBottom:'1em'}}>Project Date Metrics</h1>
           <Row>
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                      <Card.Title>Projects planned but not approved</Card.Title>
-                          <Card.Text>
-                              Some quick example text to build on the card title and make up the bulk of
-                              the card's content.
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Col>
-              
-              <Col xs={12} md={4}>
-                  <Card style={{ width: '18rem' }}>
-                      <Card.Body>
-                          <Card.Title>Projects approved but no projected start</Card.Title>
-                          <Card.Text>
-                             Some quick example text to build on the card title and make up the bulk of
-                             the card's content.
+                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}>{projectDateMetric.plannedNotApproved}</Card.Title>
+                          <Card.Text style={{textAlign:'center', fontWeight:'bold'}}>
+                              (May be inaccurate) Projects planned but not approved.
                           </Card.Text>
                       </Card.Body>
                   </Card>
@@ -122,10 +112,20 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                      <Card.Title>Projects that have a projected start date but no cancel or projected completion date</Card.Title>
-                          <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
+                          <Card.Title style={{textAlign:'center', fontSize: '3em'}}>{projectDateMetric.approvedNoStart}</Card.Title>
+                          <Card.Text style={{textAlign:'center', fontWeight: 'bold'}}>
+                             Projects approved but no projected start date.
+                          </Card.Text>
+                      </Card.Body>
+                  </Card>
+              </Col>
+
+              <Col xs={12} md={4}>
+                  <Card style={{ width: '18rem' }}>
+                      <Card.Body>
+                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}> {projectDateMetric.startNoComplete}</Card.Title>
+                          <Card.Text style={{textAlign: 'center', fontWeight:'bold'}}>
+                            Projects that have a projected start date but no cancel or projected completion date.
                           </Card.Text>
                       </Card.Body>
                   </Card>
@@ -142,10 +142,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={12}>
                   <Card style={{ width: '18rem' }}>
                      <Card.Body>
-                       <Card.Title>Number of projects missing data</Card.Title>
+                       <Card.Title> {projectDateMetric.plannedNotApproved}</Card.Title>
                        <Card.Text>
-                         Some quick example text to build on the card title and make up the bulk of
-                         the card's content.
+                         (clarify) Projects are missing data.
                        </Card.Text>
                      </Card.Body>
                    </Card>
