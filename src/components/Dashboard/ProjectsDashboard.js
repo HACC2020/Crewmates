@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col, Card} from 'react-bootstrap';
+import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
 
 
 const ProjectsDashboard = () => {
@@ -9,6 +10,7 @@ const ProjectsDashboard = () => {
         calculateProjectStatusMetric,
         calculateBusinessValueMetric,
         calculateProjectRiskMetric,
+        calculateProjectRiskToValueMetric,
         calculateProjectDates
     } = useData();
 
@@ -23,6 +25,7 @@ const ProjectsDashboard = () => {
         projectStatusMetric: calculateProjectStatusMetric(projects),
         projectBusinessValueMetric: calculateBusinessValueMetric(projects),
         projectRiskMetric: calculateProjectRiskMetric(projects),
+        projectRiskToValueMetric: calculateProjectRiskToValueMetric(projects),
         projectDateMetric: calculateProjectDates(projects)
     });
 
@@ -31,12 +34,13 @@ const ProjectsDashboard = () => {
             projectStatusMetric: calculateProjectStatusMetric(projects),
             projectBusinessValueMetric: calculateBusinessValueMetric(projects),
             projectRiskMetric: calculateProjectRiskMetric(projects),
+            projectRiskToValueMetric: calculateProjectRiskToValueMetric(projects),
             projectDateMetric: calculateProjectDates(projects)
         });
-    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectDates]);
+    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectRiskToValueMetric, calculateProjectDates]);
 
-    // Projectst Metrics
-    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectDateMetric } = projectsMetrics;
+    // Project Metrics
+    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric } = projectsMetrics;
 
     return (
     <>
@@ -45,6 +49,7 @@ const ProjectsDashboard = () => {
       <Row>
           <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
             <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
+            <ProjectRiskToValueChart data={projectRiskToValueMetric}/>
           </Col>
 
           <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
