@@ -112,10 +112,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                          <Card.Title>{projectDateMetric.approvedNoStart} Projects approved but no projected start</Card.Title>
+                          <Card.Title>{projectDateMetric.approvedNoStart}</Card.Title>
                           <Card.Text>
-                             Some quick example text to build on the card title and make up the bulk of
-                             the card's content.
+                             Projects approved but no projected start
                           </Card.Text>
                       </Card.Body>
                   </Card>
@@ -124,10 +123,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                      <Card.Title>Projects that have a projected start date but no cancel or projected completion date</Card.Title>
+                      <Card.Title> {projectDateMetric.startNoComplete}</Card.Title>
                           <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
+                            Projects that have a projected start date but no cancel or projected completion date
                           </Card.Text>
                       </Card.Body>
                   </Card>
