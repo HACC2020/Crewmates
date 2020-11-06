@@ -103,7 +103,7 @@ const ProjectsDashboard = () => {
                       <Card.Body>
                       <Card.Title style={{textAlign:'center', fontSize:'3em'}}>{projectDateMetric.plannedNotApproved}</Card.Title>
                           <Card.Text style={{textAlign:'center', fontWeight:'bold'}}>
-                              Projects planned but not approved.
+                              (May be inaccurate) Projects planned but not approved.
                           </Card.Text>
                       </Card.Body>
                   </Card>
@@ -144,7 +144,7 @@ const ProjectsDashboard = () => {
                      <Card.Body>
                        <Card.Title> {projectDateMetric.plannedNotApproved}</Card.Title>
                        <Card.Text>
-                         Projects are missing data.
+                         (clarify) Projects are missing data.
                        </Card.Text>
                      </Card.Body>
                    </Card>
