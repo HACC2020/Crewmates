@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col, Card} from 'react-bootstrap';
-
+import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 
 const ProjectsDashboard = () => {
     const {
         projects,
         calculateProjectStatusMetric,
         calculateBusinessValueMetric,
-        calculateProjectRiskMetric
+        calculateProjectRiskMetric,
+        calculateProjectCancelledCompleted
     } = useData();
 
     const colors = {
@@ -21,20 +22,21 @@ const ProjectsDashboard = () => {
     const [projectsMetrics, setProjectsMetrics] = useState({
         projectStatusMetric: calculateProjectStatusMetric(projects),
         projectBusinessValueMetric: calculateBusinessValueMetric(projects),
-        projectRiskMetric: calculateProjectRiskMetric(projects)
+        projectRiskMetric: calculateProjectRiskMetric(projects),
+        projectCancelledCompleted: calculateProjectCancelledCompleted(projects)
     });
 
     useEffect(() => {
         setProjectsMetrics({
             projectStatusMetric: calculateProjectStatusMetric(projects),
             projectBusinessValueMetric: calculateBusinessValueMetric(projects),
-            projectRiskMetric: calculateProjectRiskMetric(projects)
+            projectRiskMetric: calculateProjectRiskMetric(projects),
+            projectCancelledCompleted: calculateProjectCancelledCompleted(projects)
         });
-    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric]);
+    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectCancelledCompleted]);
 
     // Projectst Metrics
-    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric } = projectsMetrics;
-
+    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectCancelledCompleted } = projectsMetrics;
     return (
     <>
       <Container fluid>
@@ -154,6 +156,7 @@ const ProjectsDashboard = () => {
 
           <Col xs={12} md={6} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
             <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
+            <CancelledCompletedChart/>
           </Col>
       </Row>
 
