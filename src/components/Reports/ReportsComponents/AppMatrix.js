@@ -122,7 +122,7 @@ const ApplicationCard = ({appData, viewBy}) => {
 
 const fieldsValues = {
     'timeTag': ['Missing Data', 'Eliminate', 'Migrate', 'Tolerate', 'Invest'],
-    'businessCriticality': ['Missing Data', 'administrativeService', 'businessOperational', 'businessCritical', 'missionCritical'],
+    'businessCriticality': ['Missing Data', 'missionCritical', 'businessCritical', 'businessOperational', 'administrativeService'],
     'functionalFit': ['Missing Data', 'poor', 'insufficient', 'adequate', 'excellent'],
     'technicalFit': ['Missing Data', 'poor', 'insufficient', 'adequate', 'excellent'],
 };
@@ -168,16 +168,16 @@ const fieldToRating = (fieldValue) => {
     switch (fieldValue) {
 
         // If it's a businessCriticality value
-        case 'administrativeService':
+        case 'missionCritical':
             rating = 1;
             break;
-        case 'businessOperational':
+        case 'businessCritical':
             rating = 2;
             break;
-        case 'businessCritical':
+        case 'businessOperational':
             rating = 3;
             break;
-        case 'missionCritical':
+        case 'administrativeService':
             rating = 4;
             break;
 

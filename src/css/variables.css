@@ -11,4 +11,20 @@
     --theme-color-3: #aaabb8;
     --theme-color-4: #2e9cca;
     --theme-color-5: #29648a;
+
+    --warning-color-red: #cc3300;
+    --warning-color-orange: #ff9966;
+    --warning-color-yellow: #ffcc00;
+    --warning-color-lightgreen: #99cc33;
+    --warning-color-green: #339900;
+
+    --warning-color-red-active: #BF2600;
+    --warning-color-orange-active: #F28C59;
+    --warning-color-yellow-active: #F2BF00;
+    --warning-color-lightgreen-active: #8CBF26;
+    --warning-color-green-active: #8CBF26;
+
+    --missing-data-color: #8e918f;
+    --missing-data-color-active: #686B69;
+    
 }
