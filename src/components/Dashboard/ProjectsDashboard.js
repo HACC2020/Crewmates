@@ -101,8 +101,8 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                      <Card.Title>{projectDateMetric.plannedNotApproved}</Card.Title>
-                          <Card.Text>
+                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}>{projectDateMetric.plannedNotApproved}</Card.Title>
+                          <Card.Text style={{textAlign:'center', fontWeight:'bold'}}>
                               Projects planned but not approved.
                           </Card.Text>
                       </Card.Body>
@@ -112,9 +112,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                          <Card.Title>{projectDateMetric.approvedNoStart}</Card.Title>
-                          <Card.Text>
-                             Projects approved but no projected start
+                          <Card.Title style={{textAlign:'center', fontSize: '3em'}}>{projectDateMetric.approvedNoStart}</Card.Title>
+                          <Card.Text style={{textAlign:'center', fontWeight: 'bold'}}>
+                             Projects approved but no projected start date.
                           </Card.Text>
                       </Card.Body>
                   </Card>
@@ -123,9 +123,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
                       <Card.Body>
-                      <Card.Title> {projectDateMetric.startNoComplete}</Card.Title>
-                          <Card.Text>
-                            Projects that have a projected start date but no cancel or projected completion date
+                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}> {projectDateMetric.startNoComplete}</Card.Title>
+                          <Card.Text style={{textAlign: 'center', fontWeight:'bold'}}>
+                            Projects that have a projected start date but no cancel or projected completion date.
                           </Card.Text>
                       </Card.Body>
                   </Card>
