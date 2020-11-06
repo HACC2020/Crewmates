@@ -96,7 +96,7 @@ const ProjectsDashboard = () => {
 
        <Row>
           <Col xs={12} md={12} style={{backgroundColor:'var(--theme-color-3)', padding:'4em', paddingBottom:'2em'}}>
-          <h1 style={{marginBottom:'1em'}}>Additional Project Metric Cards</h1>
+          <h1 style={{marginBottom:'1em'}}>Project Date Metrics</h1>
           <Row>
               <Col xs={12} md={4}>
                   <Card style={{ width: '18rem' }}>
