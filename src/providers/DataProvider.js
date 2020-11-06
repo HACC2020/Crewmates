@@ -381,11 +381,14 @@ const DataProvider = ({children}) => {
         if(project['lifecycleCustom:planningStarted'] && !project['lifecycleCustom:approved']) {
           plannedNotApproved++;
         }
-        else if(project['lifecycleCustom:approved'] && !project['lifecycleCustom:projectedStart']){
+        if(project['lifecycleCustom:approved'] && !project['lifecycleCustom:projectedStart']){
           approvedNoStart++;
         }
+        if(project['lifecycleCustom:projectedStart'] && (!project['lifecycleCustom:projectedCompletion'] &&!project['lifecycleCustom:cancelled'])) {
+          startNoComplete++;
+        }
       });
-      return {plannedNotApproved, approvedNoStart};
+      return {plannedNotApproved, approvedNoStart, startNoComplete};
     };
 
     return (
