@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useData } from '../../providers/DataProvider';
+import { useData } from '../../../providers/DataProvider';
 import { Table, Dropdown, DropdownButton } from 'react-bootstrap';
 import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
-import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
+import BusinessCriticalityChart from '../../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 
 
 
@@ -147,7 +147,7 @@ const CategoryChips = ({field}) => {
                 color: `${rating === 4 ? 'white' : 'black'}`
             };
 
-            return (<Chip style={chipStyle} size="medium" label={val}/>);
+            return (<Chip key={val} style={chipStyle} size="medium" label={val}/>);
         })}
         </>
     );

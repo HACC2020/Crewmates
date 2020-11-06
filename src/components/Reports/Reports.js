@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import AppMatrix from './AppMatrix';
+import AppMatrix from './ReportsComponents/AppMatrix';
+import ITRoadmap from './ReportsComponents/ITRoadmap';
+import MISRoadmap from './ReportsComponents/MISRoadmap';
 
 const sideNavStyle = {
     padding:'3em',
@@ -45,17 +47,5 @@ const SideNav = ({handleClick}) =>
         <Button onClick={() => handleClick(1)} style={linkStyle} variant="link">IT Roadmap</Button>
         <Button onClick={() => handleClick(2)} style={linkStyle} variant="link">Major Information Systems Roadmap</Button>
     </Col>;
-
-
-const ITRoadmap = () => {
-
-    return(<div>IT Roadmap</div>);
-};
-
-
-const MISRoadmap = () => {
-
-    return(<div>Major Information Systems Modernization Roadmap</div>);
-};
 
 export default Reports;
