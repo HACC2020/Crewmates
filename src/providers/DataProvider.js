@@ -12,7 +12,7 @@ const DataProvider = ({children}) => {
     const [projectFields, setProjectFields] = useState([]);
 
     const url = 'https://opendata.hawaii.gov/api/3/action/datastore_search';
-      
+
     // Resource IDs for all three datasets
     const departments_rid = '50e32460-83ff-4c01-a40c-bcea5e76ae8d';
     const applications_rid = '9468a555-8d1f-42fb-b1a9-c3ae0d5c756d';
@@ -56,7 +56,7 @@ const DataProvider = ({children}) => {
         let migrate = 0;
         let tolerate = 0;
         let missing = 0;
-    
+
         applications.forEach(app => {
             switch (app.timeTag) {
                 case 'Tolerate':
@@ -76,17 +76,17 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { eliminate, invest, migrate, tolerate, missing};
     };
-    
+
     const calculateFunctionalFitMetric = applications => {
         let excellent = 0;
         let adequate = 0;
         let insufficient = 0;
         let poor = 0;
         let missing = 0;
-    
+
         applications.forEach(app => {
             switch (app.functionalFit) {
                 case 'excellent':
@@ -106,17 +106,17 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { excellent, adequate, insufficient, poor, missing};
     };
-    
+
     const calculateTechnicalFitMetric = applications => {
         let excellent = 0;
         let adequate = 0;
         let insufficient = 0;
         let poor = 0;
         let missing = 0;
-    
+
         applications.forEach(app => {
             switch (app.technicalFit) {
                 case 'excellent':
@@ -136,17 +136,17 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { excellent, adequate, insufficient, poor, missing};
     };
-    
+
     const calculateBusinessCriticalityMetric = applications => {
         let administrativeService = 0;
         let businessOperational = 0;
         let businessCritical = 0;
         let missionCritical = 0;
         let missing = 0;
-    
+
         applications.forEach(app => {
             switch (app.businessCriticality) {
                 case 'administrativeService':
@@ -166,16 +166,16 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
-        return { 
-            administrativeService, 
-            businessOperational, 
-            businessCritical, 
-            missionCritical, 
+
+        return {
+            administrativeService,
+            businessOperational,
+            businessCritical,
+            missionCritical,
             missing
         };
     };
-    
+
     const calculateHostingTypeMetric = applications => {
         let onPremise = 0;
         let coLocated = 0;
@@ -183,7 +183,7 @@ const DataProvider = ({children}) => {
         let PaaS = 0;
         let SaaS = 0;
         let missing = 0;
-    
+
         applications.forEach(app => {
             switch (app.hostingTypeTag) {
                 case '@On Premise':
@@ -206,12 +206,12 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
-        return { 
-            onPremise, 
-            coLocated, 
-            IaaS, 
-            PaaS, 
+
+        return {
+            onPremise,
+            coLocated,
+            IaaS,
+            PaaS,
             SaaS,
             missing
         };
@@ -300,7 +300,7 @@ const DataProvider = ({children}) => {
         let yellow = 0;
         let red = 0;
         let missing = 0;
-    
+
         projects.forEach(project => {
             switch (project.projectStatus) {
                 case 'green':
@@ -317,17 +317,17 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { green, yellow, red, missing };
     };
-    
+
     const calculateBusinessValueMetric = projects => {
         let marginal = 0;
         let little = 0;
         let large = 0;
         let significant = 0;
         let missing = 0;
-    
+
         projects.forEach(project => {
             switch (project.businessValue) {
                 case 'marginalBusinessBenefit':
@@ -347,7 +347,7 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { marginal, little, large, significant, missing };
     };
 
@@ -357,7 +357,7 @@ const DataProvider = ({children}) => {
         let high = 0;
         let severe = 0;
         let missing = 0;
-    
+
         projects.forEach(project => {
             switch (project.projectRisk) {
                 case 'lowProjectRisk':
@@ -377,20 +377,77 @@ const DataProvider = ({children}) => {
                     break;
             }
         });
-    
+
         return { low, moderate, high, severe, missing };
+    };
+
+    const calculateProjectRiskToValueMetric = projects => {
+        // array values are of increasing project risk
+        let marginalValueRisks = [0, 0, 0, 0];
+        let littleValueRisks = [0, 0, 0, 0];
+        let largeValueRisks = [0, 0, 0, 0];
+        let significantValueRisks = [0, 0, 0, 0];
+        let missing = 0;
+
+        const projectRisks = ['severeProjectRisk', 'highProjectRisk', 'moderateProjectRisk', 'lowProjectRisk'];
+        //const businessValues = ['marginalBusinessBenefit', 'littleBusinessBenefit', 'largeBusinessBenefit', 'significantBusinessBenefit'];
+
+        projects.forEach(project => {
+            if (project.projectRisk !== null && project.businessValue !== null) {
+                switch (project.businessValue) {
+                    case 'marginalBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? marginalValueRisks[index]++ : '');
+                        break;
+                    case 'littleBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? littleValueRisks[index]++ : '');
+                        break;
+                    case 'largeBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? largeValueRisks[index]++ : '');
+                        break;
+                    case 'significantBusinessBenefit':
+                        projectRisks.forEach((risk, index) => project.projectRisk === risk ? significantValueRisks[index]++ : '');
+                        break;
+                    default:
+                        missing++;
+                        break;
+                }
+            } else {
+                missing++;
+            }
+        });
+    
+        return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
     };
 
     const calculateMajorInformationSystems = applications => {
         let count = 0;
-    
+
         applications.forEach(app => {
             if(app.majorInformationSystemsTag === 'Major Information Systems') {
                 count++;
             }
         });
-    
+
         return count;
+    };
+
+    const calculateProjectDates = projects => {
+      let plannedNotApproved = 0;
+      let approvedNoStart = 0;
+      let startNoComplete = 0;
+
+      projects.forEach(project => {
+        if(project['lifecycleCustom:planningStarted'] && !project['lifecycleCustom:approved']) {
+          plannedNotApproved++;
+        }
+        if(project['lifecycleCustom:approved'] && !project['lifecycleCustom:projectedStart']){
+          approvedNoStart++;
+        }
+        if(project['lifecycleCustom:projectedStart'] && (!project['lifecycleCustom:projectedCompletion'] &&!project['lifecycleCustom:cancelled'])) {
+          startNoComplete++;
+        }
+      });
+      return {plannedNotApproved, approvedNoStart, startNoComplete};
     };
 
     return (
@@ -412,7 +469,9 @@ const DataProvider = ({children}) => {
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
                 calculateMajorInformationSystems,
-                calculateTimelineMetric
+                calculateTimelineMetric,
+                calculateProjectRiskToValueMetric,
+                calculateProjectDates
             }}
         >
             {children}
