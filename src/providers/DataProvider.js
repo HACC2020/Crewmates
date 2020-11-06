@@ -368,7 +368,7 @@ const DataProvider = ({children}) => {
         let significantValueRisks = [0, 0, 0, 0];
         let missing = 0;
 
-        const projectRisks = ['lowProjectRisk', 'moderateProjectRisk' ,'highProjectRisk' ,'severeProjectRisk'];
+        const projectRisks = ['severeProjectRisk', 'highProjectRisk', 'moderateProjectRisk', 'lowProjectRisk'];
         //const businessValues = ['marginalBusinessBenefit', 'littleBusinessBenefit', 'largeBusinessBenefit', 'significantBusinessBenefit'];
 
         projects.forEach(project => {

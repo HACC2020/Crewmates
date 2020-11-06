@@ -5,7 +5,7 @@ const ProjectRiskToValueChart = ({data}) => {
 
     const { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks } = data;
     const benefits = ['significant', 'large', 'little', 'marginal'];
-    const projectRisks = ['low', 'moderate' ,'high' ,'severe'];
+    const projectRisks = ['severe',  'high','moderate' ,'low'];
     const colors = ['green', 'lightgreen', 'orange', 'red'];
 
     const width = 475;
