@@ -274,6 +274,27 @@ const DataProvider = ({children}) => {
 
 
     /********************PROJECTS METRICS CALCULATION FUNCTIONS *************************/
+    const calculateProjectCancelledCompleted = projects => {
+        let cancelled = 0;
+        let projectedCompleted = 0;
+        let missing = 0;
+
+        projects.forEach(project => {
+            const projectCancelled = project['lifecycleCustom:cancelled'];
+            const projectCompletion = project['lifecycleCustom:projectedCompletion'];
+
+            if (projectCancelled !== null) {
+                cancelled++;
+            } else if (projectCompletion !== null) {
+                projectedCompleted++;
+            } else {
+                missing++;
+            }
+        });
+    
+        return { cancelled, projectedCompleted, missing };
+    };
+
     const calculateProjectStatusMetric = projects => {
         let green = 0;
         let yellow = 0;
@@ -443,6 +464,7 @@ const DataProvider = ({children}) => {
                 calculateTechnicalFitMetric,
                 calculateBusinessCriticalityMetric,
                 calculateHostingTypeMetric,
+                calculateProjectCancelledCompleted,
                 calculateProjectStatusMetric,
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,

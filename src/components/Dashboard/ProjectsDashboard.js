@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col, Card} from 'react-bootstrap';
+import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
-
 
 const ProjectsDashboard = () => {
     const {
@@ -10,6 +10,7 @@ const ProjectsDashboard = () => {
         calculateProjectStatusMetric,
         calculateBusinessValueMetric,
         calculateProjectRiskMetric,
+        calculateProjectCancelledCompleted,
         calculateProjectRiskToValueMetric,
         calculateProjectDates
     } = useData();
@@ -25,6 +26,7 @@ const ProjectsDashboard = () => {
         projectStatusMetric: calculateProjectStatusMetric(projects),
         projectBusinessValueMetric: calculateBusinessValueMetric(projects),
         projectRiskMetric: calculateProjectRiskMetric(projects),
+        projectCancelledCompleted: calculateProjectCancelledCompleted(projects),
         projectRiskToValueMetric: calculateProjectRiskToValueMetric(projects),
         projectDateMetric: calculateProjectDates(projects)
     });
@@ -34,14 +36,15 @@ const ProjectsDashboard = () => {
             projectStatusMetric: calculateProjectStatusMetric(projects),
             projectBusinessValueMetric: calculateBusinessValueMetric(projects),
             projectRiskMetric: calculateProjectRiskMetric(projects),
+            projectCancelledCompleted: calculateProjectCancelledCompleted(projects),
             projectRiskToValueMetric: calculateProjectRiskToValueMetric(projects),
             projectDateMetric: calculateProjectDates(projects)
         });
     }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectRiskToValueMetric, calculateProjectDates]);
 
     // Project Metrics
-    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric } = projectsMetrics;
-
+    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric, projectCancelledCompleted } = projectsMetrics;
+  
     return (
     <>
       <Container fluid>
@@ -157,7 +160,8 @@ const ProjectsDashboard = () => {
           </Col>
 
           <Col xs={12} md={6} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
-            <h1 style={{marginBottom:'1em'}}>Canceled vs Completed projects</h1>
+            <h1 style={{marginBottom:'1em'}}>Cancelled vs Completed projects</h1>
+            <CancelledCompletedChart/>
           </Col>
       </Row>
 
