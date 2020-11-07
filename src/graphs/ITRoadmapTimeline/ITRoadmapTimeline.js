@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, range, min, max, axisBottom, axisTop, select } from 'd3';
 import _ from 'lodash';
 import moment from 'moment';
+import './ITRoadmapTimeline.css';
 
 const ITRoadmapTimeline = () => {
     const { applications } = useData();
@@ -67,10 +68,14 @@ const ITRoadmapTimeline = () => {
     // axis
     const drawAxes = () => {
         
+        console.log(getCurrentMonths(minYear));
+        const years = [minYear, 1995, 2000, 2005, 2010, 2015, 2020, 2025, maxYear];
         // position the axes
         const topAxis = axisTop(xMonthScale)
-            .ticks(15)
-            .tickFormat(value => `${value}`);
+            .ticks(years.length)
+            .tickValues(years)
+            .tickFormat(value => `${value}`)
+            .tickSize(4);
 
         const bottomAxis = axisBottom(xMonthScale)
             .ticks(15)
@@ -96,16 +101,27 @@ const ITRoadmapTimeline = () => {
     }
 
     const CurrentDateMarker = () => {
-        const todayDateObj = moment(); // Get current date
-        const todayDateStr = todayDateObj.get('year') + '-' + (todayDateObj.get('month')+1) + '-' + todayDateObj.get('date');
-        const today = getMonthsFromDate(minYear, todayDateStr);
+
+        const today = getMonthsFromDate(minYear, moment().format("YYYY-MM-DD"));
         return (
-            <line opacity={0.3} transform={`translate(${margin.left}, ${margin.top})`} x1={x(today)} y1={0} x2={x(today)} y2={height-margin.top-margin.bottom} stroke="black" />
-        );
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <line 
+                id="current-date-marker"
+                opacity={0.3} 
+                x1={x(today)} 
+                y1={0} 
+                x2={x(today)} 
+                y2={height-margin.top-margin.bottom} 
+                stroke="black" />
+            <text                 
+                x={x(today)} 
+                y={0-2} 
+                fontSize={'.5em'}>{moment().format("MMMM YYYY")}</text>
+        </g>);
     }
 
     return (
-        <div style={{overflow:'scroll'}}>
+        <div>
             <svg viewBox={`0, 0, ${width}, ${height}`}>
                 {drawAxes()}
                 <g transform={`translate(${margin.left}, ${margin.top})`}>
@@ -121,6 +137,7 @@ const getTheYear = date => {
     return dateMoment.get('year');    
 }
 
+// date format: YYYY-MM-DD
 const getMonthsFromDate = (minYear, date) => {
     const dateAsMoment = moment(date);
     const year = dateAsMoment.get('year');
@@ -129,10 +146,11 @@ const getMonthsFromDate = (minYear, date) => {
     return ((year - minYear) * 12) + month;
 }
 
-const monthsToYears = (minYear, year) => {
-    console.log(typeof minYear);
-    console.log(typeof year);
-    return minYear + (year/12) ;
+// Function to generate a tick for the current date
+const getCurrentMonths = minYear => {
+    const today = moment().format("YYYY-MM-DD");
+    console.log(today);
+    return getMonthsFromDate(minYear, today);
 }
 
 const buildRoadmapData = (applications, minYear) => {

@@ -1,9 +1,17 @@
+import React from 'react';
 import { useData } from '../../../providers/DataProvider';
 import _ from 'lodash';
 import ITRoadmapTimeline from '../../../graphs/ITRoadmapTimeline/ITRoadmapTimeline';
+import Popper from '@material-ui/core/Popper';
 
 const ITRoadmap = () => {
     const { applications, projects } = useData();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+      };
+      const id = open ? 'simple-popper' : undefined;
 
     // console.log(_.filter(projects, (o) => {
     //     //console.log(compareDates(o['lifecycle:endOfLife']));
@@ -20,13 +28,14 @@ const ITRoadmap = () => {
     // console.log(getLongApplications(applications));
     // console.log(getMigrateEliminate(applications));
     //console.log(calculateTimeDifference('2020-10-02', '2020-10-05'));
-    const getTheYear = date => {
-        const dateObj = new Date(date);
-        return typeof dateObj.getFullYear();    
-    }
-    console.log(getTheYear('2014-05-05'));
 
-    return(<ITRoadmapTimeline/>);
+    return(<>
+        <ITRoadmapTimeline/>
+        <div onMouseEnter={handleClick} onMouseLeave={handleClick} style={{width:'100',height:'100', border:'1px solid black'}}>Test</div>
+        <Popper id={id} open={open} anchorEl={anchorEl}>
+            <div>The content of the Popper.</div>
+        </Popper>    
+        </>);
 };
 
 const compareDates = (date1, date2) => {
