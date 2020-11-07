@@ -291,7 +291,7 @@ const DataProvider = ({children}) => {
                 missing++;
             }
         });
-    
+
         return { cancelled, projectedCompleted, missing };
     };
 
@@ -415,7 +415,7 @@ const DataProvider = ({children}) => {
                 missing++;
             }
         });
-    
+
         return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
     };
 
@@ -435,6 +435,7 @@ const DataProvider = ({children}) => {
       let plannedNotApproved = 0;
       let approvedNoStart = 0;
       let startNoComplete = 0;
+      let missingData = 0;
 
       projects.forEach(project => {
         if(project['lifecycleCustom:planningStarted'] && !project['lifecycleCustom:approved']) {
@@ -446,8 +447,15 @@ const DataProvider = ({children}) => {
         if(project['lifecycleCustom:projectedStart'] && (!project['lifecycleCustom:projectedCompletion'] &&!project['lifecycleCustom:cancelled'])) {
           startNoComplete++;
         }
+        if(!project['lifecycleCustom:planningStarted'] &&
+        !project['lifecycleCustom:approved'] &&
+        !project['lifecycleCustom:projectedStart'] &&
+        !project['lifecycleCustom:cancelled'] &&
+        !project['lifecycleCustom:projectedCompletion']) {
+          missingData++;
+        }
       });
-      return {plannedNotApproved, approvedNoStart, startNoComplete};
+      return {plannedNotApproved, approvedNoStart, startNoComplete, missingData};
     };
 
     return (
