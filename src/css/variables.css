@@ -24,7 +24,7 @@
     --warning-color-lightgreen-active: #8CBF26;
     --warning-color-green-active: #8CBF26;
 
-    --missing-data-color: #8e918f;
-    --missing-data-color-active: #686B69;
-    
+    /* --missing-data-color: #8e918f; */
+    --missing-data-color: #DBDEDC;
+    --missing-data-color-active: #CED1CF;
 }
