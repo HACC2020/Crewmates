@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import AppMatrix from './AppMatrix';
+import AppMatrix from './ReportsComponents/AppMatrix';
+import ITRoadmap from './ReportsComponents/ITRoadmap';
+import MISRoadmap from './ReportsComponents/MISRoadmap';
 
 const sideNavStyle = {
     padding:'3em',
@@ -8,13 +10,6 @@ const sideNavStyle = {
     // backgroundColor:'var(--theme-color-1)',
     display:'flex',
     flexDirection:'column'
-};
-
-const linkStyle = {
-    color:'white',
-    fontSize:'1em',
-    fontWeight:'500',
-    marginBottom:'1em'
 };
 
 const Reports = () => {
@@ -39,23 +34,22 @@ const Reports = () => {
     </>);
 };
 
-const SideNav = ({handleClick}) =>                
-    <Col style={sideNavStyle} sm={12} md={4} lg={3} xl={2}>
-        <Button onClick={() => handleClick(0)} style={linkStyle} variant="link">Application Matrix</Button>
-        <Button onClick={() => handleClick(1)} style={linkStyle} variant="link">IT Roadmap</Button>
-        <Button onClick={() => handleClick(2)} style={linkStyle} variant="link">Major Information Systems Roadmap</Button>
-    </Col>;
-
-
-const ITRoadmap = () => {
-
-    return(<div>IT Roadmap</div>);
+const linkStyle = {
+    color:'white',
+    fontSize:'1em',
+    fontWeight:'500',
+    marginBottom:'1em'
 };
 
+const SideNav = ({handleClick}) => {
 
-const MISRoadmap = () => {
+    return (
+        <Col style={sideNavStyle} sm={12} md={4} lg={3} xl={2}>
+            <Button onClick={() => handleClick(0)} style={linkStyle} variant="link">Application Matrix</Button>
+            <Button onClick={() => handleClick(1)} style={linkStyle} variant="link">IT Roadmap</Button>
+            <Button onClick={() => handleClick(2)} style={linkStyle} variant="link">Major Information Systems Roadmap</Button>
+        </Col>);
+};           
 
-    return(<div>Major Information Systems Modernization Roadmap</div>);
-};
 
 export default Reports;
