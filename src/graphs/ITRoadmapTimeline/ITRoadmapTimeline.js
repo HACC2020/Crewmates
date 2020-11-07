@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useData } from '../../providers/DataProvider';
-import { scaleLinear, scaleBand, range, min, max, axisBottom, axisTop, select } from 'd3';
+import { scaleLinear, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
 import _ from 'lodash';
 import moment from 'moment';
+import Popper from '@material-ui/core/Popper';
+import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
+import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import './ITRoadmapTimeline.css';
 
 const ITRoadmapTimeline = () => {
@@ -12,10 +18,10 @@ const ITRoadmapTimeline = () => {
     const height = 1750;
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
 
-    // const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
-    const filteredApplications = _.filter(applications, app => 
-        app['lifecycle:active'] && app['lifecycle:endOfLife'] && !moment(app['lifecycle:endOfLife']).isBefore('2020-01-01')); 
-
+    const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
+    /* Add an option to view applications by when their end of lifecycle is scheduled */
+    // const filteredApplications = _.filter(applications, app => 
+    //     app['lifecycle:active'] && app['lifecycle:endOfLife'] && !moment(app['lifecycle:endOfLife']).isBefore('2025-01-01')); 
 
     const minYear = min(filteredApplications, app => {
         return getTheYear(app['lifecycle:active']);
@@ -61,14 +67,56 @@ const ITRoadmapTimeline = () => {
             </g>);
     };
 
+    const BarPopover = ({data}) => {
+        const [darken, setDarken] = useState(false);
+        const [anchorEl, setAnchorEl] = React.useState(null);
+        const open = Boolean(anchorEl);
+
+        const handleMouseEnter = (event) => {
+            setAnchorEl(anchorEl ? null : event.currentTarget);
+            setDarken(true);
+        };
+
+        const handleMouseLeave = (event) => {
+            setAnchorEl(anchorEl ? null : event.currentTarget);
+            setDarken(false);
+        };
+
+        const id = open ? 'spring-popper' : undefined;
+
+        return (
+            <>
+            <g  onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave} 
+                transform={`translate(${x(data.start)},${y(data.id)} )`}>
+                <rect 
+                    height={y.bandwidth()}
+                    width={x(data.end) - x(data.start)}
+                    fill={!darken ? data.color : data.highlightColor}/>
+                <text transform={`translate(5, ${y.bandwidth()/2})`} fontSize={'.5em'} fill={data.textColor}>{data.label}</text>
+            </g>
+            <Popper placement="top-start"
+                    disablePortal={false} 
+                    id={id} 
+                    open={open} 
+                    anchorEl={anchorEl} 
+                    transition>
+                {({ TransitionProps }) => (
+                <Fade {...TransitionProps}>
+                    <ApplicationCard data={data.data}/>
+                </Fade>
+                )}
+            </Popper>  
+            </>
+        );
+    };
     const bars = data.map(d => {
-        return (<Bar data={d}/>)
+        return (<BarPopover key={d.id} data={d}/>);
     });
 
     // axis
     const drawAxes = () => {
         
-        console.log(getCurrentMonths(minYear));
         const years = [minYear, 1995, 2000, 2005, 2010, 2015, 2020, 2025, maxYear];
         // position the axes
         const topAxis = axisTop(xMonthScale)
@@ -188,7 +236,8 @@ const buildRoadmapData = (applications, minYear) => {
             department: app.ownerAgencyName,
             color: color,
             textColor: textColor,
-            highlightColor: highlightColor
+            highlightColor: highlightColor,
+            data: app
         };
 
         data.push(appData); // Insert into new array
@@ -258,5 +307,55 @@ const fieldToRating = (fieldValue) => {
 
     return rating;
 };
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+    const { in: open, children, onEnter, onExited, ...other } = props;
+    const style = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: open ? 1 : 0 },
+      onStart: () => {
+        if (open && onEnter) {
+          onEnter();
+        }
+      },
+      onRest: () => {
+        if (!open && onExited) {
+          onExited();
+        }
+      },
+    });
+  
+    return (
+      <animated.div ref={ref} style={style} {...other}>
+        {children}
+      </animated.div>
+    );
+  });
+
+const ApplicationCard = ({data}) => {
+    return (
+        <Card>
+        <CardContent>
+          <Typography color="textSecondary" gutterBottom>
+            {moment(data['lifecycle:active']).format('YYYY MMMM DD')} 
+            {`     -     `}
+            {moment(data['lifecycle:endOfLife']).format('YYYY MMMM DD')}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {data.name}
+          </Typography>
+          <Typography color="textSecondary">
+            {data.ownerAgencyName}
+          </Typography>
+          <Typography variant="body2" component="p">
+            JASON FILL OUT THE REST OF THIS
+            <br />
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+}
+
 
 export default ITRoadmapTimeline;
