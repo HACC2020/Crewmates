@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import AppMatrix from './ReportsComponents/AppMatrix';
 import ITRoadmap from './ReportsComponents/ITRoadmap';
 import MISRoadmap from './ReportsComponents/MISRoadmap';
+import DepartmentsTreeVisualization from './ReportsComponents/DepartmentsTreeVisualization';
 
 const sideNavStyle = {
     padding:'3em',
@@ -15,7 +16,7 @@ const sideNavStyle = {
 const Reports = () => {
     const [currentReport, setCurrentReport] = useState(0);
 
-    const reports = [<AppMatrix/>, <ITRoadmap/>, <MISRoadmap/>];
+    const reports = [<AppMatrix/>, <ITRoadmap/>, <MISRoadmap/>, <DepartmentsTreeVisualization/>];
 
     const handleChangeReport = (repotIndex) => {
         setCurrentReport(repotIndex);
@@ -48,6 +49,7 @@ const SideNav = ({handleClick}) => {
             <Button onClick={() => handleClick(0)} style={linkStyle} variant="link">Application Matrix</Button>
             <Button onClick={() => handleClick(1)} style={linkStyle} variant="link">IT Roadmap</Button>
             <Button onClick={() => handleClick(2)} style={linkStyle} variant="link">Major Information Systems Roadmap</Button>
+            <Button onClick={() => handleClick(3)} style={linkStyle} variant="link">Departments Tree</Button>
         </Col>);
 };           
 
