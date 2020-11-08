@@ -44,7 +44,7 @@ const ProjectsDashboard = () => {
 
     // Project Metrics
     const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric, projectCancelledCompleted } = projectsMetrics;
-  
+
     return (
     <>
       <Container fluid>
@@ -150,9 +150,9 @@ const ProjectsDashboard = () => {
               <Col xs={12} md={12}>
                   <Card style={{ width: '18rem' }}>
                      <Card.Body>
-                       <Card.Title> {projectDateMetric.plannedNotApproved}</Card.Title>
-                       <Card.Text>
-                         (clarify) Projects are missing data.
+                       <Card.Title style={{textAlign:'center', fontSize:'3em'}}> {projectDateMetric.missingData}</Card.Title>
+                       <Card.Text style={{textAlign: 'center', fontWeight:'bold'}}>
+                         Projects don't have any lifecycle dates.
                        </Card.Text>
                      </Card.Body>
                    </Card>
