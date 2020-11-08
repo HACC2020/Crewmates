@@ -60,7 +60,6 @@ const FunctionalVsTechnicalGraph = () => {
                     {xCell.map((yCell, yIndex) => {
                         const color = getColor(xIndex, yIndex);
                         const calculatedOpacity = colorScale(yCell);
-                        console.log(colorScale(yCell));
                         return (
                             <g key={`fnVsTec:${x(xIndex)},${y(yIndex+1)}`} transform={`translate(${x(xIndex)},${y(yIndex+1)})`}>
                                 <rect width={x.bandwidth()} height={y.bandwidth()} opacity={calculatedOpacity} fill={color}/>
