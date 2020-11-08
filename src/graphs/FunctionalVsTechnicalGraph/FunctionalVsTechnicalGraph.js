@@ -142,7 +142,7 @@ const FunctionalVsTechnicalGraph = () => {
         <g transform={`
             translate(${x(2)},${y(0)+40})
         `}>
-            <text textAnchor="middle">Technical Fit Rating</text>
+            <text textAnchor="middle">Functional Fit Rating</text>
         </g>;
 
         return (

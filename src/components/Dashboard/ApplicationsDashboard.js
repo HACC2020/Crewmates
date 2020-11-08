@@ -155,7 +155,7 @@ const ApplicationsDashboard = () => {
             </Row>
             <Row>
                 <Col xs={12} md={6}>
-                    <h3>Functional vs. Technical Fit</h3>
+                    <h3>Technical vs. Functional Fit</h3>
                     <FunctionalVsTechnicalGraph/>
                 </Col>
                 <Col xs={12} md={6}>
