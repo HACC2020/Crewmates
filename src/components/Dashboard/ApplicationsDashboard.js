@@ -33,20 +33,6 @@ const ApplicationsDashboard = () => {
         fontSize:'3em'
     };
 
-    const portfolioHeader = {
-      backgroundColor: '#040404',
-      minHeight: '40vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: 'calc(20px + 6vmin)',
-      color: 'white',
-      fontWeight: '245',
-      font: 'Arial',
-      textAlign: 'center',
-    }
-
     const whiteText = {
         color:'white'
     };
@@ -79,9 +65,6 @@ const ApplicationsDashboard = () => {
 
     return (
     <>
-        <header style={portfolioHeader}>
-            Hawai'i State Executive Branch Application Portfolio
-        </header>
         <Container fluid>
             <Row id="dashboard-applications-projects">
                 <Col xs={0} md={1} lg={2} xl={3}></Col>
