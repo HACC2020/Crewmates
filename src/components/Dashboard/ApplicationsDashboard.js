@@ -4,6 +4,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 import ActiveAppTimeline from '../../graphs/ActiveAppTimelineChart/ActiveAppTimeline';
+import FunctionalVsTechnicalGraph from '../../graphs/FunctionalVsTechnicalGraph/FunctionalVsTechnicalGraph';
 
 const ApplicationsDashboard = () => {
     const {
@@ -153,49 +154,17 @@ const ApplicationsDashboard = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#5D92BD'}}>
-                                <h1>Functional vs. Technical Fit</h1>
-                            </Row>
-                            <Row style={{...colors.steelblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
+                <Col xs={12} md={6}>
+                    <h3>Functional vs. Technical Fit</h3>
+                    <FunctionalVsTechnicalGraph/>
                 </Col>
-                <Col xs={12} md={3}>
+                <Col xs={12} md={6}>
                     <Container>
                         <Col>
                             <Row style={{backgroundColor: '#BAE4E9'}}>
                                 <h1>graph</h1>
                             </Row>
                             <Row style={{...colors.powderblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
-                </Col>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#96D4ED'}}>
-                                <h1>graph</h1>
-                            </Row>
-                            <Row style={{...colors.skyblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
-                </Col>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#5D92BD'}}>
-                                <h1>graph</h1>
-                            </Row>
-                            <Row style={{...colors.steelblue}}>
                                 <h1>description</h1>
                             </Row>
                         </Col>
