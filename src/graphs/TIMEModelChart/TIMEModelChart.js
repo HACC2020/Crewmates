@@ -34,7 +34,7 @@ const TIMEModelChart = () => {
         .padding(.1);
 
     const bars = TIMEData.map((d, index) => 
-        <g fill={d.color}>
+        <g key={`TIMEDataBars-${x(d.name)}-${y(d.value)}`} fill={d.color}>
             <rect 
                 x={x(d.name)} 
                 y={y(d.value)}
@@ -57,7 +57,7 @@ const TIMEModelChart = () => {
         const labelX = x(d.name)+(x.bandwidth()/2) - 5;
         const labelY = (height-margin.bottom+4);
         return (
-            <text x={labelX} y={labelY} key={d.name}>{d.name}</text>
+            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY} key={d.name}>{d.name}</text>
 
         );
     });

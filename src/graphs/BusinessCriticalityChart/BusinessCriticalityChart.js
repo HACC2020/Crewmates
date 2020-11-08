@@ -35,7 +35,7 @@ const BusinessCriticalityChart = () => {
         .padding(.1);
 
     const bars = CRITICALITY_DATA.map((d, index) => 
-        <g fill={d.color}>
+        <g key={`BusinessCriticality-${x(d.name)}-${y(d.value)}`} fill={d.color}>
             <rect 
                 x={x(d.name)} 
                 y={y(d.value)}
@@ -58,7 +58,7 @@ const BusinessCriticalityChart = () => {
         const labelX =  x(d.name)+2;
         const labelY = (height-margin.bottom+4);
         return (
-            <text x={labelX} y={labelY} key={d.name}>{d.name}</text>
+            <text key={`BusinessCriticality-${labelX}-${labelY}`} x={labelX} y={labelY} key={d.name}>{d.name}</text>
         );
     });
     return (

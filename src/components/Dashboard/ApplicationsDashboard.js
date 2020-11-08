@@ -157,7 +157,7 @@ const ApplicationsDashboard = () => {
                     <Container>
                         <Col>
                             <Row style={{backgroundColor: '#5D92BD'}}>
-                                <h1>graph</h1>
+                                <h1>Functional vs. Technical Fit</h1>
                             </Row>
                             <Row style={{...colors.steelblue}}>
                                 <h1>description</h1>
