@@ -80,7 +80,7 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row style={{minHeight:'100vh'}}>
-                <Col xs={12} md={8} style={{backgroundColor: '#fbfbfd'}}>
+                <Col xs={12} md={8} lg={9} style={{backgroundColor: '#fbfbfd'}}>
                     <TIMEModelChart/>
                 </Col>
                 <Col id="TIME-description" xs={12} md={4} lg={3} style={{ padding:'4em', paddingBottom:'2em'}}>
@@ -110,9 +110,6 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={9} lg={7} xl={6}>
-                    <BusinessCriticalityChart/>
-                </Col>
                 <Col id="dashboard-business-criticality" xs={12} md={3} lg={5} xl={6} style={{ padding:'3em'}}>
                 <h1>Business Criticality Metric</h1>
                 <p style={{fontWeight:'bold'}}>
@@ -136,7 +133,9 @@ const ApplicationsDashboard = () => {
                   Administrative Service: The application's failures can be tolerated a little more and do not affect customers.
                   </li>
                 </ul>
-
+                </Col>
+                <Col xs={12} md={9} lg={7} xl={6}>
+                    <BusinessCriticalityChart/>
                 </Col>
             </Row>
 
