@@ -4,6 +4,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 import ActiveAppTimeline from '../../graphs/ActiveAppTimelineChart/ActiveAppTimeline';
+import FunctionalVsTechnicalGraph from '../../graphs/FunctionalVsTechnicalGraph/FunctionalVsTechnicalGraph';
 
 const ApplicationsDashboard = () => {
     const {
@@ -32,20 +33,6 @@ const ApplicationsDashboard = () => {
     const timeModel = {
         fontSize:'3em'
     };
-
-    const portfolioHeader = {
-      backgroundColor: '#040404',
-      minHeight: '40vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: 'calc(20px + 6vmin)',
-      color: 'white',
-      fontWeight: '245',
-      font: 'Arial',
-      textAlign: 'center',
-    }
 
     const whiteText = {
         color:'white'
@@ -79,9 +66,6 @@ const ApplicationsDashboard = () => {
 
     return (
     <>
-        <header style={portfolioHeader}>
-            Hawai'i State Executive Branch Application Portfolio
-        </header>
         <Container fluid>
             <Row id="dashboard-applications-projects">
                 <Col xs={0} md={1} lg={2} xl={3}></Col>
@@ -97,7 +81,7 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row style={{minHeight:'100vh'}}>
-                <Col xs={12} md={8} style={{backgroundColor: '#fbfbfd'}}>
+                <Col xs={12} md={8} lg={9} style={{backgroundColor: '#fbfbfd'}}>
                     <TIMEModelChart/>
                 </Col>
                 <Col id="TIME-description" xs={12} md={4} lg={3} style={{ padding:'4em', paddingBottom:'2em'}}>
@@ -127,9 +111,6 @@ const ApplicationsDashboard = () => {
             </Row>
 
             <Row>
-                <Col xs={12} md={9} lg={7} xl={6}>
-                    <BusinessCriticalityChart/>
-                </Col>
                 <Col id="dashboard-business-criticality" xs={12} md={3} lg={5} xl={6} style={{ padding:'3em'}}>
                 <h1>Business Criticality Metric</h1>
                 <p style={{fontWeight:'bold'}}>
@@ -153,7 +134,9 @@ const ApplicationsDashboard = () => {
                   Administrative Service: The application's failures can be tolerated a little more and do not affect customers.
                   </li>
                 </ul>
-
+                </Col>
+                <Col xs={12} md={9} lg={7} xl={6}>
+                    <BusinessCriticalityChart/>
                 </Col>
             </Row>
 
@@ -171,49 +154,17 @@ const ApplicationsDashboard = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#5D92BD'}}>
-                                <h1>graph</h1>
-                            </Row>
-                            <Row style={{...colors.steelblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
+                <Col xs={12} md={6}>
+                    <h3>Technical vs. Functional Fit</h3>
+                    <FunctionalVsTechnicalGraph/>
                 </Col>
-                <Col xs={12} md={3}>
+                <Col xs={12} md={6}>
                     <Container>
                         <Col>
                             <Row style={{backgroundColor: '#BAE4E9'}}>
                                 <h1>graph</h1>
                             </Row>
                             <Row style={{...colors.powderblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
-                </Col>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#96D4ED'}}>
-                                <h1>graph</h1>
-                            </Row>
-                            <Row style={{...colors.skyblue}}>
-                                <h1>description</h1>
-                            </Row>
-                        </Col>
-                    </Container>
-                </Col>
-                <Col xs={12} md={3}>
-                    <Container>
-                        <Col>
-                            <Row style={{backgroundColor: '#5D92BD'}}>
-                                <h1>graph</h1>
-                            </Row>
-                            <Row style={{...colors.steelblue}}>
                                 <h1>description</h1>
                             </Row>
                         </Col>

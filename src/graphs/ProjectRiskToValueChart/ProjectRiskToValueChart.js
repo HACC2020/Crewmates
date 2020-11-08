@@ -32,7 +32,7 @@ const ProjectRiskToValueChart = ({data}) => {
             <>
             <text x={x - 1} y={y} fontSize={'13px'} >Business Value</text>
             {colors.map((d, index) => 
-                <g fill={colors[index]}>
+                <g key={`BusinessValue-ProjectRisk-${x}-${y + 12 + index * 15}`}  fill={colors[index]}>
                     <rect x={x} y={y + 12 + index * 15} height={10} width={10}/>
                     <text x={x + 15} y={y + 21.5 + index * 15} fontSize={'12px'}>{benefits[index]}</text>
                 </g>
