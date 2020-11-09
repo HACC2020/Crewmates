@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios';
+import _ from 'lodash';
 
 const DataContext = React.createContext(null);
 
@@ -419,6 +420,32 @@ const DataProvider = ({children}) => {
         return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
     };
 
+    const calculateMISRelations = (applications, projects) => {
+        let future = [];
+        let current = [];
+        let count = 0;
+        let MISApps = []
+//{name: '', successors: [], projects: []}
+        
+        // get a list of the MIS apps
+        applications.forEach(app => {
+            if (app.majorInformationSystemsTag === 'Major Information Systems') {
+                MISApps.push(app);
+            }
+        })
+
+        // sort the MIS apps into their relations together
+        MISApps.forEach(app => {
+            if (app.majorInformationSystemsTag === 'Major Information Systems') {
+                if (app.successors !== null) {
+                    //idk
+                }
+            }
+        })
+
+        return MISApps;
+    }
+
     const calculateMajorInformationSystems = applications => {
         let count = 0;
 
@@ -469,6 +496,7 @@ const DataProvider = ({children}) => {
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
                 calculateMajorInformationSystems,
+                calculateMISRelations,
                 calculateTimelineMetric,
                 calculateProjectRiskToValueMetric,
                 calculateProjectDates
