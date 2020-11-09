@@ -48,7 +48,7 @@ const AppMatrix = () => {
 
     return(
     <ThemeProvider theme={buttonColorTheme}>
-        <Paper style={{height:'100vh', padding:'1em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
+        <Paper style={{height:'100vh', padding:'1em', backgroundColor:'var(--theme-color-5)', overflowY:'scroll', overflowX:'scroll',}} elevation={2}>
             <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 View By: {_.startCase(viewOptions[viewField])}
             </Button>
@@ -67,7 +67,7 @@ const AppMatrix = () => {
             </Menu>
             {<CategoryChips field={viewOptions[viewField]}/>}
 
-            <div style={{overflowY:'scroll', overflowX:'scroll', height:'750px', width:`80vw`}}>
+            <div style={{ height:'750px', width:`80vw`}}>
                 <Table striped bordered size="sm">
                     <thead>
                         <tr>
