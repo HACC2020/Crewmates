@@ -25,7 +25,7 @@ const Reports = () => {
     return (
     <>
         <Container fluid>
-            <Row style={{backgroundColor:'var(--theme-color-1)'}}>
+            <Row>
                 <SideNav handleClick={handleChangeReport}/>
                 <Col sm={12} md={8} lg={9} xl={10}  style={{backgroundColor:'white', padding:'2em'}}>
                     {reports[currentReport]}

@@ -11,12 +11,15 @@ import { DataProvider } from './providers/DataProvider';
 // Import Pages
 import NewNav from './components/Navigation/Navigation.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
-import Reports from './components/Reports/Reports.js';
 import Filter from './components/Filter/Filter.js';
 import Data from './components/Data/Data.js';
 import Footer from './components/Footer.js';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// Reports
+import AppMatrix from './components/Reports/ReportsComponents/AppMatrix';
+import ITRoadmap from './components/Reports/ReportsComponents/ITRoadmap';
+import MISRoadmap from './components/Reports/ReportsComponents/MISRoadmap';
+import DepartmentsTree from './graphs/DepartmentsTree/DepartmentsTree';
 
 // Drawer 
 
@@ -36,6 +39,7 @@ import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -103,7 +107,10 @@ function App(props) {
 
   const links = [
     { name: 'Dashboard', link: '/'},
-    { name: 'Reports', link: '/reports'},
+    { name: 'Application Grid', link: '/application-grid'},
+    { name: 'IT Roadmap', link: '/itroadmap'},
+    { name: 'Major Information Systems Roadmap', link: '/misroadmap'},
+    { name: 'Departments Hierarchy', link: '/departments'},
     { name: 'Filter', link: '/filter'},
     { name: 'Raw Data', link: '/data'}
   ];
@@ -186,7 +193,10 @@ function App(props) {
       <main style={{marginTop:'4.5em', backgroundColor:'var(--theme-color-4)'}} className={classes.content}>
         {/* <div className={classes.toolbar} /> */}
           <Route exact path="/" component={Dashboard}/>
-          <Route exact path="/reports" component={Reports}/>
+          <Route exact path="/application-grid" component={AppMatrix}/>
+          <Route exact path="/itroadmap" component={ITRoadmap}/>
+          <Route exact path="/misroadmap" component={()=><div>TODO</div>}/>
+          <Route exact path="/departments" component={DepartmentsTree}/>
           <Route exact path="/filter" component={Filter}/>
           <Route exact path="/data" component={Data}/>
       </main>

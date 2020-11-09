@@ -105,7 +105,8 @@ const ApplicationsDashboard = () => {
                         IT Projects
                         </Typography>
                         <Typography variant="body" component="p">
-                        A project is an effort to create, modify or maintain a specific application, infrastructure or service.                        </Typography>
+                        A project is an effort to create, modify or maintain a specific application, infrastructure or service.                        
+                        </Typography>
                     </CardContent>
                     </Card>
                 </Paper>
@@ -187,13 +188,11 @@ const ApplicationsDashboard = () => {
                         </Col>
                     </Row>
                 </Container>
-
-
             </Col>
 
             <Col  
                 style={{padding:0, marginTop:'1em'}} 
-                sm={12} md={5} lg={12} xl={3}>
+                sm={12} md={12} lg={12} xl={3}>
                         <Paper  elevation={2}>
                             <Card style={{padding:'3em'}} id="TIME-description">
                                 <CardContent>
