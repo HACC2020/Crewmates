@@ -4,22 +4,28 @@ import Chip from '@material-ui/core/Chip';
 
 const MISRoadmap = () => {
 
-	const { applications, projects, calculateMISRelations } = useData();
+	const { applications, projects, calculateMISRelations, calculateMajorInformationSystems } = useData();
 	console.log(calculateMISRelations);
 
 	const [projectsMetrics, setProjectsMetrics] = useState({
         MISRelations: calculateMISRelations(projects),
+        wtf: calculateMajorInformationSystems(applications)
     });
 
     useEffect(() => {
         setProjectsMetrics({
             MISRelations: calculateMISRelations(applications, projects),
+            wtf: calculateMajorInformationSystems(applications)
         });
-    }, [applications, projects, calculateMISRelations]);
+    }, [applications, projects]);
 
     // data for table
-    const { MISRelations } = projectsMetrics;
-  	console.log(MISRelations);
+    const { MISRelations, wtf } = projectsMetrics;
+    const { MISApps, current, future } = MISRelations;
+    console.log(wtf);
+  	console.log(MISApps);
+  	console.log(current);
+  	console.log(future);
 
     return(
     	<div>
