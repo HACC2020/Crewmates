@@ -6,11 +6,11 @@
     --prussian-blue: #004e59;
     --rich-black: #021C2D;
 
-    --theme-color-1: #25274d;
+    /* --theme-color-1: #25274d;
     --theme-color-2: #464866;
     --theme-color-3: #aaabb8;
     --theme-color-4: #2e9cca;
-    --theme-color-5: #29648a;
+    --theme-color-5: #29648a; */
 
     --warning-color-red: #cc3300;
     --warning-color-orange: #ff9966;
@@ -27,4 +27,12 @@
     /* --missing-data-color: #8e918f; */
     --missing-data-color: #DBDEDC;
     --missing-data-color-active: #CED1CF;
+
+    /* New Theme colors */
+    --theme-color-1: #2A4A7B;
+    --theme-color-2: #7385A4;
+    --theme-color-3: #838FAC;
+    /* --theme-color-4: #9EA7A7; */
+    --theme-color-4: #CFDAE3;
+    --theme-color-5: #F7F7F7;
 }

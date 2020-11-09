@@ -8,9 +8,9 @@ const ProjectRiskToValueChart = ({data}) => {
     const projectRisks = ['severe',  'high','moderate' ,'low'];
     const colors = ['green', 'lightgreen', 'orange', 'red'];
 
-    const width = 475;
+    const width = 500;
     const height = 250;
-    const margin = {top: 0, right: 0, bottom: 2, left: 2};
+    const margin = {top: 20, right: 0, bottom: 25, left: 25};
     const xRange = [margin.left, width - margin.right];
     const yRange = [height - margin.bottom, margin.top];
 
@@ -50,7 +50,7 @@ const ProjectRiskToValueChart = ({data}) => {
             .curve(curveCardinal);
 
         return (
-            <>
+            <g>
                 <path
                   className="line"
                   d={myLine(marginalValueRisks)}
@@ -75,7 +75,7 @@ const ProjectRiskToValueChart = ({data}) => {
                   fill='none'
                   stroke='green'
                 />
-            </>
+            </g>
         );
       }
 
@@ -96,18 +96,19 @@ const ProjectRiskToValueChart = ({data}) => {
             axis && yAxis(select(axis));
         }
 
-        const xTransform = `translate(0, 250)`;
+        const xTransform = `translate(${0}, ${height-margin.bottom})`;
+        const yTransform = `translate(${margin.left}, ${0})`;
 
         return (
             <>
                 <g transform={xTransform} ref={xAxisRef} />
-                <g ref={yAxisRef} />
+                <g transform={yTransform} ref={yAxisRef} />
             </>
         );
     }
 
     // chart title
-    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={ 0 }>Project Risk to Business Value</text>;
+    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={margin.top}>Project Risk Vs. Business Value</text>;
 
     return (
         <div>
