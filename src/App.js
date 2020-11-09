@@ -200,7 +200,7 @@ function App(props) {
           <Route exact path="/filter" component={Filter}/>
           <Route exact path="/data" component={Data}/>
       </main>
-        </div>
+      </div>
       </Router>
     {/* </ThemeProvider> */}
     </DataProvider>

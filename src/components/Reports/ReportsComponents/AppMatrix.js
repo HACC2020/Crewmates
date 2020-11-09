@@ -1,17 +1,42 @@
 import React, { useState } from 'react';
 import { useData } from '../../../providers/DataProvider';
-import { Table, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Container, Row, Col, Table, Dropdown, DropdownButton } from 'react-bootstrap';
 import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
-import BusinessCriticalityChart from '../../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 
-
-
+// Material UI
+import Paper from '@material-ui/core/Paper';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
 
     const [ viewField, setViewField ] = useState(0);
+    const [anchorEl, setAnchorEl] = React.useState(null); // For View By menu
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const buttonColorTheme = createMuiTheme({
+        palette: {
+            primary: {
+                light: '#504f79',
+                main: '#7385A4',
+                dark: '#000025',
+                contrastText: '#ffffff',
+            },
+        },
+    });
+
     const viewOptions = [
         'timeTag',
         'businessCriticality',
@@ -22,68 +47,83 @@ const AppMatrix = () => {
     const capabilities = enumerateBusinessCapabilities(applications);
 
     return(
-        <div style={{padding:'1em'}}>
+    <ThemeProvider theme={buttonColorTheme}>
+        <Paper style={{height:'100vh', padding:'1em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
+            <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                View By: {_.startCase(viewOptions[viewField])}
+            </Button>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                {viewOptions.map((option, index) => 
+                    <MenuItem key={`${index}-option`} onClick={()=> {
+                        setViewField(index);
+                        handleClose();
+                    }}>{_.startCase(option)}</MenuItem>)}
+            </Menu>
+            {<CategoryChips field={viewOptions[viewField]}/>}
 
-        <DropdownButton style={{borderRadius:0}} id="dropdown-basic-button" title={`View By: ${_.startCase(viewOptions[viewField])}`}>
-            {viewOptions.map((option, index) => <Dropdown.Item key={index} onClick={()=>setViewField(index)}>{_.startCase(option)}</Dropdown.Item>)}
-        </DropdownButton>
-        <p>Categories:</p>
-        {<CategoryChips field={viewOptions[viewField]}/>}
-        <div style={{overflowY:'scroll', overflowX:'scroll', height:'100vh'}}>
-        <Table striped bordered size="sm">
-            <thead>
-                <tr>
-                    <th></th>
-                    {capabilities.map(capability => {
-                        // Render top row headers that represent all the business capabilities
-                        let headerTitle = '';
-                        if(capability === null) headerTitle = 'Missing Capability';
-                            else headerTitle = capability;
-                        return (
-                            <th key={capability}>{headerTitle}</th>
-                        );
-                    })}
-                </tr>
-            </thead>
-            <tbody>
-                {departments.map(dep => {
-                    const MAX_DISPLAYED_CHARACTERS = 75;
-                    let departmentName = dep.name;
-                    let displayedName;
-
-                    // let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
-                    //     return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
-                    // });
-
-                    if(departmentName.length > MAX_DISPLAYED_CHARACTERS) {
-                        displayedName = departmentName.slice(0,MAX_DISPLAYED_CHARACTERS-1);
-                    } else {
-                        displayedName = departmentName;
-                    }
-                    return (
-                        <tr key={dep.id}>
-                            <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
-                            {/* <td>{missingBusinessCapabilityApplications.map(o => 
-                                <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>)}
-                            </td> */}
+            <div style={{overflowY:'scroll', overflowX:'scroll', height:'750px', width:`80vw`}}>
+                <Table striped bordered size="sm">
+                    <thead>
+                        <tr>
+                            <th></th>
                             {capabilities.map(capability => {
-                                const matchingApplications = _.filter(applications, (application) => {
-                                    return (application.ownerAgencyName === departmentName) 
-                                        && (application.leadingBusinessCapability === capability);
-                                });
-
-                                const matchingApplicationsEl = matchingApplications.map(o => 
-                                    <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
-
-                                return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
+                                // Render top row headers that represent all the business capabilities
+                                let headerTitle = '';
+                                if(capability === null) headerTitle = 'Missing Capability';
+                                    else headerTitle = capability;
+                                return (
+                                    <th key={capability}>{headerTitle}</th>
+                                );
                             })}
                         </tr>
-                        );
-                })}
-            </tbody>
-        </Table>
-        </div>
-        </div>);
+                    </thead>
+                    <tbody>
+                    {departments.map(dep => {
+                        const MAX_DISPLAYED_CHARACTERS = 75;
+                        let departmentName = dep.name;
+                        let displayedName;
+
+                        // let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
+                        //     return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
+                        // });
+
+                        if(departmentName.length > MAX_DISPLAYED_CHARACTERS) {
+                            displayedName = departmentName.slice(0,MAX_DISPLAYED_CHARACTERS-1);
+                        } else {
+                            displayedName = departmentName;
+                        }
+                        return (
+                            <tr key={dep.id}>
+                                <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
+                                {/* <td>{missingBusinessCapabilityApplications.map(o => 
+                                    <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>)}
+                                </td> */}
+                                {capabilities.map(capability => {
+                                    const matchingApplications = _.filter(applications, (application) => {
+                                        return (application.ownerAgencyName === departmentName) 
+                                            && (application.leadingBusinessCapability === capability);
+                                    });
+
+                                    const matchingApplicationsEl = matchingApplications.map(o => 
+                                        <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
+
+                                    return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
+                                })}
+                            </tr>
+                            );
+                    })}
+                    </tbody>
+                </Table>
+            </div>
+        </Paper>
+    </ThemeProvider>
+    );
 };
 
 const enumerateBusinessCapabilities = applications => {
