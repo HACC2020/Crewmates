@@ -60,21 +60,25 @@ const ITRoadmapTimeline = () => {
         const open = Boolean(anchorEl);
 
         const handleMouseEnter = (event) => {
-            setAnchorEl(anchorEl ? null : event.currentTarget);
+            // setAnchorEl(anchorEl ? null : event.currentTarget);
             setDarken(true);
         };
 
         const handleMouseLeave = (event) => {
-            setAnchorEl(anchorEl ? null : event.currentTarget);
+            // setAnchorEl(anchorEl ? null : event.currentTarget);
             setDarken(false);
         };
+        const handleBarClick = (event) => {
+            setAnchorEl(anchorEl ? null : event.currentTarget);
+        }
 
         const id = open ? 'spring-popper' : undefined;
 
         return (
             <>
             <g  onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave} 
+                onMouseLeave={handleMouseLeave}
+                onClick={handleBarClick} 
                 transform={`translate(${x(data.start)},${y(data.id)} )`}>
                 <rect 
                     height={y.bandwidth()}
@@ -142,6 +146,7 @@ const ITRoadmapTimeline = () => {
         const today = getMonthsFromDate(minYear, moment().format("YYYY-MM-DD"));
         return (
         <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <polygon points={`${x(today)},-1 ${x(today)+3},-4 ${x(today)-3},-4`} style={{fill:'var(--theme-color-1)',stroke:'black',strokeWidth:0}} />
             <line 
                 id="current-date-marker"
                 opacity={0.3} 
@@ -152,8 +157,8 @@ const ITRoadmapTimeline = () => {
                 stroke="black" />
             <text                 
                 x={x(today)} 
-                y={0-2} 
-                fontSize={'.5em'}>{moment().format("MMMM YYYY")}</text>
+                y={0-6} 
+                fontSize={'.5em'}>{moment().format("MMMM D, YYYY")}</text>
         </g>);
     }
 
