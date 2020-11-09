@@ -8,6 +8,7 @@ import FunctionalVsTechnicalGraph from '../../graphs/FunctionalVsTechnicalGraph/
 
 
 import { makeStyles } from '@material-ui/core/styles';
+import AppsIcon from '@material-ui/icons/Apps';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -22,6 +23,9 @@ import Divider from '@material-ui/core/Divider';
 
 const ApplicationsDashboard = () => {
     const {
+        projects,
+        departments,
+
         applications,
         calculateTIMEMetric,
         calculateFunctionalFitMetric,
@@ -115,7 +119,7 @@ const ApplicationsDashboard = () => {
                         Departments
                         </Typography>
                         <Typography variant="body" component="p">
-                        Each department or agency under the Hawai'i State Executive Branch has their own applications and services they maintain.                </Typography>
+                        Each department or agency under the Hawai'i State Executive Branch has their own applications and services they use and maintain.                </Typography>
                     </CardContent>
                     </Card>
                 </Paper>    
@@ -130,7 +134,20 @@ const ApplicationsDashboard = () => {
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
-                                        <h1>69</h1>
+
+                                        <Container fluid>
+                                            <Row>
+                                                <Col sm={4}><AppsIcon fontSize="large" /></Col>
+                                                <Col sm={8}>
+                                                    <Typography variant="h3" component="h2">
+                                                        {applications.length}
+                                                    </Typography>
+                                                    <Typography variant="h5">
+                                                        Applications
+                                                    </Typography>
+                                                </Col>
+                                            </Row>
+                                        </Container>
                                     </CardContent>
                                 </Card>
                             </Paper>
@@ -140,7 +157,12 @@ const ApplicationsDashboard = () => {
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
-                                        <h1>69</h1>
+                                        <Typography variant="h3" component="h2">
+                                            {projects.length}
+                                        </Typography>
+                                        <Typography variant="h5">
+                                            Projects
+                                        </Typography>                                    
                                     </CardContent>
                                 </Card>
                             </Paper>
@@ -150,7 +172,12 @@ const ApplicationsDashboard = () => {
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
-                                        <h1>69</h1>
+                                    <Typography variant="h3" component="h2">
+                                            {departments.length}
+                                        </Typography>
+                                        <Typography variant="h5">
+                                            Departments/Agencies
+                                        </Typography>                                    
                                     </CardContent>
                                 </Card>
                             </Paper>
