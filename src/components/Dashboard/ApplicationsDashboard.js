@@ -131,30 +131,22 @@ const ApplicationsDashboard = () => {
                 <Container fluid>
                     <Row>
                         {/* <Col style={{marginTop:'1em'}} sm={0} md={3}></Col> */}
-                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
+                        <Col style={{marginTop:'1em'}} sm={12} md={4}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
-
-                                        <Container fluid>
-                                            <Row>
-                                                <Col sm={4}><AppsIcon fontSize="large" /></Col>
-                                                <Col sm={8}>
-                                                    <Typography variant="h3" component="h2">
-                                                        {applications.length}
-                                                    </Typography>
-                                                    <Typography variant="h5">
-                                                        Applications
-                                                    </Typography>
-                                                </Col>
-                                            </Row>
-                                        </Container>
+                                        <Typography variant="h3" component="h2">
+                                            {applications.length}
+                                        </Typography>
+                                        <Typography variant="h5">
+                                            Applications
+                                        </Typography>
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Col>
 
-                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
+                        <Col style={{marginTop:'1em'}} sm={12} md={4}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
@@ -169,7 +161,7 @@ const ApplicationsDashboard = () => {
                             </Paper>
                         </Col>
 
-                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
+                        <Col style={{marginTop:'1em'}} sm={12} md={4}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
@@ -261,9 +253,9 @@ const Graph = ({graph, title, content}) => {
     return (
             <Card>
                 <CardContent>
-                    {graph}
-                    <Divider/>
-                    <CardHeader title={title}/>
+
+                    {/* <CardHeader title={title}/> */}
+                    <Typography style={{marginTop:'1em'}} variant="h5">
                     { content === null ? null :
                         <IconButton
                         className={clsx(classes.expand, {
@@ -275,17 +267,49 @@ const Graph = ({graph, title, content}) => {
                             <ExpandMoreIcon />
                         </IconButton>
                     }
-
-                </CardContent>
-                { content === null ? null :
+                        {title}</Typography>
+                    <Divider/>
+                    { content === null ? null :
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
                             {content}
                         </CardContent>
                     </Collapse>
-                }
+                    }
+                        {graph}
+
+                </CardContent>
 
             </Card>
+            // <Card>
+            //     <CardContent>
+            //         {graph}
+            //         <Divider/>
+            //         {/* <CardHeader title={title}/> */}
+            //         <Typography style={{marginTop:'1em'}} variant="h5">
+            //         { content === null ? null :
+            //             <IconButton
+            //             className={clsx(classes.expand, {
+            //                 [classes.expandOpen]: expanded,
+            //             })}
+            //             onClick={handleExpandClick}
+            //             aria-expanded={expanded}
+            //             aria-label="show more">
+            //                 <ExpandMoreIcon />
+            //             </IconButton>
+            //         }
+            //             {title}</Typography>
+
+
+            //     </CardContent>
+            //     { content === null ? null :
+            //         <Collapse in={expanded} timeout="auto" unmountOnExit>
+            //             <CardContent>
+            //                 {content}
+            //             </CardContent>
+            //         </Collapse>
+            //     }
+            // </Card>
     );
 }
 

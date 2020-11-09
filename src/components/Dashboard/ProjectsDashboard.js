@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../providers/DataProvider';
-import { Container, Row, Col, Card} from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+
+import { makeStyles } from '@material-ui/core/styles';
+import AppsIcon from '@material-ui/icons/Apps';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import clsx from 'clsx';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 
 const ProjectsDashboard = () => {
     const {
@@ -46,128 +60,94 @@ const ProjectsDashboard = () => {
     const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric, projectCancelledCompleted } = projectsMetrics;
 
     return (
-    <>
-      <Container fluid>
-
-      <Row>
-          <Col xs={12} md={7} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
-            <h1 style={{marginBottom:'1em'}}>Business Value vs. Project Risk</h1>
-            <ProjectRiskToValueChart data={projectRiskToValueMetric}/>
-          </Col>
-
-          <Col xs={12} md={5} style={{backgroundColor: 'var(--theme-color-4)', padding: '3em', paddingBottom:'2em'}}>
-              <Row>
-                  <Col md={12} style={{}}>
-                    <h3 style={{color:'black', paddingTop: '1em'}}>What is Business Value?</h3>
-                    <ul>
-                        <li style={{color: 'white'}}>
-                            Marginal Benefit: Small quality or financial improvements.
-                        </li>
-
-                        <li style={{color: 'white'}}>
-                            Little Benefit: Some quality and financial improvements.
-                        </li>
-
-                        <li style={{color: 'white'}}>
-                            Large Benefit: Remarkable quality and/or financial improvements.
-                        </li>
-
-                        <li style={{color: 'white'}}>
-                            Signifiant Benefit: Significant improvements in quality and/or financials.
-                        </li>
-                      </ul>
-                  </Col>
-
-                  <Col md={12} style={{}}>
-                      <h3 style={{color:'black'}}>What is Project Risk?</h3>
-                      <ul>
-                          <li style={{color: 'white'}}>
-                              Low Risk: No risks or a minor risk that can be easily mitigated.
-                          </li>
-
-                          <li style={{color: 'white'}}>
-                              Moderate risk - Some effects on quality, timeline or budget that can be mitigated by project management.
-                          </li>
-
-                          <li style={{color: 'white'}}>
-                              High Risk: Remarkable effects on quality, timeline or budget require management support.
-                          </li>
-
-                          <li style={{color: 'white'}}>
-                              Severe Risk: Intolerable effects on quality and/or timeline and/or budget of a project.
-                          </li>
-                      </ul>
-                  </Col>
-                </Row>
-            </Col>
-        </Row>
-
-       <Row>
-          <Col xs={12} md={12} style={{backgroundColor:'var(--theme-color-3)', padding:'4em', paddingBottom:'2em'}}>
-          <h1 style={{marginBottom:'1em'}}>Project Date Metrics</h1>
-          <Row>
-              <Col xs={12} md={4}>
-                  <Card style={{ width: '18rem' }}>
-                      <Card.Body>
-                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}>{projectDateMetric.plannedNotApproved}</Card.Title>
-                          <Card.Text style={{textAlign:'center', fontWeight:'bold'}}>
-                              (May be inaccurate) Projects planned but not approved.
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Col>
-
-              <Col xs={12} md={4}>
-                  <Card style={{ width: '18rem' }}>
-                      <Card.Body>
-                          <Card.Title style={{textAlign:'center', fontSize: '3em'}}>{projectDateMetric.approvedNoStart}</Card.Title>
-                          <Card.Text style={{textAlign:'center', fontWeight: 'bold'}}>
-                             Projects approved but no projected start date.
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Col>
-
-              <Col xs={12} md={4}>
-                  <Card style={{ width: '18rem' }}>
-                      <Card.Body>
-                      <Card.Title style={{textAlign:'center', fontSize:'3em'}}> {projectDateMetric.startNoComplete}</Card.Title>
-                          <Card.Text style={{textAlign: 'center', fontWeight:'bold'}}>
-                            Projects that have a projected start date but no cancel or projected completion date.
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Col>
-
-          </Row>
-          </Col>
-        </Row>
-
-      <Row>
-
-          <Col xs={12} md={6} style={{backgroundColor:'var(--theme-color-1',padding:'4em', paddingBottom:'2em'}}>
-              <h1 style={{color: 'white', marginBottom:'1em'}}># Number of Projects Missing Data</h1>
-              <Col xs={12} md={12}>
-                  <Card style={{ width: '18rem' }}>
-                     <Card.Body>
-                       <Card.Title style={{textAlign:'center', fontSize:'3em'}}> {projectDateMetric.missingData}</Card.Title>
-                       <Card.Text style={{textAlign: 'center', fontWeight:'bold'}}>
-                         Projects don't have any lifecycle dates.
-                       </Card.Text>
-                     </Card.Body>
-                   </Card>
-              </Col>
-          </Col>
-
-          <Col xs={12} md={6} style={{...colors.white, padding:'4em', paddingBottom:'2em'}}>
-            <h1 style={{marginBottom:'1em'}}>Cancelled vs Completed projects</h1>
-            <CancelledCompletedChart/>
-          </Col>
-      </Row>
-
-      </Container>
-    </>
+        <Container fluid>
+            <Row>
+                <Col style={{marginTop:'1em'}} sm={12} md={4}>
+                    <Paper>
+                        <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
+                    </Paper>
+                </Col>
+                <Col style={{marginTop:'1em'}} sm={12} md={8}>
+                    <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
+const GraphCard = ({graph, title, content}) => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+      };
+
+    const useStyles = makeStyles((theme) => ({
+        expand: {
+          transform: 'rotate(0deg)',
+          marginLeft: 'auto',
+          transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+          }),
+        },
+        expandOpen: {
+          transform: 'rotate(180deg)',
+        },
+      }));
+    const classes = useStyles();
+
+    return (
+            <Card>
+                <CardContent>
+                    {graph}
+                    <Divider/>
+                    {/* <CardHeader title={title}/> */}
+                    <Typography style={{marginTop:'1em'}} variant="h5">
+                    { content === null ? null :
+                        <IconButton
+                        className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more">
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    }
+                        {title}</Typography>
+
+
+                </CardContent>
+                { content === null ? null :
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            {content}
+                        </CardContent>
+                    </Collapse>
+                }
+
+            </Card>
+    );
+}
+
+const BusinessValueVsProjectRiskDescription = (<>
+              <h3>What is Business Value?</h3>
+              <ul>
+                  <li>
+                      Marginal Benefit: Small quality or financial improvements.
+                  </li>
+
+                  <li>
+                      Little Benefit: Some quality and financial improvements.
+                  </li>
+
+                  <li>
+                      Large Benefit: Remarkable quality and/or financial improvements.
+                  </li>
+
+                  <li>
+                      Signifiant Benefit: Significant improvements in quality and/or financials.
+                  </li>
+                </ul>
+</>);
 export default ProjectsDashboard;

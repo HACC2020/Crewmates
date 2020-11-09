@@ -14,8 +14,8 @@ const Dashboard = () => {
             Crewmates
         </header> */}
         <ApplicationsDashboard/>
-        {/* <ProjectsDashboard/>
-        <MISDashboard/> */}
+        <ProjectsDashboard/>
+        {/* <MISDashboard/> */}
         </>
     );
 };

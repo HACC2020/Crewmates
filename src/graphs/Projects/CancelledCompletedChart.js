@@ -16,7 +16,7 @@ const CancelledCompletedChart = () => {
     const height = 100;
     const margin = 40;
     const radius = width / 2 - margin;
-    const colors = ['green', 'grey', 'red'];
+    const colors = ['var(--warning-color-green)', 'var(--missing-data-color)', 'var(--warning-color-red)'];
 
     const pieChart = () => {
         let myPie = pie()
@@ -39,7 +39,7 @@ const CancelledCompletedChart = () => {
                             d={myArc(dataReady[index])}
                             fill={colors[index]}
                             stroke='black'
-                            strokeWidth='.2px'
+                            strokeWidth='0px'
                         />
                         <text
                             transform={`translate(${myArc.centroid(dataReady[index])})`}
