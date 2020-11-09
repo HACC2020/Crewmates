@@ -97,7 +97,7 @@ const ApplicationsDashboard = () => {
                     </Card>
                 </Paper>
             </Col>
-            <Col sm={12} md={4}>
+            <Col style={{marginTop:'1em'}} sm={12} md={4}>
                 <Paper elevation={2}>
                     <Card>
                     <CardContent>
@@ -111,7 +111,7 @@ const ApplicationsDashboard = () => {
                 </Paper>
             </Col>
 
-            <Col sm={12} md={4}>
+            <Col style={{marginTop:'1em'}} sm={12} md={4}>
                 <Paper elevation={2}>
                     <Card>
                     <CardContent>
@@ -126,11 +126,12 @@ const ApplicationsDashboard = () => {
             </Col>
         </Row>
 
-        <Row style={{marginTop:'1em'}}>
+        <Row>
             <Col style={{padding:0}} sm={12} md={7} lg={12} xl={9}>
                 <Container fluid>
                     <Row>
-                        <Col sm={12} md={3}>
+                        {/* <Col style={{marginTop:'1em'}} sm={0} md={3}></Col> */}
+                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
@@ -153,7 +154,7 @@ const ApplicationsDashboard = () => {
                             </Paper>
                         </Col>
 
-                        <Col sm={12} md={3}>
+                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
@@ -168,7 +169,7 @@ const ApplicationsDashboard = () => {
                             </Paper>
                         </Col>
 
-                        <Col sm={12} md={3}>
+                        <Col style={{marginTop:'1em'}} sm={12} md={3}>
                             <Paper elevation={2}>
                                 <Card>
                                     <CardContent>
@@ -178,16 +179,6 @@ const ApplicationsDashboard = () => {
                                         <Typography variant="h5">
                                             Departments/Agencies
                                         </Typography>                                    
-                                    </CardContent>
-                                </Card>
-                            </Paper>
-                        </Col>
-
-                        <Col sm={12} md={3}>
-                            <Paper elevation={2}>
-                                <Card>
-                                    <CardContent>
-                                        <h1>69</h1>
                                     </CardContent>
                                 </Card>
                             </Paper>
