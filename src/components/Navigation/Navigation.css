@@ -1,14 +1,14 @@
 nav {
   /* background: rgb(170,171,184);
   background: linear-gradient(0deg, rgba(170,171,184,1) 0%, rgba(41,100,138,1) 100%); */
-  background: var(--theme-color-1);
-  padding: 1em;
+  /* background: var(--theme-color-1); */
+  /* padding: 1em; */
  }
 
 .navbarLink {
-  padding: 1em;
-  color: white;
-  text-decoration: none;
+  /* padding: 1em;
+  flex: 1;
+  text-decoration: none; */
 }
 
 .navbarLink:hover {
