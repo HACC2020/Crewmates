@@ -96,7 +96,6 @@ function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [currentPage, setCurrentPage] = React.useState(0);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -184,25 +183,13 @@ function App(props) {
           </Hidden>
         </nav>
 
-      <main style={{marginTop:'4em'}} className={classes.content}>
+      <main style={{marginTop:'4.5em', backgroundColor:'var(--theme-color-4)'}} className={classes.content}>
         {/* <div className={classes.toolbar} /> */}
           <Route exact path="/" component={Dashboard}/>
           <Route exact path="/reports" component={Reports}/>
           <Route exact path="/filter" component={Filter}/>
           <Route exact path="/data" component={Data}/>
       </main>
-          {/* <Container fluid>
-            <Row>
-              <Navigation/>
-              <Col sm={12} md={9} lg={10}>
-                <Route exact path="/" component={Dashboard}/>
-                <Route exact path="/reports" component={Reports}/>
-                <Route exact path="/filter" component={Filter}/>
-                <Route exact path="/data" component={Data}/>
-                <Footer/>
-              </Col>
-            </Row>
-          </Container> */}
         </div>
       </Router>
     {/* </ThemeProvider> */}

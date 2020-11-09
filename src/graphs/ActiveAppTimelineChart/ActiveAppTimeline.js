@@ -5,9 +5,9 @@ const ActiveAppTimeline = ({data}) => {
 
     const { ticks, xValues } = data;
 
-    const width = 475;
+    const width = 750;
     const height = 250;
-    const margin = {top: 0, right: 0, bottom: 2, left: 2};
+    const margin = {top: 30, right: 30, bottom: 30, left: 30};
     const xRange = [margin.left, width - margin.right];
     const yRange = [height - margin.bottom, margin.top];
 
@@ -54,18 +54,18 @@ const ActiveAppTimeline = ({data}) => {
             axis && yAxis(select(axis));
         }
 
-        const xTransform = `translate(0, 250)`;
+        const xTransform = `translate(0, ${height-margin.bottom})`;
 
         return (
             <>
                 <g transform={xTransform} ref={xAxisRef} />
-                <g ref={yAxisRef} />
+                <g transform={`translate(${margin.left},0)`} ref={yAxisRef} />
             </>
         );
     }
 
     // chart title
-    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={ 0 }>Current Apps from each Year</text>;
+    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={ margin.top }>Current Applications Per Year</text>;
 
     return (
         <div>

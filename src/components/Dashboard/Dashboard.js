@@ -10,12 +10,12 @@ const Dashboard = () => {
 
     return (
         <>
-        <header className="dashboard-header">
-            Hawai'i State Executive Branch Application Portfolio
-        </header>
+        {/* <header className="dashboard-header">
+            Crewmates
+        </header> */}
         <ApplicationsDashboard/>
-        <ProjectsDashboard/>
-        <MISDashboard/>
+        {/* <ProjectsDashboard/>
+        <MISDashboard/> */}
         </>
     );
 };
