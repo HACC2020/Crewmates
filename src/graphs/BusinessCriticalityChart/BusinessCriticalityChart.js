@@ -17,9 +17,9 @@ const BusinessCriticalityChart = () => {
         {name:'Missing', value: missing, color:'gray'}
     ];
 
-    const width = 300;
-    const height = 300;
-    const margin = {top: 10, right: 5, bottom: 15, left: 5};
+    const width = 500;
+    const height = 500;
+    const margin = {top: 20, right: 30, bottom: 15, left: 30};
     const xRange = [margin.left, width - margin.right]; // Plotting on the x-axis starts from 40-500
     const yRange = [height - margin.bottom, margin.top]; // Plotting on the x-axis starts from 470-20
 
@@ -46,26 +46,32 @@ const BusinessCriticalityChart = () => {
                 y={y(d.value)-2}
                 fill="black"
                 textAnchor="middle" 
+                fontSize="6em"
                 >{d.value}</text>
         </g>);
 
-    const titleX = margin.left+((width-margin.left)/2);
-    const titleY = height-(margin.bottom/2)+5;
+    const titleX = 0;
+    const titleY = 30;
 
-    const yTitle = <text x={titleX} y={titleY}>Business Criticality</text>;
+    const yTitle = <text fontSize={`5em`} x={titleX} y={titleY}>Business Criticality</text>;
 
     const labels = CRITICALITY_DATA.map((d, index) => {
-        const labelX =  x(d.name)+2;
-        const labelY = (height-margin.bottom+4);
+        const labelX =  x(d.name)+(x.bandwidth()/2);
+        const labelY = (height-margin.bottom+10);
         return (
-            <text key={`BusinessCriticality-${labelX}-${labelY}`} x={labelX} y={labelY} key={d.name}>{d.name}</text>
+            <text key={`BusinessCriticality-${labelX}-${labelY}`} 
+                fontSize={`3em`}
+                textAnchor="middle" 
+                x={labelX} y={labelY} key={d.name}>{d.name}</text>
         );
     });
     return (
     <svg fontSize={`2`} viewBox={`0, 0, ${width}, ${height}`}>
-        {bars}
-        {yTitle}
-        {labels}
+        <g translate={`translate${margin.left},${height-margin.bottom}`}>
+            {bars}
+            {yTitle}
+            {labels}
+        </g>
     </svg>);
 }
 

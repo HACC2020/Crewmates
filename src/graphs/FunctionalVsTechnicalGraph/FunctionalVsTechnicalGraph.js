@@ -9,7 +9,7 @@ const FunctionalVsTechnicalGraph = () => {
     const width = 750;
     const height = 750;
 
-    const margin = {top: 50, right: 0, bottom: 20, left: 50 };
+    const margin = {top: 20, right: 20, bottom: 0, left: 50 };
 
     const xRange = [0, width - margin.left - margin.right]; // Where plotting on the x-axis starts
     const yRange = [height - margin.bottom - margin.top, 0]; // Where plotting on the y-axis starts
@@ -153,7 +153,7 @@ const FunctionalVsTechnicalGraph = () => {
     }
 
     return (
-        <svg viewBox={`0, 0, ${width}, ${height}`}>
+        <svg viewBox={`0, 0, ${width}, ${height}`} transform={`translate(0,50)`}>
             <Cells/>
             <Gridlines/>
             <Axes/>

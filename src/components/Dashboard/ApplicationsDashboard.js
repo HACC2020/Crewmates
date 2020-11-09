@@ -31,28 +31,6 @@ const ApplicationsDashboard = () => {
         calculateTimelineMetric
     } = useData();
 
-    const colors = {
-        powderblue: {backgroundColor:'powderblue'},
-        skyblue: {backgroundColor: 'skyblue'},
-        steelblue: {backgroundColor: 'steelblue'}
-    };
-
-    const centerInBox = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-    };
-
-    const timeModel = {
-        fontSize:'3em'
-    };
-
-    const whiteText = {
-        color:'white'
-    };
-
-
     const [applicationMetrics, setApplicationsMetrics] = useState({
         TIMEMetric: calculateTIMEMetric(applications),
         functionalFitMetric: calculateFunctionalFitMetric(applications),
@@ -224,12 +202,12 @@ const ApplicationsDashboard = () => {
             </Col>
         </Row>
 
-        <Row style={{marginTop:'1em'}}>
-            <Col sm={12} md={6}>
+        <Row >
+            <Col style={{marginTop:'1em'}} sm={12} md={6}>
                 <Graph graph={<BusinessCriticalityChart/>} title="Business Criticality Chart" content={BusinessCriticalityDescription}/>
             </Col>
 
-            <Col sm={12} md={6}>
+            <Col style={{marginTop:'1em'}} sm={12} md={6}>
                 <Graph 
                     graph={<FunctionalVsTechnicalGraph/>} 
                     title="Measure of Functional and Technical Ratings of All Applications" 
