@@ -14,7 +14,7 @@ const ITRoadmapTimeline = () => {
     const { applications } = useData();
 
     const width = 750;
-    const height = 1750;
+    const height = 4050;
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
 
     const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
@@ -39,7 +39,7 @@ const ITRoadmapTimeline = () => {
         .domain(data.map(d => d.id))
         .range([0, height - margin.bottom - margin.top])
         .padding(.15);
-
+    console.log(data.map(d => d.id));
     // Function to spit out the correct x coordinate on graph
     const x = scaleLinear()
         .domain([0, totalYearsInMonths])

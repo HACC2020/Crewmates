@@ -420,65 +420,87 @@ const DataProvider = ({children}) => {
         return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
     };
 
+    // return MISApps = [objects], pairing = [{modern: object, legacy: [objects]}], standalone = [objects]
     const calculateMISRelations = (applications, projects) => {
-        let future = [];    // MIS apps that are successors to a legacy app
-        let current = [];   // MIS apps that are in production
-        let MISApps = [];   // all MIS apps
-        const { modern, legacy } = getMISApps(applications);
-        
-        current = MISApps;
+        let MISAppsSuccessors = [];   // future MIS apps with their legacy app and projects
+        let MISAppsStandalone = [];    // current MIS apps with their projects
+        const { MISApps, pairing, standalone } = getMISApps(applications);
+        console.log(standalone);
+
         // sort the MIS apps into their relations with each other
-        MISApps.forEach(app => {
-            console.log('wtfffff');
-            if (app.successors !== null) {
-                future.push({name: app.successors, successors: app.name, projects: []});
-                // 
-                _.remove(current, c => (c.name === app.name) || c.name === app.successors);
-            }
-        })
+        pairing.forEach(pair => {
+            let appProjects = [];
+            
+            projects.forEach(project => {
+                if (project.applications !== null && project.applications.indexOf(pair.modern.name) !== -1) {
+                    appProjects.push(project);
+                }
+            });
 
-        return { MISApps, current, future };
-    }
+            MISAppsSuccessors.push({modern: pair.modern, legacy: pair.legacy, projects: appProjects});
+        });
 
+        standalone.forEach(app => {
+            let appProjects = [];
+            
+            projects.forEach(project => {
+                if (project.applications !== null && project.applications.indexOf(app.name) !== -1) {
+                    appProjects.push(project);
+                }
+            });
+
+            MISAppsStandalone.push({modern: app, projects: appProjects});
+        });
+
+        return { MISApps, MISAppsSuccessors, MISAppsStandalone };
+    };
+
+    // return MISApps = [objects], pairing = [{modern: object, legacy: [objects]}], standalone = [objects]
     const getMISApps = (applications) => {
-        let MISApps = [];
-        let modern = [];
-        let legacy = [];
-        let MISAppsSuccessors = [];
+        let MISApps = [];   // all the apps with a MIS tag
+        let modernApps = [];    // MIS apps that are successors to a legacy app
+        let legacyApps = [];    // MIS apps that are being replaced
+        let pairing = []; // modern MIS apps with paired with their successor
+        let standalone = []; // MIS apps not a successor to a legacy app
 
         applications.forEach(app => {
             // get apps with MIS tag
             if (app.majorInformationSystemsTag === 'Major Information Systems') {
-                MISApps.push(app);
+                MISApps.push(app);  // add to collection of apps with the MIS tag
+                standalone.push(app);
             }
-            // get 
+            // get apps that are either the legacy or modernization app
             if (app.successors) {
                 applications.forEach(modern => {
                     if ((modern.majorInformationSystemsTag === 'Major Information Systems') && (modern.name === app.successors)) {
-                        modern.push(modern);
-                        legacy.push(app);
+                        modernApps.push(modern);
+                        legacyApps.push(app);
+
+                        // remove legacy modern pairs
+                        standalone = _.filter(standalone, s => s.name !== modern.name);
+                        standalone = _.filter(standalone, s => s.name !== app.name);
                     }        
                 });
             }
         });
 
-        modern = _.uniq(modern);
+        modernApps = _.uniq(modernApps);
 
-        modern.forEach(app => {
+        // build the modern-legacy pairing
+        modernApps.forEach(app => {
             let successors = [];
             
-            legacy.forEach(legacyApp => {
+            legacyApps.forEach(legacyApp => {
                 if (app.name === legacyApp.successors) {
                     successors.push(legacyApp);
                 }
             });
 
-            MISAppsSuccessors.push({name: app, legacy: successors});
-        })
+            pairing.push({modern: app, legacy: successors});
+        });
 
-
-        return { modern, legacy };
-    }
+        return { MISApps, pairing, standalone };
+    };
 
     const calculateMajorInformationSystems = applications => {
         let count = 0;
