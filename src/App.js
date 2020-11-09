@@ -19,7 +19,7 @@ import Footer from './components/Footer.js';
 import AppMatrix from './components/Reports/ReportsComponents/AppMatrix';
 import ITRoadmap from './components/Reports/ReportsComponents/ITRoadmap';
 import MISRoadmap from './components/Reports/ReportsComponents/MISRoadmap';
-import DepartmentsTree from './graphs/DepartmentsTree/DepartmentsTree';
+import DepartmentsTreeVisualization from './components/Reports/ReportsComponents/DepartmentsTreeVisualization';
 
 // Drawer 
 
@@ -196,7 +196,7 @@ function App(props) {
           <Route exact path="/application-grid" component={AppMatrix}/>
           <Route exact path="/itroadmap" component={ITRoadmap}/>
           <Route exact path="/misroadmap" component={()=><div>TODO</div>}/>
-          <Route exact path="/departments" component={DepartmentsTree}/>
+          <Route exact path="/departments" component={DepartmentsTreeVisualization}/>
           <Route exact path="/filter" component={Filter}/>
           <Route exact path="/data" component={Data}/>
       </main>
