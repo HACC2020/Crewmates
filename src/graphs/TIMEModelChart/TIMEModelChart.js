@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useData } from '../../providers/DataProvider';
-import { scaleLinear, scaleBand, max, select } from 'd3';
+import { scaleLinear, scaleBand, max } from 'd3';
 
 
 const TIMEModelChart = () => {
@@ -57,7 +57,7 @@ const TIMEModelChart = () => {
         const labelX = x(d.name)+(x.bandwidth()/2) - 5;
         const labelY = (height-margin.bottom+4);
         return (
-            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY} key={d.name}>{d.name}</text>
+            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY}>{d.name}</text>
 
         );
     });
@@ -69,46 +69,47 @@ const TIMEModelChart = () => {
     </svg>);
 }
 
-const barTextStyle = {
-    fontSize: "1px", 
-};
+// const barTextStyle = {
+//     fontSize: "1px", 
+// };
 
 // NOT USED AT THE MOMENT
 // Represents an individual bar in a bar chart
-const Bar = ({ xRect, yRect, xText, yText, width, height, color, count }) => {
-    const rectRef = React.createRef();
-    const countTextRef = React.createRef();
 
-    useEffect(() => {
-        animateRect(rectRef, height, yText, color, countTextRef);
-    });
+// const Bar = ({ xRect, yRect, xText, yText, width, height, color, count }) => {
+//     const rectRef = React.createRef();
+//     const countTextRef = React.createRef();
 
-    return(<>
-        <g>
-            <rect x={xRect} y={yRect} width={width} ref={rectRef}/> 
-            <text x={xText} 
-                fill="white"
-                textAnchor="middle" 
-                style={barTextStyle}
-                ref={countTextRef}>{count}</text>
-        </g>
+//     useEffect(() => {
+//         animateRect(rectRef, height, yText, color, countTextRef);
+//     });
 
-        {/* <g fill={d.color}>
-            <rect 
-                x={x(d.name)} 
-                y={y(d.value)}
-                height={y(0)-y(d.value)}
-                width={x.bandwidth()}/>
-            <text 
-                x={x(d.name)+(x.bandwidth()/2)} 
-                y={y(d.value)-2} 
-                fill="black"
-                textAnchor="middle" 
-                >{d.value}</text>
-        </g> */}
-        </>
-    )
-};
+//     return(<>
+//         <g>
+//             <rect x={xRect} y={yRect} width={width} ref={rectRef}/> 
+//             <text x={xText} 
+//                 fill="white"
+//                 textAnchor="middle" 
+//                 style={barTextStyle}
+//                 ref={countTextRef}>{count}</text>
+//         </g>
+
+//         {/* <g fill={d.color}>
+//             <rect 
+//                 x={x(d.name)} 
+//                 y={y(d.value)}
+//                 height={y(0)-y(d.value)}
+//                 width={x.bandwidth()}/>
+//             <text 
+//                 x={x(d.name)+(x.bandwidth()/2)} 
+//                 y={y(d.value)-2} 
+//                 fill="black"
+//                 textAnchor="middle" 
+//                 >{d.value}</text>
+//         </g> */}
+//         </>
+//     )
+// };
 
 // NOT USED AT THE MOMENT
 // Apply an animation to a bar and its text element
@@ -116,16 +117,17 @@ const Bar = ({ xRect, yRect, xText, yText, width, height, color, count }) => {
 // height: Specify a height
 // color: Specify a color it will transition to
 // countTextRef: A reference to the text element
-const animateRect = (rectRef, height, yText, color, countTextRef) => {
-    const rect = select(rectRef.current);
-    rect.transition()
-        .duration(650)
-        .attr("height", height)
-        .attr("fill", color)
-    const text = select(countTextRef.current);
-    text.transition()
-        .duration(650)
-        .attr("y", yText);
-};
+
+// const animateRect = (rectRef, height, yText, color, countTextRef) => {
+//     const rect = select(rectRef.current);
+//     rect.transition()
+//         .duration(650)
+//         .attr("height", height)
+//         .attr("fill", color)
+//     const text = select(countTextRef.current);
+//     text.transition()
+//         .duration(650)
+//         .attr("y", yText);
+// };
 
 export default TIMEModelChart;

@@ -1,57 +1,13 @@
-/*
-import React, { useState, useEffect } from 'react';
-import { useData } from '../../providers/DataProvider';
 import * as d3 from 'd3';
-
-const Timeline = () => {
-    
-    const { 
-        applications, 
-        calculateTimelineMetric
-    } = useData();
-
-    const [applicationMetrics, setApplicationsMetrics] = useState({
-        TIMEMetric: calculateTimelineMetric(applications),
-    })
-
-    useEffect(() => {
-        setApplicationsMetrics({
-            TIMEMetric: calculateTimelineMetric(applications),
-        })
-    }, [applications]);
-
-    // Applications Metrics
-
-    const { timeline } = applicationMetrics;
-    
-
-    l
-
-    return (
-        <div>
-        
-        </div>
-    );
-};
-
-export default Timeline;
-*/
-
-// move over to graphs folder
-// move over to react-dom d3-math
-// have this file call in the data instead of passing as props
-// finish the data function in dataprovider
-
-import * as d3 from 'd3';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 // width/height of the chart bounds, data the data, indi the x values
 function Timeline({ width, height, data, indi }){
     const ref = useRef();
 
-    useEffect(() => {
-        draw();
-    }, [data]);
+    // useEffect(() => {
+    //     draw();
+    // }, [data, draw]);
 
     const draw = () => {
         
@@ -92,6 +48,7 @@ function Timeline({ width, height, data, indi }){
             <svg ref={ref} style={{ backgroundColor: `eee`, overflow: 'visible', width: `${width}`, height: `${height}` }}>
                 <g className='x-axis' />
                 <g className='y-axis' />
+                {draw()}
             </svg>
         </div>
         

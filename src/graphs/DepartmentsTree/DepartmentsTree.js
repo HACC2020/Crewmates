@@ -1,5 +1,4 @@
 import { useData } from '../../providers/DataProvider';
-import { stratify } from 'd3';
 import _ from 'lodash';
 import Tree from 'react-d3-tree';
 
@@ -10,9 +9,9 @@ const DepartmentsTree = () => {
     //let hierarchyData = buildData(departments, applications);
     const root = buildTree(departments, applications)
 
-    const margin = ({top: 10, right: 120, bottom: 10, left: 40});
-    const width = 750;
-    const height = 750;
+    // const margin = ({top: 10, right: 120, bottom: 10, left: 40});
+    // const width = 750;
+    // const height = 750;
 
     const dimensionStyle = {
         height: '100vh'

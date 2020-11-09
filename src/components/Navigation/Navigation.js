@@ -1,6 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Col } from 'react-bootstrap';
 import './Navigation.css';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -11,35 +9,34 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const Navigation = () => {
+// const Navigation = () => {
     
-   const activeStyle = {
-     textDecoration: 'underline',
-     fontWeight:'bold'
-   }
+//    const activeStyle = {
+//      textDecoration: 'underline',
+//      fontWeight:'bold'
+//    }
 
-    return (
-      <Col sm={12} md={3} lg={2}>
-        <nav style={{
-          display:'flex',
-          flexDirection:'column'
-        }}>
-          <h3 style={{color:'white'}}>ETS IT Roadmap</h3>
-          <NavLink exact activeStyle={activeStyle} className="navbarLink" to="/">Dashboard</NavLink>
-          <NavLink activeStyle={activeStyle} className="navbarLink" to="/reports">Reports</NavLink>
-          <NavLink activeStyle={activeStyle} className="navbarLink" to="/filter">Filter</NavLink>
-          <NavLink activeStyle={activeStyle} className="navbarLink" to="/data">Raw Data</NavLink>
-        </nav>
-      </Col>
-    );
-};
+//     return (
+//       <Col sm={12} md={3} lg={2}>
+//         <nav style={{
+//           display:'flex',
+//           flexDirection:'column'
+//         }}>
+//           <h3 style={{color:'white'}}>ETS IT Roadmap</h3>
+//           <NavLink exact activeStyle={activeStyle} className="navbarLink" to="/">Dashboard</NavLink>
+//           <NavLink activeStyle={activeStyle} className="navbarLink" to="/reports">Reports</NavLink>
+//           <NavLink activeStyle={activeStyle} className="navbarLink" to="/filter">Filter</NavLink>
+//           <NavLink activeStyle={activeStyle} className="navbarLink" to="/data">Raw Data</NavLink>
+//         </nav>
+//       </Col>
+//     );
+// };
 
 
 const drawerWidth = 240;

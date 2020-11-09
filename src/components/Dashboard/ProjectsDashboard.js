@@ -5,11 +5,8 @@ import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedCha
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
 
 import { makeStyles } from '@material-ui/core/styles';
-import AppsIcon from '@material-ui/icons/Apps';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,13 +26,6 @@ const ProjectsDashboard = () => {
         calculateProjectDates
     } = useData();
 
-    const colors = {
-        powderblue: {backgroundColor:'powderblue'},
-        skyblue: {backgroundColor: 'skyblue'},
-        steelblue: {backgroundColor: 'steelblue'},
-        white: {backgroundColor: 'white'}
-    };
-
     const [projectsMetrics, setProjectsMetrics] = useState({
         projectStatusMetric: calculateProjectStatusMetric(projects),
         projectBusinessValueMetric: calculateBusinessValueMetric(projects),
@@ -54,10 +44,11 @@ const ProjectsDashboard = () => {
             projectRiskToValueMetric: calculateProjectRiskToValueMetric(projects),
             projectDateMetric: calculateProjectDates(projects)
         });
-    }, [projects, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectRiskToValueMetric, calculateProjectDates]);
+    }, [projects, calculateProjectCancelledCompleted, calculateProjectStatusMetric, calculateBusinessValueMetric, calculateProjectRiskMetric, calculateProjectRiskToValueMetric, calculateProjectDates]);
 
     // Project Metrics
-    const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric, projectCancelledCompleted } = projectsMetrics;
+    // const { projectStatusMetric, projectBusinessValueMetric, projectRiskMetric, projectRiskToValueMetric, projectDateMetric, projectCancelledCompleted } = projectsMetrics;
+    const { projectRiskToValueMetric } = projectsMetrics;
 
     return (
         <Container fluid>

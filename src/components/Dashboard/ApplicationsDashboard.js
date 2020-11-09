@@ -8,11 +8,8 @@ import FunctionalVsTechnicalGraph from '../../graphs/FunctionalVsTechnicalGraph/
 
 
 import { makeStyles } from '@material-ui/core/styles';
-import AppsIcon from '@material-ui/icons/Apps';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,41 +22,26 @@ const ApplicationsDashboard = () => {
     const {
         projects,
         departments,
-
         applications,
-        calculateTIMEMetric,
-        calculateFunctionalFitMetric,
-        calculateTechnicalFitMetric,
-        calculateBusinessCriticalityMetric,
-        calculateHostingTypeMetric,
         calculateTimelineMetric
     } = useData();
 
     const [applicationMetrics, setApplicationsMetrics] = useState({
-        TIMEMetric: calculateTIMEMetric(applications),
-        functionalFitMetric: calculateFunctionalFitMetric(applications),
-        technicalFitMetric: calculateTechnicalFitMetric(applications),
-        businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
-        hostingTypeMetric: calculateHostingTypeMetric(applications),
+
         timeline: calculateTimelineMetric(applications)
     })
 
     useEffect(() => {
         setApplicationsMetrics({
-            TIMEMetric: calculateTIMEMetric(applications),
-            functionalFitMetric: calculateFunctionalFitMetric(applications),
-            technicalFitMetric: calculateTechnicalFitMetric(applications),
-            businessCriticalityMetric: calculateBusinessCriticalityMetric(applications),
-            hostingTypeMetric: calculateHostingTypeMetric(applications),
             timeline: calculateTimelineMetric(applications)
         })
-    }, [applications]);
+    }, [applications, calculateTimelineMetric]);
 
     // Applications Metrics
 
-    const { TIMEMetric, functionalFitMetric, technicalFitMetric,
-        businessCriticalityMetric, hostingTypeMetric, timeline } = applicationMetrics;
-
+    // const { TIMEMetric, functionalFitMetric, technicalFitMetric,
+    //     businessCriticalityMetric, hostingTypeMetric, timeline } = applicationMetrics;
+    const { timeline } = applicationMetrics;
     const useStyles = makeStyles({
         root: {
             minWidth: 275,

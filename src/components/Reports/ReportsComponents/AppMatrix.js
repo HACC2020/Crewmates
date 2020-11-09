@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../../../providers/DataProvider';
-import { Container, Row, Col, Table, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
 
@@ -10,7 +10,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
@@ -236,21 +235,7 @@ const fieldToRating = (fieldValue) => {
             break;
 
 
-        // If it's functionalFit
-        case 'poor':
-            rating = 1;
-            break;
-        case 'insufficient':
-            rating = 2;
-            break;
-        case 'adequate':
-            rating = 3;
-            break;
-        case 'excellent':
-            rating = 4;
-            break;
-
-        // If it's technicalFit
+        // If it's functionalFit or technicalFit
         case 'poor':
             rating = 1;
             break;

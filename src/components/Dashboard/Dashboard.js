@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React from 'react';
 import ApplicationsDashboard from './ApplicationsDashboard';
 import ProjectsDashboard from './ProjectsDashboard';
-import MISDashboard from './MISDashboard';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -15,7 +13,6 @@ const Dashboard = () => {
         </header> */}
         <ApplicationsDashboard/>
         <ProjectsDashboard/>
-        {/* <MISDashboard/> */}
         </>
     );
 };

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useData } from '../../providers/DataProvider';
-import { scaleLinear, scaleBand, max, select } from 'd3';
+import { scaleLinear, scaleBand, max } from 'd3';
 
 
 const BusinessCriticalityChart = () => {
@@ -62,7 +62,7 @@ const BusinessCriticalityChart = () => {
             <text key={`BusinessCriticality-${labelX}-${labelY}`} 
                 fontSize={`3em`}
                 textAnchor="middle" 
-                x={labelX} y={labelY} key={d.name}>{d.name}</text>
+                x={labelX} y={labelY}>{d.name}</text>
         );
     });
     return (
