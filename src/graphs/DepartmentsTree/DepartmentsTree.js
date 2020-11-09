@@ -23,7 +23,7 @@ const DepartmentsTree = () => {
     <div style={{...dimensionStyle, border:'1px solid black'}}>
         <Tree translate={{x:30, y:30}}
             scaleExtent={{min:0.1, max: 5}}
-            zoom={1} orientation="vertical" pathFunc="diagonal" transitionDuration={250} initialDepth={1} data={root}/>
+            zoom={1} orientation="horizontal" pathFunc="diagonal" transitionDuration={250} initialDepth={1} data={root}/>
     </div>
         );
 
