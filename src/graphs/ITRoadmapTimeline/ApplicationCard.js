@@ -1,30 +1,41 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
+import _ from 'lodash';
 
 const ApplicationCard = ({data}) => {
+    const { name, ownerAgencyName, leadingBusinessCapability,
+      businessCriticality, functionalFit, technicalFit,
+      timeTag, hostingTypeTag } = data;
     return (
-        <Card style={{width:'300px'}}>
+      <Paper square elevation={2}>
+        <Card style={{width:'250px', marginBottom:'1em', background:'var(--theme-color-5)'}}>
         <CardContent>
           <Typography color="textSecondary" gutterBottom>
-            {moment(data['lifecycle:active']).format('YYYY MMMM DD')} 
-            {`     -     `}
-            {moment(data['lifecycle:endOfLife']).format('YYYY MMMM DD')}
+            {moment(data['lifecycle:active']).format('YYYY/MM/DD')} 
+            {`  -  `}
+            {moment(data['lifecycle:endOfLife']).format('YYYY/MM/DD')}
           </Typography>
-          <Typography variant="h5" component="h2">
-            {data.name}
+          <Typography variant="h6" component="h2">
+            {name}
           </Typography>
-          <Typography color="textSecondary">
-            {data.ownerAgencyName}
+          <Typography variant="caption" color="textSecondary">
+            {ownerAgencyName}
           </Typography>
-          <Typography variant="body2" component="p">
-            JASON FILL OUT THE REST OF THIS
-            <br />
-            {'"a benevolent smile"'}
+          <Divider/>
+          <Typography variant="body2" component="p"><br/>
+            {timeTag ? <>TIME Tag: {_.startCase(timeTag)}<br/></>:null}
+            {businessCriticality ? <>Business Criticality: {_.startCase(businessCriticality)}<br/></>:null}
+            {functionalFit ? <>Functional Fit: {_.startCase(functionalFit)}<br/></>:null}
+            {technicalFit ? <>Technical Fit: {_.startCase(technicalFit)}<br/></>:null}
+            {hostingTypeTag ? <>Hosting Type: {hostingTypeTag}<br/></>:null}            
           </Typography>
         </CardContent>
       </Card>
+    </Paper>
     );
 };
 
