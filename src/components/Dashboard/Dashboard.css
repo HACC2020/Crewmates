@@ -27,12 +27,12 @@
 
 #dashboard-applications-projects {
     background: var(--theme-color-4);
- 
 }
 
 #TIME-description {
-    background: var(--theme-color-1);
-    color: white;
+    font-family: Georgia;
+    background: var(--theme-color-3);
+    color: var(--theme-color-5);
 }
 
 #dashboard-business-criticality {

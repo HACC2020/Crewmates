@@ -10,16 +10,18 @@ const BusinessCriticalityChart = () => {
 
     // The data to display
     const CRITICALITY_DATA = [
-        {name:'Administrative Service', value: administrativeService, color:'green'},
-        {name:'Business Operational', value: businessOperational, color:'blue'},
-        {name:'Business Critical', value: businessCritical, color:'skyblue'},
-        {name:'Mission Critical', value: missionCritical, color:'red'},
-        {name:'Missing', value: missing, color:'gray'}
+        {name:'Administrative Service', value: administrativeService, color:'var(--warning-color-green)'},
+        {name:'Business Operational', value: businessOperational, color:'var(--warning-color-lightgreen)'},
+        {name:'Business Critical', value: businessCritical, color:'var(--warning-color-yellow)'},
+        {name:'Mission Critical', value: missionCritical, color:'var(--warning-color-red)'},
+        {name:'Missing', value: missing, color:'var(--missing-data-color)'}
     ];
 
-    const width = 500;
-    const height = 500;
-    const margin = {top: 20, right: 30, bottom: 15, left: 30};
+    const width = 150;
+    const height = 150;
+    // const margin = {top: 10, right: 5, bottom: 15, left: 5};
+    const margin = {top: 10, right: 5, bottom: 10, left: 5};
+
     const xRange = [margin.left, width - margin.right]; // Plotting on the x-axis starts from 40-500
     const yRange = [height - margin.bottom, margin.top]; // Plotting on the x-axis starts from 470-20
 
@@ -46,22 +48,23 @@ const BusinessCriticalityChart = () => {
                 y={y(d.value)-2}
                 fill="black"
                 textAnchor="middle" 
-                fontSize="6em"
+                fontSize="2em"
                 >{d.value}</text>
         </g>);
 
     const titleX = 0;
-    const titleY = 30;
+    const titleY = 10;
 
-    const yTitle = <text fontSize={`5em`} x={titleX} y={titleY}>Business Criticality</text>;
+    const yTitle = <text fontSize={`2em`} x={titleX} y={titleY}>Business Criticality</text>;
 
     const labels = CRITICALITY_DATA.map((d, index) => {
         const labelX =  x(d.name)+(x.bandwidth()/2);
-        const labelY = (height-margin.bottom+10);
+        const labelY = (height-margin.bottom+5);
         return (
             <text key={`BusinessCriticality-${labelX}-${labelY}`} 
-                fontSize={`3em`}
-                textAnchor="middle" 
+                fontSize={`1em`}
+                textAnchor="middle"
+                fontWeight="bold"
                 x={labelX} y={labelY}>{d.name}</text>
         );
     });

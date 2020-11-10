@@ -54,12 +54,14 @@ const ProjectsDashboard = () => {
         <Container fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper>
+                    <Paper elevation={2} square>
                         <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
                     </Paper>
                 </Col>
                 <Col style={{marginTop:'1em'}} sm={12} md={8}>
-                    <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                    </Paper>
                 </Col>
             </Row>
         </Container>

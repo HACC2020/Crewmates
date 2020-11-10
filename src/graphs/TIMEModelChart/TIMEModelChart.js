@@ -9,16 +9,16 @@ const TIMEModelChart = () => {
 
     // The data to display
     const TIMEData = [
-        {name:'Invest', value:invest, color:'green'},
-        {name:'Tolerate', value:tolerate, color:'blue'},
-        {name:'Migrate', value:migrate, color:'skyblue'},
-        {name:'Eliminate', value:eliminate, color:'red'},
-        {name:'Missing', value:missing, color:'gray'}
+        {name:'Invest', value:invest, color:'var(--warning-color-green)'},
+        {name:'Tolerate', value:tolerate, color:'var(--warning-color-lightgreen)'},
+        {name:'Migrate', value:migrate, color:'var(--warning-color-yellow)'},
+        {name:'Eliminate', value:eliminate, color:'var(--warning-color-red)'},
+        {name:'Missing', value:missing, color:'var(--missing-data-color)'}
     ];
 
-    const width = 200;
+    const width = 175;
     const height = 150;
-    const margin = {top: 10, right: 5, bottom: 15, left: 20};
+    const margin = {top: 10, right: 5, bottom: 15, left: 5};
     const xRange = [margin.left, width - margin.right]; // Plotting on the x-axis starts from 40-500
     const yRange = [height - margin.bottom, margin.top]; // Plotting on the x-axis starts from 470-20
 
@@ -48,17 +48,17 @@ const TIMEModelChart = () => {
                 >{d.value}</text>
         </g>);
 
-    const titleX = margin.left+((width-margin.left)/2);
+    // const titleX = margin.left+((width-margin.left)/2);
+    const titleX = width/2;
     const titleY = height-(margin.bottom/2)+5;
 
     const yTitle = <text x={titleX} y={titleY}>TIME Model</text>;
 
     const labels = TIMEData.map((d, index) => {
-        const labelX = x(d.name)+(x.bandwidth()/2) - 5;
+        const labelX = x(d.name)+(x.bandwidth()/2);
         const labelY = (height-margin.bottom+4);
         return (
-            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY}>{d.name}</text>
-
+            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY} textAnchor="middle">{d.name}</text>
         );
     });
     return (

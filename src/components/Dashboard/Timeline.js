@@ -38,14 +38,14 @@ function Timeline({ width, height, data, indi }){
             .join('path')
             .attr('class', 'line')
             .attr('d', myLine)
-            .attr('fill', 'none')
-            .attr('stroke', 'blue');
+            // .attr('fill', 'none')
+            // .attr('stroke', 'black');
     }
 
 
     return (
         <div>
-            <svg ref={ref} style={{ backgroundColor: `eee`, overflow: 'visible', width: `${width}`, height: `${height}` }}>
+            <svg ref={ref} style={{ backgroundColor: `eee`, width: `${width}`, height: `${height}` }}>
                 <g className='x-axis' />
                 <g className='y-axis' />
                 {draw()}
