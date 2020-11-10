@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const AppMatrix = () => {
@@ -47,7 +48,7 @@ const AppMatrix = () => {
 
     return(
     <ThemeProvider theme={buttonColorTheme}>
-        <Paper style={{height:'100vh', padding:'1em', backgroundColor:'var(--theme-color-5)', overflowY:'scroll', overflowX:'scroll',}} elevation={2}>
+        <Paper square style={{height:'120vh', width:'80vw', padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
             <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 View By: {_.startCase(viewOptions[viewField])}
             </Button>
@@ -65,8 +66,8 @@ const AppMatrix = () => {
                     }}>{_.startCase(option)}</MenuItem>)}
             </Menu>
             {<CategoryChips field={viewOptions[viewField]}/>}
-
-            <div style={{ height:'750px', width:`80vw`}}>
+            <Divider />
+            <div style={{ height:'95%', width:`95%`, overflowY:'scroll', overflowX:'scroll',}}>
                 <Table striped bordered size="sm">
                     <thead>
                         <tr>
@@ -143,11 +144,11 @@ const ApplicationCard = ({appData, viewBy}) => {
 
     const rating = fieldToRating(appData[viewBy]);
 
-    let chipColor = '';
-    if(rating === 1) chipColor = 'red';
-    if(rating === 2) chipColor = 'powderblue';
-    if(rating === 3) chipColor = 'palegreen';
-    if(rating === 4) chipColor = 'darkgreen';
+    let chipColor = 'var(--missing-data-color)';
+    if(rating === 1) chipColor = 'var(--warning-color-red)';
+    if(rating === 2) chipColor = 'var(--warning-color-yellow)';
+    if(rating === 3) chipColor = 'var(--warning-color-lightgreen)';
+    if(rating === 4) chipColor = 'var(--warning-color-green)';
 
     const chipStyle = {
         backgroundColor:`${chipColor}`,
@@ -174,19 +175,19 @@ const CategoryChips = ({field}) => {
         {values.map(val => {
             const rating = fieldToRating(val);
 
-            let chipColor = '';
+            let chipColor = 'var(--missing-data-color)';
             
-            if(rating === 1) chipColor = 'red';
-            if(rating === 2) chipColor = 'powderblue';
-            if(rating === 3) chipColor = 'palegreen';
-            if(rating === 4) chipColor = 'darkgreen';
+            if(rating === 1) chipColor = 'var(--warning-color-red)';
+            if(rating === 2) chipColor = 'var(--warning-color-yellow)';
+            if(rating === 3) chipColor = 'var(--warning-color-lightgreen)';
+            if(rating === 4) chipColor = 'var(--warning-color-green)';
 
             const chipStyle = {
                 backgroundColor:`${chipColor}`,
                 color: `${rating === 4 ? 'white' : 'black'}`
             };
 
-            return (<Chip key={val} style={chipStyle} size="medium" label={val}/>);
+            return (<Chip key={val} style={chipStyle} size="medium" label={_.startCase(val)}/>);
         })}
         </>
     );
