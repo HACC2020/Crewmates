@@ -121,7 +121,8 @@ const ApplicationsDashboard = () => {
                                         <Typography variant="h3" component="h2">
                                             {applications.length}
                                         </Typography>
-                                        <Typography variant="h5">
+                                        <Divider/>
+                                        <Typography variant="h6">
                                             Applications
                                         </Typography>
                                     </CardContent>
@@ -136,7 +137,8 @@ const ApplicationsDashboard = () => {
                                         <Typography variant="h3" component="h2">
                                             {projects.length}
                                         </Typography>
-                                        <Typography variant="h5">
+                                        <Divider/>
+                                        <Typography variant="h6">
                                             Projects
                                         </Typography>                                    
                                     </CardContent>
@@ -145,13 +147,14 @@ const ApplicationsDashboard = () => {
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2}>
+                            <Paper style={{  textOverflow: 'ellipsis'}} elevation={2}>
                                 <Card>
                                     <CardContent>
                                     <Typography variant="h3" component="h2">
                                             {departments.length}
                                         </Typography>
-                                        <Typography variant="h5">
+                                        <Divider/>
+                                        <Typography variant="h6">
                                             Departments/Agencies
                                         </Typography>                                    
                                     </CardContent>
