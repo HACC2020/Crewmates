@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../../providers/DataProvider';
 import Chip from '@material-ui/core/Chip';
-// import { Container, Row, Col, Card } from 'react-bootstrap';
-// import { scaleLinear, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
 import { scaleLinear, axisTop, select } from 'd3';
 
 import './styles.css';
@@ -23,16 +21,12 @@ const MISRoadmap = () => {
 
     // data for table
     const { MISRelations } = projectsMetrics;
-    // const { MISApps, MISAppsSuccessors, MISAppsStandalone } = MISRelations;
-    const { MISAppsSuccessors,  } = MISRelations;
-  	// console.log(MISApps);
-  	//  console.log(MISAppsSuccessors);
-  	// console.log(MISAppsStandalone);
+    const { MISAppsSuccessors, MISAppsStandalone } = MISRelations;
 
     const margin = {top: 50, right: 20, bottom: 10, left: 20};
 
+    // render bar for a legacy application
     const Legs = ({data, height}) => {
-        // const total = 540;
         return (
             data.legacy.map((legacy, index) => {
                 let end = 431;
@@ -64,7 +58,7 @@ const MISRoadmap = () => {
                 }
 
                 return (
-                    <g transform={`translate(${start},${height - (index + 1) * 35} )`}>
+                    <g key={`${legacy.name}${data.name}`} transform={`translate(${start},${height - (index + 1) * 35} )`}>
                         {!circ ? <rect height={25} width={end - start} fill={color}/> :
                             <circle cy={25/2} r={25/2} fill={color} />
                         }
@@ -75,8 +69,8 @@ const MISRoadmap = () => {
         )
     }
 
+    // render bar for projects related to an application
     const Projs = ({data, height}) => {
-        // const total = 540;
         return (
             data.projects.map((project, index) => {
                 let end = 431;
@@ -103,7 +97,7 @@ const MISRoadmap = () => {
                 }
 
                 return (
-                    <g transform={`translate(${start},${(index + 1) * 35} )`}>
+                    <g key={`${project.name}${data.name}`} transform={`translate(${start},${(index + 1) * 35} )`}>
                         {!circ ? <rect height={25} width={end - start} fill={color}/> :
                             <circle cy={25/2} r={25/2} fill={color} />
                         }
@@ -114,8 +108,8 @@ const MISRoadmap = () => {
         )
     }
 
+    // render bar for a modernization application
     const Modern = ({data, height}) => {
-        // const total = 540;
         let end = 431;
         let start =  431; // half of total
         const eol = data.modern['lifecycle:endOfLife'];
@@ -154,10 +148,13 @@ const MISRoadmap = () => {
         )
     }
 
-    const SVGwrap = ({data, index}) => {
-        // each bar will have height 35 marginTopBot 5
+    const SVGwrap = ({data, index, legacy}) => {
+        // each bar will have height 25 marginTopBot 5
         const numProjects = data.projects.length * 35;
-        const numLegacy = data.legacy.length * 35;
+        let numLegacy = 0;
+        if (legacy) {
+            numLegacy = data.legacy.length * 35;
+        }
         const height = numProjects + numLegacy + 35 + margin.top + margin.bottom;   // projects and legacy height total plus modern app height
         const width = 580;
         const grey = index % 2 === 0 ? 'lightgrey' : 'white';
@@ -173,20 +170,24 @@ const MISRoadmap = () => {
                         y2={25} 
                         stroke="black" />
                     <g transform={`translate(${margin.left}, ${margin.top})`}>
-                        <Legs data={data} height={height - margin.top - margin.bottom} />
+                        { legacy ? <Legs data={data} height={height - margin.top - margin.bottom} /> : ''}
                         <Projs data={data} height={height - margin.top - margin.bottom} />
                         <Modern data={data} height={height - margin.top - margin.bottom} />
                     </g>
                 </svg>
             </div>
         )
-    }
+    };
 
+    // render block for apps that are successors to a legacy app
     const MISsuccessors = MISAppsSuccessors.map((data, index) => {
-        return (<SVGwrap key={data.modern.id} data={data} index={index} />);
+        return (<SVGwrap key={data.modern.id} data={data} index={index} legacy={true} />);
     });
 
-
+    // render block for apps that are not a successor app
+    const MISstandalone = MISAppsStandalone.map((data, index) => {
+        return (<SVGwrap key={data.modern.id} data={data} index={index + 1} legacy={false} />);
+    });
 
     // Function to spit out correct x coordinate of the bar ticks
     const xMonthScale = scaleLinear()
@@ -224,8 +225,8 @@ const MISRoadmap = () => {
 
     const legend = fields.map(field => {
         return (
-            <React.Fragment>
-                <Chip key={field.name} style={{backgroundColor: `${field.color}`, marginLeft: 10, marginBottom: 10}} size="medium" label={field.name}/>
+            <React.Fragment key={field.name}>
+                <Chip  style={{backgroundColor: `${field.color}`, marginLeft: 10, marginBottom: 10}} size="medium" label={field.name}/>
                 
             </React.Fragment>
         )
@@ -242,6 +243,7 @@ const MISRoadmap = () => {
             </svg>
             <div style={{overflowY:'scroll', overflowX:'scroll', height:'80vh'}}>
                 {MISsuccessors}
+                {MISstandalone}
             </div>
     	</div>
     );
