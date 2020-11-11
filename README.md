@@ -17,13 +17,13 @@ We plan on creating a user friendly visualization from the data provided.
 
 In order to run this application on your machine, you will need Node, which can be installed [here](https://nodejs.org/en/download/).
 
-You will need the code which can be cloned or downloaded from the [repository](https://github.com/the-crewmates/hacc2020.git):
+You will need the code which can be cloned or downloaded from the [repository](https://github.com/HACC2020/Crewmates.git):
 ```
-git clone https://github.com/the-crewmates/hacc2020.git
+git clone https://github.com/HACC2020/Crewmates.git
 ```
 Make your way into the project directory:
 ```
-cd hacc2020
+cd Crewmates
 ```
 
 You will then need to install the dependencies:
@@ -38,4 +38,4 @@ Finally, start the application typing:
 npm start
 ```
 
-If everything went well, you will see the app running on localhost:3000
+If everything went well, you will see the app running on localhost:3000 in your default browser and if it doesn't automatically pop up then you can open a new tab and enter in the address localhost:3000 to get to the app.
