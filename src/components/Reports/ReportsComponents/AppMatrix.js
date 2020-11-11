@@ -196,7 +196,7 @@ const ApplicationChip = ({appData, viewBy}) => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClick} 
-                style={chipStyle} size="medium" label={name} onClick={handleClick} />
+                style={chipStyle} size="medium" label={name}/>
             <Popper placement="top-start"
                     disablePortal={false} 
                     id={id} 
