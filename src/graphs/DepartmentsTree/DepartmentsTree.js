@@ -2,6 +2,8 @@ import { useData } from '../../providers/DataProvider';
 import _ from 'lodash';
 import Tree from 'react-d3-tree';
 
+// Material UI
+import Paper from '@material-ui/core/Paper';
 
 const DepartmentsTree = () => {
     const { departments, applications } = useData();
@@ -14,15 +16,35 @@ const DepartmentsTree = () => {
     // const height = 750;
 
     const dimensionStyle = {
-        height: '100vh'
-    }
+        height: '600px',
+    };
+
+    const customTreeStyle = {
+        links: { strokeWidth:.2 },
+        nodes: {
+            node: {
+                circle: { strokeWidth:0, fill: 'var(--theme-color-2)' },
+            },
+            leafNode: {
+                circle: { strokeWidth: .2, fill: 'var(--theme-color-4)' },
+          },
+        },
+      };
     
     return (
-    <div style={{...dimensionStyle, border:'1px solid black'}}>
+        <Paper style={dimensionStyle} elevation={2} square>
         <Tree translate={{x:300, y:300}}
             scaleExtent={{min:0.1, max: 5}}
-            zoom={1} orientation="horizontal" pathFunc="diagonal" transitionDuration={250} initialDepth={1} data={root}/>
-    </div>
+            zoom={1} orientation="horizontal" 
+            pathFunc="diagonal" 
+            transitionDuration={250} 
+            initialDepth={1} 
+            data={root}
+            depthFactor={150}
+            separation={{siblings: 1, nonSiblings: 3}}
+            textLayout={{textAnchor: "middle", x: 0, y: -20, transform: `rotate(-15)` }}
+            styles={customTreeStyle}/>
+        </Paper>
         );
 
 };
@@ -55,18 +77,35 @@ const buildTree =  (departments, applications) => {
 
     let topLevelDepartments = _.filter(departments, d => !d.parent);
     let subDepartments = _.filter(departments, d => d.parent);
-    console.log(subDepartments);
-    root.children.push({
-        name:'Legislature'
-    });
+
+    // Exception
+    // root.children.push({
+    //     name:'Legislature'
+    // });
 
     _.forEach(topLevelDepartments, dep => {
         const childApps = _.filter(applications, app => {
             return dep.name === app.ownerAgencyName;
         });
+        
+        let childAppsWithData = [];
+        _.forEach(childApps, c => {
+            childAppsWithData.push({
+                ...c,
+                nodeSvgShape: {
+                    shape: 'circle',
+                    shapeProps: {
+                      r: 10,
+                      strokeWidth: 0,
+                      fill: getAppColor(c)
+                    }
+                }
+            })
+        });
+
         root.children.push({
             name: dep.name,
-            children: [...childApps]
+            children: [...childAppsWithData],
         });
     });
 
@@ -81,16 +120,40 @@ const buildTree =  (departments, applications) => {
             return d.name === app.ownerAgencyName
         });
 
+        let childAppsWithData = [];
+        _.forEach(childApps, c => {
+            childAppsWithData.push({
+                ...c,
+                nodeSvgShape: {
+                    shape: 'circle',
+                    shapeProps: {
+                      r: 10,
+                      strokeWidth: 0,
+                      fill: getAppColor(c)
+                    }
+                }
+            })
+        });
+
         // Insert into the children array of its parent
         if(i >= 0) {
             root.children[i].children.push({
                 name: d.name,
-                children: childApps
+                children: childAppsWithData
             });
         }
     })
 
     return root;
 }
+
+const getAppColor = (app) => {
+    const { timeTag } = app;
+    if(timeTag === 'Invest') return 'var(--warning-color-green)';
+    if(timeTag === 'Tolerate') return 'var(--warning-color-lightgreen)';
+    if(timeTag === 'Migrate') return 'var(--warning-color-yellow)';
+    if(timeTag === 'Eliminate') return 'var(--warning-color-red)';
+    return '--theme-color-4'
+};
 
 export default DepartmentsTree;
