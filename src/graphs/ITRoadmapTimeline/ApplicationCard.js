@@ -22,11 +22,17 @@ const ApplicationCard = ({data}) => {
           <Typography variant="h6" component="h2">
             {name}
           </Typography>
+          <Divider/>
           <Typography variant="caption" color="textSecondary">
-            {ownerAgencyName}
+            Department:{ownerAgencyName}
+          </Typography>
+          <br/>
+          <Typography variant="caption" color="textSecondary">
+            Business Capability: {leadingBusinessCapability}
           </Typography>
           <Divider/>
-          <Typography variant="body2" component="p"><br/>
+          <Typography variant="body2" component="p">
+            <br/>
             {timeTag ? <>TIME Tag: {_.startCase(timeTag)}<br/></>:null}
             {businessCriticality ? <>Business Criticality: {_.startCase(businessCriticality)}<br/></>:null}
             {functionalFit ? <>Functional Fit: {_.startCase(functionalFit)}<br/></>:null}
