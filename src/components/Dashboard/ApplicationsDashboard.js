@@ -46,11 +46,14 @@ const ApplicationsDashboard = () => {
         root: {
             minWidth: 275,
             border: '1px solid black',
-            margin: '1em'
+            margin: '1em',
         },
         title: {
             fontSize: '2em',
             color:'black',
+        },
+        font: {
+            fontFamily: 'Georgia'
         },
         pos: {
             marginBottom: 12,
@@ -63,10 +66,10 @@ const ApplicationsDashboard = () => {
     <>
     {/* <Card className={classes.root}> */}
 
-    <Container fluid>
+    <Container style={{padding:'0'}} fluid>
         <Row>
             <Col sm={12} md={4}>
-                <Paper elevation={2}>
+                <Paper elevation={2} square>
                     <Card>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -80,7 +83,7 @@ const ApplicationsDashboard = () => {
                 </Paper>
             </Col>
             <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                <Paper elevation={2}>
+                <Paper elevation={2} square>
                     <Card>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -95,7 +98,7 @@ const ApplicationsDashboard = () => {
             </Col>
 
             <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                <Paper elevation={2}>
+                <Paper elevation={2} square>
                     <Card>
                     <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -115,55 +118,55 @@ const ApplicationsDashboard = () => {
                     <Row>
                         {/* <Col style={{marginTop:'1em'}} sm={0} md={3}></Col> */}
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2}>
+                            <Paper elevation={2} square>
                                 <Card>
                                     <CardContent>
-                                        <Typography variant="h3" component="h2">
-                                            {applications.length}
-                                        </Typography>
-                                        <Divider/>
                                         <Typography variant="h6">
                                             Applications
                                         </Typography>
+                                        <Divider/>
+                                        <Typography variant="h3" component="h2">
+                                            {applications.length}
+                                        </Typography>
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2}>
+                            <Paper elevation={2} square>
                                 <Card>
                                     <CardContent>
-                                        <Typography variant="h3" component="h2">
-                                            {projects.length}
-                                        </Typography>
-                                        <Divider/>
                                         <Typography variant="h6">
                                             Projects
                                         </Typography>                                    
+                                        <Divider/>
+                                        <Typography variant="h3" component="h2">
+                                            {projects.length}
+                                        </Typography>
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper style={{  textOverflow: 'ellipsis'}} elevation={2}>
+                            <Paper elevation={2} square>
                                 <Card>
                                     <CardContent>
-                                    <Typography variant="h3" component="h2">
-                                            {departments.length}
-                                        </Typography>
-                                        <Divider/>
                                         <Typography variant="h6">
                                             Departments/Agencies
                                         </Typography>                                    
+                                        <Divider/>
+                                        <Typography variant="h3" component="h2">
+                                            {departments.length}
+                                        </Typography>
                                     </CardContent>
                                 </Card>
                             </Paper>
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12}>
-                            <Paper elevation={2}>
+                            <Paper elevation={2} square>
                                 <Card>
                                     <CardContent>
                                         <TIMEModelChart/>
@@ -178,19 +181,22 @@ const ApplicationsDashboard = () => {
             <Col  
                 style={{padding:0, marginTop:'1em'}} 
                 sm={12} md={12} lg={12} xl={3}>
-                        <Paper  elevation={2}>
-                            <Card style={{padding:'3em'}} id="TIME-description">
+                        <Paper style={{height:'100%', marginRight:'1em', marginLeft:'1em'}} elevation={2}>
+                            {/* <Card style={{padding:'2em'}} id="TIME-description">
                                 <CardContent>
                                     {TIMEModelDescription}
                                 </CardContent>
-                            </Card>
+                            </Card> */}
+                            <div style={{padding:'2em', height:'100%'}} id="TIME-description">
+                            {TIMEModelDescription}
+                            </div>
                         </Paper>
             </Col>
         </Row>
 
         <Row style={{marginTop:'1em'}}>
             <Col>
-                <Paper elevation={2}>
+                <Paper elevation={2} square>
                 <ActiveAppTimeline data={timeline} />
                 </Paper>
             </Col>
@@ -198,14 +204,18 @@ const ApplicationsDashboard = () => {
 
         <Row >
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                <Graph graph={<BusinessCriticalityChart/>} title="Business Criticality Chart" content={BusinessCriticalityDescription}/>
+                <Paper elevation={2} square>
+                    <Graph graph={<BusinessCriticalityChart/>} title="Business Criticality Chart" content={BusinessCriticalityDescription}/>
+                </Paper>
             </Col>
 
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                <Graph 
-                    graph={<FunctionalVsTechnicalGraph/>} 
-                    title="Measure of Functional and Technical Ratings of All Applications" 
-                    content={null}/>
+                <Paper elevation={2} square>
+                    <Graph 
+                        graph={<FunctionalVsTechnicalGraph/>} 
+                        title="Measure of Functional and Technical Ratings of All Applications" 
+                        content={null}/>
+                </Paper>
             </Col>
         </Row>
     </Container>
@@ -299,8 +309,9 @@ const Graph = ({graph, title, content}) => {
 
 const TIMEModelDescription = (
     <>
-    <h1 style={{marginBottom:'1em'}}>TIME Model</h1>
-    <p>
+    <h1>TIME Model</h1>
+    <Divider style={{background:'var(--theme-color-4)'}} light={true}/>
+    <p style={{marginTop:'1em'}}>
         <span className="firstcharacter">T</span>olerate:
         An application with high technical quality, but sub-optimal functional business value. The applications should be redesigned for better business alignment.
     </p>

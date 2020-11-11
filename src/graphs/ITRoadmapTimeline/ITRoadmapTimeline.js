@@ -79,7 +79,8 @@ const ITRoadmapTimeline = () => {
             <g  onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleBarClick} 
-                transform={`translate(${x(data.start)},${y(data.id)} )`}>
+                transform={`translate(${x(data.start)},${y(data.id)} )`}
+                cursor="pointer">
                 <rect 
                     height={y.bandwidth()}
                     width={x(data.end) - x(data.start)}
@@ -94,7 +95,7 @@ const ITRoadmapTimeline = () => {
                     transition>
                 {({ TransitionProps }) => (
                 <Fade {...TransitionProps}>
-                    <ApplicationCard data={data.data}/>
+                    <ApplicationCard showDate data={data.data}/>
                 </Fade>
                 )}
             </Popper>  

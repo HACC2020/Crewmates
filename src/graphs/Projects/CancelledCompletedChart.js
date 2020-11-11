@@ -13,7 +13,7 @@ const CancelledCompletedChart = () => {
                     {key: "Cancelled", value: cancelled} ]
 
     const width = 150;
-    const height = 100;
+    const height = 135;
     const margin = 40;
     const radius = width / 2 - margin;
     const colors = ['var(--warning-color-green)', 'var(--missing-data-color)', 'var(--warning-color-red)'];
