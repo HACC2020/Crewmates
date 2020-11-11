@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios';
+import _ from 'lodash';
 
 const DataContext = React.createContext(null);
 
@@ -419,6 +420,88 @@ const DataProvider = ({children}) => {
         return { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks, missing };
     };
 
+    // return MISApps = [objects], pairing = [{modern: object, legacy: [objects]}], standalone = [objects]
+    const calculateMISRelations = (applications, projects) => {
+        let MISAppsSuccessors = [];   // future MIS apps with their legacy app and projects
+        let MISAppsStandalone = [];    // current MIS apps with their projects
+        const { MISApps, pairing, standalone } = getMISApps(applications);
+        console.log(standalone);
+
+        // sort the MIS apps into their relations with each other
+        pairing.forEach(pair => {
+            let appProjects = [];
+            
+            projects.forEach(project => {
+                if (project.applications !== null && project.applications.indexOf(pair.modern.name) !== -1) {
+                    appProjects.push(project);
+                }
+            });
+
+            MISAppsSuccessors.push({modern: pair.modern, legacy: pair.legacy, projects: appProjects});
+        });
+
+        standalone.forEach(app => {
+            let appProjects = [];
+            
+            projects.forEach(project => {
+                if (project.applications !== null && project.applications.indexOf(app.name) !== -1) {
+                    appProjects.push(project);
+                }
+            });
+
+            MISAppsStandalone.push({modern: app, projects: appProjects});
+        });
+
+        return { MISApps, MISAppsSuccessors, MISAppsStandalone };
+    };
+
+    // return MISApps = [objects], pairing = [{modern: object, legacy: [objects]}], standalone = [objects]
+    const getMISApps = (applications) => {
+        let MISApps = [];   // all the apps with a MIS tag
+        let modernApps = [];    // MIS apps that are successors to a legacy app
+        let legacyApps = [];    // MIS apps that are being replaced
+        let pairing = []; // modern MIS apps with paired with their successor
+        let standalone = []; // MIS apps not a successor to a legacy app
+
+        applications.forEach(app => {
+            // get apps with MIS tag
+            if (app.majorInformationSystemsTag === 'Major Information Systems') {
+                MISApps.push(app);  // add to collection of apps with the MIS tag
+                standalone.push(app);
+            }
+            // get apps that are either the legacy or modernization app
+            if (app.successors) {
+                applications.forEach(modern => {
+                    if ((modern.majorInformationSystemsTag === 'Major Information Systems') && (modern.name === app.successors)) {
+                        modernApps.push(modern);
+                        legacyApps.push(app);
+
+                        // remove legacy modern pairs
+                        standalone = _.filter(standalone, s => s.name !== modern.name);
+                        standalone = _.filter(standalone, s => s.name !== app.name);
+                    }        
+                });
+            }
+        });
+
+        modernApps = _.uniq(modernApps);
+
+        // build the modern-legacy pairing
+        modernApps.forEach(app => {
+            let successors = [];
+            
+            legacyApps.forEach(legacyApp => {
+                if (app.name === legacyApp.successors) {
+                    successors.push(legacyApp);
+                }
+            });
+
+            pairing.push({modern: app, legacy: successors});
+        });
+
+        return { MISApps, pairing, standalone };
+    };
+
     const calculateMajorInformationSystems = applications => {
         let count = 0;
 
@@ -477,6 +560,7 @@ const DataProvider = ({children}) => {
                 calculateBusinessValueMetric,
                 calculateProjectRiskMetric,
                 calculateMajorInformationSystems,
+                calculateMISRelations,
                 calculateTimelineMetric,
                 calculateProjectRiskToValueMetric,
                 calculateProjectDates
