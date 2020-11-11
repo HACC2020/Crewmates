@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../../providers/DataProvider';
 import Chip from '@material-ui/core/Chip';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { scaleLinear, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
+// import { Container, Row, Col, Card } from 'react-bootstrap';
+// import { scaleLinear, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
+import { scaleLinear, axisTop, select } from 'd3';
 
 import './styles.css';
 
@@ -18,19 +19,20 @@ const MISRoadmap = () => {
         setProjectsMetrics({
             MISRelations: calculateMISRelations(applications, projects),
         });
-    }, [applications, projects]);
+    }, [applications, projects, calculateMISRelations]);
 
     // data for table
     const { MISRelations } = projectsMetrics;
-    const { MISApps, MISAppsSuccessors, MISAppsStandalone } = MISRelations;
+    // const { MISApps, MISAppsSuccessors, MISAppsStandalone } = MISRelations;
+    const { MISAppsSuccessors,  } = MISRelations;
   	// console.log(MISApps);
-  	 console.log(MISAppsSuccessors);
+  	//  console.log(MISAppsSuccessors);
   	// console.log(MISAppsStandalone);
 
     const margin = {top: 50, right: 20, bottom: 10, left: 20};
 
     const Legs = ({data, height}) => {
-        const total = 540;
+        // const total = 540;
         return (
             data.legacy.map((legacy, index) => {
                 let end = 431;
@@ -74,7 +76,7 @@ const MISRoadmap = () => {
     }
 
     const Projs = ({data, height}) => {
-        const total = 540;
+        // const total = 540;
         return (
             data.projects.map((project, index) => {
                 let end = 431;
@@ -113,7 +115,7 @@ const MISRoadmap = () => {
     }
 
     const Modern = ({data, height}) => {
-        const total = 540;
+        // const total = 540;
         let end = 431;
         let start =  431; // half of total
         const eol = data.modern['lifecycle:endOfLife'];

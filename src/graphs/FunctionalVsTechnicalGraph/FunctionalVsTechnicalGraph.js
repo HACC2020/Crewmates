@@ -56,7 +56,7 @@ const FunctionalVsTechnicalGraph = () => {
         <g transform={`translate(${margin.left},${margin.top})`}>
             {data.map((xCell, xIndex) => {
                 return (
-                <>
+                <React.Fragment key={`xCell:${xIndex}`}>
                     {xCell.map((yCell, yIndex) => {
                         const color = getColor(xIndex, yIndex);
                         const calculatedOpacity = colorScale(yCell);
@@ -68,7 +68,7 @@ const FunctionalVsTechnicalGraph = () => {
                             </g>
                         )
                     })}
-                </>);
+                </React.Fragment>);
             })}
         </g>);
     }
@@ -99,7 +99,8 @@ const FunctionalVsTechnicalGraph = () => {
             <g transform={`translate(${margin.left},${margin.top})`}>
                 {labels.map((label, index) => {
                     return (
-                        <g transform={`
+                        <g  key={`technical-label-${index}-${label}`}
+                            transform={`
                             translate(${x(0) - 5},${y(index) - (y.bandwidth()/2)})
                             rotate(270)
                         `}>
@@ -112,9 +113,10 @@ const FunctionalVsTechnicalGraph = () => {
             <g transform={`translate(${margin.left},${margin.top})`}>
                 {labels.map((label, index) => {
                     return (
-                        <g transform={`
-                            translate(${x(index)+(x.bandwidth()/2)},${y(0) + 15})
-                        `}>
+                        <g  key={`functional-label-${index}-${label}`}
+                            transform={`
+                                translate(${x(index)+(x.bandwidth()/2)},${y(0) + 15})
+                            `}>
                             <text textAnchor="middle">{label}</text>
                         </g>
                     );

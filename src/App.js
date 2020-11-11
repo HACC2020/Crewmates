@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/variables.css';
@@ -33,7 +33,6 @@ import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
-import Link from '@material-ui/core/Link';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -124,7 +123,7 @@ function App(props) {
       <Divider />
       <List>
         {links.map((link, index) => (
-          <ListItemLink style={{padding:'1em', color:'white'}}  href={link.link}>
+          <ListItemLink key={`link.name-${index}`} style={{padding:'1em', color:'white'}}  href={link.link}>
             <ListItemText primary={link.name} />
           </ListItemLink>
         ))}

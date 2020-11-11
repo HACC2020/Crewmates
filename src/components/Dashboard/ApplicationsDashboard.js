@@ -43,25 +43,25 @@ const ApplicationsDashboard = () => {
     // const { TIMEMetric, functionalFitMetric, technicalFitMetric,
     //     businessCriticalityMetric, hostingTypeMetric, timeline } = applicationMetrics;
     const { timeline } = applicationMetrics;
-    const useStyles = makeStyles({
-        root: {
-            minWidth: 275,
-            border: '1px solid black',
-            margin: '1em',
-        },
-        title: {
-            fontSize: '2em',
-            color:'black',
-        },
-        font: {
-            fontFamily: 'Georgia'
-        },
-        pos: {
-            marginBottom: 12,
-        },
-    });
+    // const useStyles = makeStyles({
+    //     root: {
+    //         minWidth: 275,
+    //         border: '1px solid black',
+    //         margin: '1em',
+    //     },
+    //     title: {
+    //         fontSize: '2em',
+    //         color:'black',
+    //     },
+    //     font: {
+    //         fontFamily: 'Georgia'
+    //     },
+    //     pos: {
+    //         marginBottom: 12,
+    //     },
+    // });
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
     <>

@@ -70,19 +70,24 @@ const ActiveAppTimeline = ({data}) => {
 
     const yAxes = () => {
         const axes =  [20,30,40,50,60,70,80,90];
+
         return (
             <g transform={`translate(${margin.left},${height-margin.bottom})`}>
-                {axes.map(val => (
-                <line 
-                    key={`axes:${val}`}
-                    strokeDasharray={3}
-                    opacity={0.1} 
-                    x1={0} 
-                    y1={yScale(val)-yScale(10)} 
-                    x2={width-margin.right-margin.left} 
-                    y2={yScale(val)-yScale(10)} 
-                    stroke="black" />  
-                ))}
+                {axes.map(val => {
+                    const y = yScale(val)-yScale(10);
+                    return (
+                        <line 
+                        key={`axes:${val}`}
+                        strokeDasharray={3}
+                        opacity={0.1} 
+                        x1={0} 
+                        y1={y} 
+                        x2={width-margin.right-margin.left} 
+                        y2={y} 
+                        stroke="black" />  
+                        )}
+                    )
+                }
             </g>
         );
     };

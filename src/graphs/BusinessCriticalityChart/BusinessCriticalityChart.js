@@ -37,7 +37,7 @@ const BusinessCriticalityChart = () => {
         .padding(.1);
 
     const bars = CRITICALITY_DATA.map((d, index) => 
-        <g key={`BusinessCriticality-${x(d.name)}-${y(d.value)}`} fill={d.color}>
+        <g key={`BusinessCriticality-${x(d.name)*index}-${y(d.value)*index}`} fill={d.color}>
             <rect 
                 x={x(d.name)} 
                 y={y(d.value)}
@@ -58,14 +58,14 @@ const BusinessCriticalityChart = () => {
         const labelNames = d.name.split(' ');
 
         return (
-        <>
-            <text key={`BusinessCriticality-${labelX}-${labelY}`} 
+        <React.Fragment key={`BusinessCriticality-${labelX}-${labelY}`}>
+            <text 
                 fontSize={`1.5em`}
                 textAnchor="middle"
                 x={labelX} y={labelY}>{labelNames[0]}</text>
             { labelNames.length > 1 
                 ? 
-                <text key={`BusinessCriticality-${labelX}-${labelY}`} 
+                <text key={`BusinessCriticality-${labelX+1}-${labelY+1}`} 
                 fontSize={`1.5em`}
                 textAnchor="middle"
                 x={labelX} y={labelY+3}>{labelNames[1]}</text>
@@ -73,7 +73,7 @@ const BusinessCriticalityChart = () => {
 
             }
 
-        </>
+        </React.Fragment>
         );
     });
     return (

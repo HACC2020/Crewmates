@@ -14,7 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import Popper from '@material-ui/core/Popper';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 
 // react-spring
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -25,10 +25,6 @@ import ApplicationCard from '../../../graphs/ITRoadmapTimeline/ApplicationCard';
 const AppMatrix = () => {
     const { departments, applications } = useData();
 
-    const [isLoading, setIsLoading] = useState(true);
-    React.useEffect(() => {
-        setIsLoading(false)
-    })
 
     const [ viewField, setViewField ] = useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null); // For View By menu

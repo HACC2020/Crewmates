@@ -15,17 +15,18 @@ import './ITRoadmapTimeline.css';
 
 const ITRoadmapTimeline = () => {
     const { applications } = useData();
+    const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
 
     const [isLoading, setIsLoading] = useState(true);
+    
     React.useEffect(() => {
         if(filteredApplications) setIsLoading(false)
-    })
+    }, [filteredApplications])
 
     const width = 750;
     const height = 1750;
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
 
-    const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
     /* Add an option to view applications by when their end of lifecycle is scheduled */
     // const filteredApplications = _.filter(applications, app => 
     //     app['lifecycle:active'] && app['lifecycle:endOfLife'] && !moment(app['lifecycle:endOfLife']).isBefore('2025-01-01')); 

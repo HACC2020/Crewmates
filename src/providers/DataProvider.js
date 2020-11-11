@@ -38,7 +38,7 @@ const DataProvider = ({children}) => {
         }
         })
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
             setDatabase(response.data.result.records);
             if(setField !== null) {
             setField(response.data.result.fields);
@@ -425,7 +425,7 @@ const DataProvider = ({children}) => {
         let MISAppsSuccessors = [];   // future MIS apps with their legacy app and projects
         let MISAppsStandalone = [];    // current MIS apps with their projects
         const { MISApps, pairing, standalone } = getMISApps(applications);
-        console.log(standalone);
+        // console.log(standalone);
 
         // sort the MIS apps into their relations with each other
         pairing.forEach(pair => {
