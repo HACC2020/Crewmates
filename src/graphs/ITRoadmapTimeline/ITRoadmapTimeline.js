@@ -95,7 +95,7 @@ const ITRoadmapTimeline = () => {
                     transition>
                 {({ TransitionProps }) => (
                 <Fade {...TransitionProps}>
-                    <ApplicationCard data={data.data}/>
+                    <ApplicationCard showDate data={data.data}/>
                 </Fade>
                 )}
             </Popper>  

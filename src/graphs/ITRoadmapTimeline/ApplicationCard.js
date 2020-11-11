@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import _ from 'lodash';
 
-const ApplicationCard = ({data}) => {
+const ApplicationCard = ({data, showDate}) => {
     const { name, ownerAgencyName, leadingBusinessCapability,
       businessCriticality, functionalFit, technicalFit,
       timeTag, hostingTypeTag } = data;
@@ -14,11 +14,15 @@ const ApplicationCard = ({data}) => {
       <Paper square elevation={2}>
         <Card style={{width:'250px', marginBottom:'1em', background:'var(--theme-color-5)'}}>
         <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            {moment(data['lifecycle:active']).format('YYYY/MM/DD')} 
-            {`  -  `}
-            {moment(data['lifecycle:endOfLife']).format('YYYY/MM/DD')}
-          </Typography>
+          {!showDate ? null :
+            <>
+            <Typography color="textSecondary" gutterBottom>
+              {moment(data['lifecycle:active']).format('YYYY/MM/DD')} 
+              {`  -  `}
+              {moment(data['lifecycle:endOfLife']).format('YYYY/MM/DD')}
+            </Typography>
+            </>
+          }
           <Typography variant="h6" component="h2">
             {name}
           </Typography>
@@ -26,7 +30,6 @@ const ApplicationCard = ({data}) => {
           <Typography variant="caption" color="textSecondary">
             Department:{ownerAgencyName}
           </Typography>
-          <br/>
           <Typography variant="caption" color="textSecondary">
             Business Capability: {leadingBusinessCapability}
           </Typography>

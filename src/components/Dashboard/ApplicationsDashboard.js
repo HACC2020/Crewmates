@@ -66,7 +66,7 @@ const ApplicationsDashboard = () => {
     <>
     {/* <Card className={classes.root}> */}
 
-    <Container fluid>
+    <Container style={{padding:'0'}} fluid>
         <Row>
             <Col sm={12} md={4}>
                 <Paper elevation={2} square>

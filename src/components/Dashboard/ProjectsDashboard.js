@@ -51,7 +51,7 @@ const ProjectsDashboard = () => {
     const { projectRiskToValueMetric } = projectsMetrics;
 
     return (
-        <Container fluid>
+        <Container style={{padding:'0'}} fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12} md={4}>
                     <Paper elevation={2} square>

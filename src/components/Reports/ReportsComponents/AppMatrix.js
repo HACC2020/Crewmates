@@ -10,7 +10,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Popper from '@material-ui/core/Popper';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+// react-spring
+import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
+
+// Custom Component
+import ApplicationCard from '../../../graphs/ITRoadmapTimeline/ApplicationCard';
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
@@ -48,9 +56,12 @@ const AppMatrix = () => {
 
     return(
     <ThemeProvider theme={buttonColorTheme}>
-        <Paper square style={{height:'120vh', width:'80vw', padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
+        <Paper square style={{padding:'2em', marginBottom:'1em', width:'calc(100vw - 240px)'}}>
+            View By: 
+            {`  `}
             <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                View By: {_.startCase(viewOptions[viewField])}
+            <ArrowDropDownIcon/>
+                {_.startCase(viewOptions[viewField])}
             </Button>
             <Menu
                 id="simple-menu"
@@ -65,7 +76,14 @@ const AppMatrix = () => {
                         handleClose();
                     }}>{_.startCase(option)}</MenuItem>)}
             </Menu>
-            {<CategoryChips field={viewOptions[viewField]}/>}
+            <Divider/>
+            <div style={{marginTop:'1em'}}>
+                {<CategoryChips field={viewOptions[viewField]}/>}
+            </div>
+        </Paper>
+
+        <Paper square style={{height:'120vh', width:'calc(100vw - 240px)', padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
+
             <Divider />
             <div style={{ height:'95%', width:`95%`, overflowY:'scroll', overflowX:'scroll',}}>
                 <Table striped bordered size="sm">
@@ -111,7 +129,7 @@ const AppMatrix = () => {
                                     });
 
                                     const matchingApplicationsEl = matchingApplications.map(o => 
-                                        <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
+                                        <ApplicationChip key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
 
                                     return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
                                 })}
@@ -139,9 +157,12 @@ const enumerateBusinessCapabilities = applications => {
     return _.sortBy(capabilities, x => x);
 };
 
-const ApplicationCard = ({appData, viewBy}) => {
+const ApplicationChip = ({appData, viewBy}) => {
     const { name } = appData;
 
+    const [darken, setDarken] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     const rating = fieldToRating(appData[viewBy]);
 
     let chipColor = 'var(--missing-data-color)';
@@ -149,14 +170,46 @@ const ApplicationCard = ({appData, viewBy}) => {
     if(rating === 2) chipColor = 'var(--warning-color-yellow)';
     if(rating === 3) chipColor = 'var(--warning-color-lightgreen)';
     if(rating === 4) chipColor = 'var(--warning-color-green)';
-
+    let darkChipColor = chipColor.slice(0, chipColor.length-1) + '-active)';
     const chipStyle = {
-        backgroundColor:`${chipColor}`,
+        backgroundColor:`${!darken ? chipColor : darkChipColor}`,
         color: `${rating === 4 ? 'white' : 'black'}`
     }
-    const handleClick = () => console.log(`App: ${name}`);
+    const handleMouseEnter = (event) => {
+        // setAnchorEl(anchorEl ? null : event.currentTarget);
+        setDarken(true);
+    };
+
+    const handleMouseLeave = (event) => {
+        // setAnchorEl(anchorEl ? null : event.currentTarget);
+        setDarken(false);
+    };
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    }
+
+    const id = open ? 'spring-popper' : undefined;
+
     return (
-            <Chip style={chipStyle} size="medium" label={name} onClick={handleClick} />
+        <>
+            <Chip
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={handleClick} 
+                style={chipStyle} size="medium" label={name} onClick={handleClick} />
+            <Popper placement="top-start"
+                    disablePortal={false} 
+                    id={id} 
+                    open={open} 
+                    anchorEl={anchorEl} 
+                    transition>
+                {({ TransitionProps }) => (
+                <Fade {...TransitionProps}>
+                    <ApplicationCard data={appData}/>
+                </Fade>
+                )}
+            </Popper> 
+        </>
     );
 };
 
@@ -175,8 +228,9 @@ const CategoryChips = ({field}) => {
         {values.map(val => {
             const rating = fieldToRating(val);
 
-            let chipColor = 'var(--missing-data-color)';
-            
+            let chipColor = 'var(--missing-data-color-active)';
+            let textColor = 'white';
+
             if(rating === 1) chipColor = 'var(--warning-color-red)';
             if(rating === 2) chipColor = 'var(--warning-color-yellow)';
             if(rating === 3) chipColor = 'var(--warning-color-lightgreen)';
@@ -184,7 +238,7 @@ const CategoryChips = ({field}) => {
 
             const chipStyle = {
                 backgroundColor:`${chipColor}`,
-                color: `${rating === 4 ? 'white' : 'black'}`
+                color: textColor
             };
 
             return (<Chip key={val} style={chipStyle} size="medium" label={_.startCase(val)}/>);
@@ -257,5 +311,32 @@ const fieldToRating = (fieldValue) => {
 
     return rating;
 }
+
+/**
+ * Function to wrap a component in a transition.
+ */
+const Fade = React.forwardRef(function Fade(props, ref) {
+    const { in: open, children, onEnter, onExited, ...other } = props;
+    const style = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: open ? 1 : 0 },
+      onStart: () => {
+        if (open && onEnter) {
+          onEnter();
+        }
+      },
+      onRest: () => {
+        if (!open && onExited) {
+          onExited();
+        }
+      },
+    });
+  
+    return (
+      <animated.div ref={ref} style={style} {...other}>
+        {children}
+      </animated.div>
+    );
+});
 
 export default AppMatrix;
