@@ -1,12 +1,17 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, max } from 'd3';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const TIMEModelChart = () => {
     const { applications, calculateTIMEMetric } = useData();
     const { invest, tolerate, migrate, eliminate, missing } = calculateTIMEMetric(applications);
+    const [ isLoading, setIsLoading ] = React.useState(true);
 
+    React.useEffect(() => {
+        if(invest && tolerate &&migrate &&eliminate && missing) setIsLoading(false)
+    }, [invest, tolerate, migrate, eliminate, missing]);
+    
     // The data to display
     const TIMEData = [
         {name:'Invest', value:invest, color:'var(--warning-color-green)'},
@@ -16,7 +21,8 @@ const TIMEModelChart = () => {
         {name:'Missing', value:missing, color:'var(--missing-data-color)'}
     ];
 
-    const width = 175;
+    // const width = 175;
+    const width = 300;
     const height = 150;
     const margin = {top: 10, right: 5, bottom: 15, left: 5};
     const xRange = [margin.left, width - margin.right]; // Plotting on the x-axis starts from 40-500
@@ -62,11 +68,17 @@ const TIMEModelChart = () => {
         );
     });
     return (
-    <svg fontSize={`4`} viewBox={`0, 0, ${width}, ${height}`}>
-        {bars}
-        {yTitle}
-        {labels}
-    </svg>);
+    <>
+        {
+            isLoading ? <CircularProgress/>
+            :
+            <svg fontSize={`4`} viewBox={`0, 0, ${width}, ${height}`}>
+                {bars}
+                {yTitle}
+                {labels}
+            </svg>
+        }
+    </>);
 }
 
 // const barTextStyle = {

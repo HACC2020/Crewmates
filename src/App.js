@@ -31,7 +31,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import ListItemText from '@material-ui/core/ListItemText';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link';
 
@@ -106,13 +106,17 @@ function App(props) {
 
   const links = [
     { name: 'Dashboard', link: '/'},
-    { name: 'Application Grid', link: '/application-grid'},
     { name: 'IT Roadmap', link: '/itroadmap'},
-    { name: 'Major Information Systems Roadmap', link: '/misroadmap'},
     { name: 'Departments Hierarchy', link: '/departments'},
-    { name: 'Filter', link: '/filter'},
-    { name: 'Raw Data', link: '/data'}
+    { name: 'Application Grid', link: '/application-grid'},
+    { name: 'Major Information Systems Roadmap', link: '/misroadmap'},
+    // { name: 'Filter', link: '/filter'},
+    // { name: 'Raw Data', link: '/data'}
   ];
+
+  function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />;
+  }
 
   const drawer = (
     <div>
@@ -120,12 +124,11 @@ function App(props) {
       <Divider />
       <List>
         {links.map((link, index) => (
-          <ListItem style={{padding:'1em'}} button key={link.link}
-            children={<Link 
-              style={{color:'white'}} 
-              component={NavLink} 
-              to={link.link}>{link.name}</Link>}/>
+          <ListItemLink style={{padding:'1em', color:'white'}}  href={link.link}>
+            <ListItemText primary={link.name} />
+          </ListItemLink>
         ))}
+
       </List>
       <Divider />
     </div>

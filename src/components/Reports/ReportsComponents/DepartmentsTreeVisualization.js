@@ -2,11 +2,14 @@ import DepartmentsTree from '../../../graphs/DepartmentsTree/DepartmentsTree';
 
 // Material UI
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 const DepartmentsTreeVisualization = () => {
     return (
-        <Paper square style={{padding:'2em', backgroundColor:'var(--theme-color-5)', height: "90vh"}} elevation={2}>
-            <h2>Departments Tree Visualization</h2>
+        <Paper square style={{padding:'2em', backgroundColor:'var(--theme-color-5)', height: "100vh"}} elevation={2}>
+            <Typography variant="h2">Departments Tree Visualization</Typography>
+            <Typography variant="h5">IT Applications by Department</Typography>
+            
             <div>
                 <Legend/>
             </div>

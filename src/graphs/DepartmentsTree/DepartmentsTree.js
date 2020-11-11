@@ -34,7 +34,7 @@ const DepartmentsTree = () => {
     return (
         <Paper style={dimensionStyle} elevation={2} square>
         <Tree translate={{x:300, y:300}}
-            scaleExtent={{min:0.1, max: 5}}
+            scaleExtent={{min:0.1, max: 10}}
             zoom={1} orientation="horizontal" 
             pathFunc="diagonal" 
             transitionDuration={250} 
@@ -42,7 +42,7 @@ const DepartmentsTree = () => {
             data={root}
             depthFactor={150}
             separation={{siblings: 1, nonSiblings: 3}}
-            textLayout={{textAnchor: "middle", x: 0, y: -20, transform: `rotate(-15)` }}
+            textLayout={{textAnchor: "middle", x: 0, y: -20, transform: `rotate(-10)` }}
             styles={customTreeStyle}/>
         </Paper>
         );

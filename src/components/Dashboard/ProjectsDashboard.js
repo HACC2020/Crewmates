@@ -127,19 +127,19 @@ const BusinessValueVsProjectRiskDescription = (<>
               <h3>What is Business Value?</h3>
               <ul>
                   <li>
-                      Marginal Benefit: Small quality or financial improvements.
+                      <b>Marginal Benefit:</b> Small quality or financial improvements.
                   </li>
 
                   <li>
-                      Little Benefit: Some quality and financial improvements.
+                      <b>Little Benefit:</b> Some quality and financial improvements.
                   </li>
 
                   <li>
-                      Large Benefit: Remarkable quality and/or financial improvements.
+                      <b>Large Benefit:</b> Remarkable quality and/or financial improvements.
                   </li>
 
                   <li>
-                      Signifiant Benefit: Significant improvements in quality and/or financials.
+                      <b>Signifiant Benefit:</b> Significant improvements in quality and/or financials.
                   </li>
                 </ul>
 </>);

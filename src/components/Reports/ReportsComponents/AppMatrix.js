@@ -9,10 +9,12 @@ import Paper from '@material-ui/core/Paper';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import Popper from '@material-ui/core/Popper';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // react-spring
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -22,6 +24,11 @@ import ApplicationCard from '../../../graphs/ITRoadmapTimeline/ApplicationCard';
 
 const AppMatrix = () => {
     const { departments, applications } = useData();
+
+    const [isLoading, setIsLoading] = useState(true);
+    React.useEffect(() => {
+        setIsLoading(false)
+    })
 
     const [ viewField, setViewField ] = useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null); // For View By menu
@@ -57,12 +64,16 @@ const AppMatrix = () => {
     return(
     <ThemeProvider theme={buttonColorTheme}>
         <Paper square style={{padding:'2em', marginBottom:'1em', width:'calc(100vw - 240px)'}}>
-            View By: 
-            {`  `}
-            <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-            <ArrowDropDownIcon/>
-                {_.startCase(viewOptions[viewField])}
-            </Button>
+            
+            <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
+                <Button>View By: </Button>
+                <Button onClick={handleClick}>{_.startCase(viewOptions[viewField])}
+                <ArrowDropDownIcon/></Button>
+            </ButtonGroup>
+            {/* <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            View By: {_.startCase(viewOptions[viewField])}
+                <ArrowDropDownIcon/>
+            </Button> */}
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -130,8 +141,8 @@ const AppMatrix = () => {
 
                                     const matchingApplicationsEl = matchingApplications.map(o => 
                                         <ApplicationChip key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
-
-                                    return (<td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td>);
+                                    
+                                    return (<><td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td></>);
                                 })}
                             </tr>
                             );

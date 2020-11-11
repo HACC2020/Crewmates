@@ -20,7 +20,7 @@ const buildRoadmapData = (applications, minYear) => {
     let data = [];
     _.forEach(applications, app => {
         let color = 'var(--missing-data-color)';
-        let textColor = 'white';
+        let textColor = 'var(--theme-color-5)';
         let highlightColor = 'var(--missing-data-color-active)';
 
         const rating = fieldToRating(app.timeTag);

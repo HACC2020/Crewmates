@@ -3,18 +3,26 @@ import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
 import _ from 'lodash';
 import moment from 'moment';
-import Popper from '@material-ui/core/Popper';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
 import { getTheYear, getMonthsFromDate, buildRoadmapData } from './functions';
 import ApplicationCard from './ApplicationCard';
+
+//Material UI
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Popper from '@material-ui/core/Popper';
 
 import './ITRoadmapTimeline.css';
 
 const ITRoadmapTimeline = () => {
     const { applications } = useData();
 
+    const [isLoading, setIsLoading] = useState(true);
+    React.useEffect(() => {
+        if(filteredApplications) setIsLoading(false)
+    })
+
     const width = 750;
-    const height = 4050;
+    const height = 1750;
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
 
     const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
@@ -39,7 +47,6 @@ const ITRoadmapTimeline = () => {
         .domain(data.map(d => d.id))
         .range([0, height - margin.bottom - margin.top])
         .padding(.15);
-    console.log(data.map(d => d.id));
     // Function to spit out the correct x coordinate on graph
     const x = scaleLinear()
         .domain([0, totalYearsInMonths])
@@ -165,13 +172,18 @@ const ITRoadmapTimeline = () => {
 
     return (
         <div>
-            <svg viewBox={`0, 0, ${width}, ${height}`}>
+            {
+                isLoading ? <CircularProgress/>
+                :
+                <svg viewBox={`0, 0, ${width}, ${height}`}>
                 {drawAxes()}
                 <g transform={`translate(${margin.left}, ${margin.top})`}>
                     {bars}
                 </g>
                 <CurrentDateMarker/>
-            </svg>
+                </svg>
+            }
+
         </div>);
 };
 

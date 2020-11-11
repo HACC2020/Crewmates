@@ -1,12 +1,13 @@
 import React from 'react';
 import { scaleLinear, line, curveCardinal, axisBottom, axisLeft, select, max } from 'd3';
+import _ from 'lodash';
 
 const ProjectRiskToValueChart = ({data}) => {
 
     const { marginalValueRisks, littleValueRisks, largeValueRisks, significantValueRisks } = data;
     const benefits = ['significant', 'large', 'little', 'marginal'];
     const projectRisks = ['severe',  'high','moderate' ,'low'];
-    const colors = ['green', 'lightgreen', 'orange', 'red'];
+    const colors = ['var(--warning-color-green)', 'var(--warning-color-lightgreen)', 'var(--warning-color-yellow)', 'var(--warning-color-red)'];
 
     const width = 500;
     const height = 250;
@@ -34,7 +35,7 @@ const ProjectRiskToValueChart = ({data}) => {
             {colors.map((d, index) => 
                 <g key={`BusinessValue-ProjectRisk-${x}-${y + 12 + index * 15}`}  fill={colors[index]}>
                     <rect x={x} y={y + 12 + index * 15} height={10} width={10}/>
-                    <text x={x + 15} y={y + 21.5 + index * 15} fontSize={'12px'}>{benefits[index]}</text>
+                    <text x={x + 15} y={y + 21.5 + index * 15} fontSize={'12px'}>{_.startCase(benefits[index])}</text>
                 </g>
             )}
             </>
@@ -55,25 +56,25 @@ const ProjectRiskToValueChart = ({data}) => {
                   className="line"
                   d={myLine(marginalValueRisks)}
                   fill='none'
-                  stroke='red'
+                  stroke='var(--warning-color-red)'
                 />
                 <path
                   className="line"
                   d={myLine(littleValueRisks)}
                   fill='none'
-                  stroke='orange'
+                  stroke='var(--warning-color-yellow)'
                 />
                 <path
                   className="line"
                   d={myLine(largeValueRisks)}
                   fill='none'
-                  stroke='lightgreen'
+                  stroke='var(--warning-color-lightgreen)'
                 />
                 <path
                   className="line"
                   d={myLine(significantValueRisks)}
                   fill='none'
-                  stroke='green'
+                  stroke='var(--warning-color-green)'
                 />
             </g>
         );
@@ -84,7 +85,7 @@ const ProjectRiskToValueChart = ({data}) => {
         // position the axes
         const xAxis = axisBottom(xScale)
             .ticks(4)
-            .tickFormat(index => projectRisks[index]);
+            .tickFormat(index => _.startCase(projectRisks[index]));
         
         const yAxis = axisLeft(yScale);
 

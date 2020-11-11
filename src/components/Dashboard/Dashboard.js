@@ -8,9 +8,6 @@ const Dashboard = () => {
 
     return (
         <>
-        {/* <header className="dashboard-header">
-            Crewmates
-        </header> */}
         <ApplicationsDashboard/>
         <ProjectsDashboard/>
         </>

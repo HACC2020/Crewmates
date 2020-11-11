@@ -9,7 +9,7 @@ const ITRoadmap = () => {
     return(
     <Paper style={{padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
         <h1>Application Roadmap</h1>
-        <p>Lifespans of all applications.</p>
+        <p>Viewing the lifespans of all active applications.</p>
         <ITRoadmapTimeline/>
     </Paper>);
 };

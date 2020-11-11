@@ -17,6 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ApplicationsDashboard = () => {
     const {
@@ -64,105 +65,29 @@ const ApplicationsDashboard = () => {
 
     return (
     <>
-    {/* <Card className={classes.root}> */}
-
     <Container style={{padding:'0'}} fluid>
-        <Row>
-            <Col sm={12} md={4}>
-                <Paper elevation={2} square>
-                    <Card>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        IT Applications
-                        </Typography>
-                        <Typography variant="body" component="p">
-                        Software programs or a group of programs owned and managed by a department, and used by the department's employees or by citizens/constituents                        <br />
-                        </Typography>
-                    </CardContent>
-                    </Card>
-                </Paper>
-            </Col>
-            <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                <Paper elevation={2} square>
-                    <Card>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        IT Projects
-                        </Typography>
-                        <Typography variant="body" component="p">
-                        A project is an effort to create, modify or maintain a specific application, infrastructure or service.                        
-                        </Typography>
-                    </CardContent>
-                    </Card>
-                </Paper>
-            </Col>
 
-            <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                <Paper elevation={2} square>
-                    <Card>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Departments
-                        </Typography>
-                        <Typography variant="body" component="p">
-                        Each department or agency under the Hawai'i State Executive Branch has their own applications and services they use and maintain.                </Typography>
-                    </CardContent>
-                    </Card>
-                </Paper>    
-            </Col>
-        </Row>
 
         <Row>
             <Col style={{padding:0}} sm={12} md={7} lg={12} xl={9}>
                 <Container fluid>
                     <Row>
-                        {/* <Col style={{marginTop:'1em'}} sm={0} md={3}></Col> */}
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2} square>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="h6">
-                                            Applications
-                                        </Typography>
-                                        <Divider/>
-                                        <Typography variant="h3" component="h2">
-                                            {applications.length}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Paper>
+                            <MetricCard title="IT Applications" metric={applications.length} 
+                                content={`Software programs or a group of programs owned and managed by a department, and used by the department's employees or by citizens/constituents`}
+                                />
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2} square>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="h6">
-                                            Projects
-                                        </Typography>                                    
-                                        <Divider/>
-                                        <Typography variant="h3" component="h2">
-                                            {projects.length}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Paper>
+                        <MetricCard title="IT Projects" metric={projects.length} 
+                                content={`A project is an effort to create, modify or maintain a specific application, infrastructure or service.`}
+                                />
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                            <Paper elevation={2} square>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="h6">
-                                            Departments/Agencies
-                                        </Typography>                                    
-                                        <Divider/>
-                                        <Typography variant="h3" component="h2">
-                                            {departments.length}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Paper>
+                            <MetricCard title="Departments/Agencies" metric={departments.length} 
+                                    content={`Each department or agency under the Hawai'i State Executive Branch has their own applications and services they use and maintain.`}
+                                    />
                         </Col>
 
                         <Col style={{marginTop:'1em'}} sm={12}>
@@ -187,9 +112,7 @@ const ApplicationsDashboard = () => {
                                     {TIMEModelDescription}
                                 </CardContent>
                             </Card> */}
-                            <div style={{padding:'2em', height:'100%'}} id="TIME-description">
                             {TIMEModelDescription}
-                            </div>
                         </Paper>
             </Col>
         </Row>
@@ -222,6 +145,60 @@ const ApplicationsDashboard = () => {
     </>
     );
 };
+
+const MetricCard = ({title, metric, content}) => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+      };
+
+    const useStyles = makeStyles((theme) => ({
+        expand: {
+          transform: 'rotate(0deg)',
+          marginLeft: 'auto',
+          transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+          }),
+        },
+        expandOpen: {
+          transform: 'rotate(180deg)',
+        },
+      }));
+    const classes = useStyles();
+
+    return (
+        <Paper elevation={2} square>
+            <Card>
+                <CardContent>
+                    <Typography variant="h6">
+                        {title}
+                        <IconButton
+                            className={clsx(classes.expand, {
+                                [classes.expandOpen]: expanded,
+                            })}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more">
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    </Typography>
+
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            {content}
+                        </CardContent>
+                    </Collapse>
+
+                    <Divider />
+                    <Typography variant="h3" component="h2">
+                        {metric ? metric : <CircularProgress/>}
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Paper>
+    );
+}
 
 const Graph = ({graph, title, content}) => {
     const [expanded, setExpanded] = React.useState(false);
@@ -270,7 +247,7 @@ const Graph = ({graph, title, content}) => {
                         </CardContent>
                     </Collapse>
                     }
-                        {graph}
+                        {graph ? graph : null}
 
                 </CardContent>
 
@@ -308,31 +285,45 @@ const Graph = ({graph, title, content}) => {
 }
 
 const TIMEModelDescription = (
-    <>
-    <h1>TIME Model</h1>
-    <Divider style={{background:'var(--theme-color-4)'}} light={true}/>
-    <p style={{marginTop:'1em'}}>
-        <span className="firstcharacter">T</span>olerate:
+    <div style={{ padding: '4em', height: '100%'}} id="TIME-description">
+        <h1>TIME Model</h1>
+        <Divider style={{ background: 'var(--theme-color-4)' }} light={true} />
+        <div style={{display:'flex', flexDirection:'column', justifyContent:'space-around', height:'100%'}}>
+            <div style={{flex:1}}>
+            <p style={{ marginTop: '1em' }}>
+            <span className="firstcharacter">T</span>olerate:
         An application with high technical quality, but sub-optimal functional business value. The applications should be redesigned for better business alignment.
-    </p>
-
-    <p>
-        <span className="firstcharacter">I</span>nvest:
+        </p>
+            </div>
+            <div style={{flex:1}}>
+            <p>
+            <span className="firstcharacter">I</span>nvest:
 
           An application with high technical and business value. There is an attributable and recognizable value - and high and/or critical usage. The application is worth continued investment to get even better returns or reduce more costs.
 
-    </p>
-
-    <p>
-        <span className="firstcharacter">M</span>igrate:
+        </p>
+            </div>
+            <div style={{flex:1}}>
+            <p>
+            <span className="firstcharacter">M</span>igrate:
          An application has high business value, but a poor technical fit. Discard the application but migrate its data and users to a new application or to a better-fit existing application.
-    </p>
-
-    <p>
-        <span className="firstcharacter">E</span>liminate:
+        </p>
+            </div>
+            <div style={{flex:1}}>
+            <p>
+            <span className="firstcharacter">E</span>liminate:
          Eliminate useless applications with low business value and a poor technical fit (possible reasons; no business value, not used, low utility, based on obsolete software)
-    </p>
-    </>
+        </p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
 );
 
 const BusinessCriticalityDescription = (<>
@@ -345,16 +336,16 @@ const BusinessCriticalityDescription = (<>
                     <Typography  paragraph>
                         <ul>
                             <li>
-                                Mission Critical: The application is fundamentally necessary for the success of a specific operation. Any breaks in service are intolerable and will be immediately significantly damaging.
+                                <b>Mission Critical:</b> The application is fundamentally necessary for the success of a specific operation. Any breaks in service are intolerable and will be immediately significantly damaging.
                             </li>
                             <li>
-                                Business Critical: The application is relied on by the business to carry out normal business operations to keep them running successfully. Short breaks in service are not catastrophic in the short-term.
+                                <b>Business Critical:</b> The application is relied on by the business to carry out normal business operations to keep them running successfully. Short breaks in service are not catastrophic in the short-term.
                             </li>
                             <li>
-                                Business Operational: The application contributes to an efficient business operation but isn't in the direct line of service to customers.
+                                <b>Business Operational:</b> The application contributes to an efficient business operation but isn't in the direct line of service to customers.
                             </li>
                             <li>
-                                Administrative Service: The application's failures can be tolerated a little more and do not affect customers.
+                                <b>Administrative Service:</b> The application's failures can be tolerated a little more and do not affect customers.
                             </li>
                         </ul>
                     </Typography>

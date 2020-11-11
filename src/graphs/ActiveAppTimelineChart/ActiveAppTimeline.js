@@ -32,7 +32,7 @@ const ActiveAppTimeline = ({data}) => {
               className="line"
               d={myLine(xValues)}
               fill='none'
-              stroke='blue'
+              stroke='var(--theme-color-2)'
             />
         );
       }
@@ -44,7 +44,8 @@ const ActiveAppTimeline = ({data}) => {
             .ticks(ticks.length)
             .tickFormat(index => ticks[index] % 5 === 0 ? ticks[index] : '');
         
-        const yAxis = axisLeft(yScale);
+        const yAxis = axisLeft(yScale)
+            ;
 
         const xAxisRef = axis => {
             axis && xAxis(select(axis));
@@ -67,12 +68,31 @@ const ActiveAppTimeline = ({data}) => {
     // chart title
     const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={ margin.top }>Current Applications Per Year</text>;
 
+    const yAxes = () => {
+        const axes =  [20,30,40,50,60,70,80,90];
+        return (
+            <g transform={`translate(${margin.left},${height-margin.bottom})`}>
+                {axes.map(val => (
+                <line 
+                    key={`axes:${val}`}
+                    strokeDasharray={3}
+                    opacity={0.1} 
+                    x1={0} 
+                    y1={yScale(val)-yScale(10)} 
+                    x2={width-margin.right-margin.left} 
+                    y2={yScale(val)-yScale(10)} 
+                    stroke="black" />  
+                ))}
+            </g>
+        );
+    };
     return (
         <div>
             <svg style={{overflow: 'visible'}} viewBox={`0, 0, ${width}, ${height}`}>
                 {drawLine()}
                 {drawAxes()}
-                {title}
+                {yAxes()}
+            {title}
             </svg>
         </div>
         

@@ -52,27 +52,34 @@ const BusinessCriticalityChart = () => {
                 >{d.value}</text>
         </g>);
 
-    const titleX = 0;
-    const titleY = 10;
-
-    const yTitle = <text fontSize={`2em`} x={titleX} y={titleY}>Business Criticality</text>;
-
     const labels = CRITICALITY_DATA.map((d, index) => {
         const labelX =  x(d.name)+(x.bandwidth()/2);
-        const labelY = (height-margin.bottom+5);
+        const labelY = (height-margin.bottom+3);
+        const labelNames = d.name.split(' ');
+
         return (
+        <>
             <text key={`BusinessCriticality-${labelX}-${labelY}`} 
-                fontSize={`1em`}
+                fontSize={`1.5em`}
                 textAnchor="middle"
-                fontWeight="bold"
-                x={labelX} y={labelY}>{d.name}</text>
+                x={labelX} y={labelY}>{labelNames[0]}</text>
+            { labelNames.length > 1 
+                ? 
+                <text key={`BusinessCriticality-${labelX}-${labelY}`} 
+                fontSize={`1.5em`}
+                textAnchor="middle"
+                x={labelX} y={labelY+3}>{labelNames[1]}</text>
+                : null
+
+            }
+
+        </>
         );
     });
     return (
     <svg fontSize={`2`} viewBox={`0, 0, ${width}, ${height}`}>
         <g translate={`translate${margin.left},${height-margin.bottom}`}>
             {bars}
-            {yTitle}
             {labels}
         </g>
     </svg>);

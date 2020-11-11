@@ -30,12 +30,12 @@ const ApplicationCard = ({data, showDate}) => {
           <Typography variant="caption" color="textSecondary">
             Department:{ownerAgencyName}
           </Typography>
+          <br/>
           <Typography variant="caption" color="textSecondary">
             Business Capability: {leadingBusinessCapability}
           </Typography>
           <Divider/>
-          <Typography variant="body2" component="p">
-            <br/>
+          <Typography variant="caption" component="textSecondary">
             {timeTag ? <>TIME Tag: {_.startCase(timeTag)}<br/></>:null}
             {businessCriticality ? <>Business Criticality: {_.startCase(businessCriticality)}<br/></>:null}
             {functionalFit ? <>Functional Fit: {_.startCase(functionalFit)}<br/></>:null}
