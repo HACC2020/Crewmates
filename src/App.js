@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/variables.css';
@@ -31,7 +31,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Toolbar from '@material-ui/core/Toolbar';
@@ -113,9 +113,9 @@ function App(props) {
     // { name: 'Raw Data', link: '/data'}
   ];
 
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
+  // function ListItemLink(props) {
+  //   return <ListItem button component="a" {...props} />;
+  // }
 
   const drawer = (
     <div>
@@ -123,9 +123,14 @@ function App(props) {
       <Divider />
       <List>
         {links.map((link, index) => (
-          <ListItemLink key={`link.name-${index}`} style={{padding:'1em', color:'white'}}  href={link.link}>
-            <ListItemText primary={link.name} />
-          </ListItemLink>
+        <>
+          {/* // <ListItemLink key={`link.name-${index}`} style={{padding:'1em', color:'white'}}  href={link.link}>
+          //   <ListItemText primary={link.name} />
+          // </ListItemLink> */}
+          <ListItem>
+            <NavLink style={{color:'white'}} key={`link.name-${index}`} to={link.link}>{link.name}</NavLink>
+          </ListItem>
+        </>
         ))}
 
       </List>
