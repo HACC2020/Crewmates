@@ -25,7 +25,7 @@ const ITRoadmapTimeline = () => {
 
     const width = 750;
     const height = 1750;
-    const margin = {top: 20, right: 20, bottom: 20, left: 20};
+    const margin = {top: 35, right: 20, bottom: 20, left: 20};
 
     /* Add an option to view applications by when their end of lifecycle is scheduled */
     // const filteredApplications = _.filter(applications, app => 
@@ -171,6 +171,29 @@ const ITRoadmapTimeline = () => {
         </g>);
     }
 
+    const Legend = () => {
+
+        return (
+            <g transform={`translate(${margin.left}, ${(margin.top/2)-10})`}>
+                <text y={2.5} fontSize="8">TIME Tag:</text>
+                <g transform={`translate(${45}, ${0})`}>
+                    <circle r={5} strokeWidth={0} fill={`var(--warning-color-green)`}/>
+                    <text x={6} y={2.5} fontSize="8" >Invest</text>
+
+                    <circle cx={37} r={5} strokeWidth={0} fill={`var(--warning-color-yellow)`}/>
+                    <text x={43} y={2.5} fontSize="8" >Tolerate</text>
+
+                    <circle cx={80} r={5} strokeWidth={0} fill={`var(--warning-color-orange)`}/>
+                    <text x={86} y={2.5} fontSize="8" >Migrate</text>
+
+                    <circle cx={121} r={5} strokeWidth={0} fill={`var(--warning-color-red)`}/>
+                    <text x={127} y={2.5} fontSize="8" >Eliminate</text>
+                </g>
+
+            </g>
+        );
+    };
+
     return (
         <div>
             {
@@ -182,6 +205,7 @@ const ITRoadmapTimeline = () => {
                     {bars}
                 </g>
                 <CurrentDateMarker/>
+                <Legend/>
                 </svg>
             }
 
