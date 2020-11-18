@@ -110,7 +110,7 @@ function App(props) {
     { name: 'Application Grid', link: '/application-grid'},
     { name: 'Major Information Systems Roadmap', link: '/misroadmap'},
     // { name: 'Filter', link: '/filter'},
-    // { name: 'Raw Data', link: '/data'}
+    { name: 'Raw Data', link: '/data'}
   ];
 
   // function ListItemLink(props) {
