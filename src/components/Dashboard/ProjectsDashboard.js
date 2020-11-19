@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+import ProjectPhaseChart from '../../graphs/Projects/ProjectPhaseChart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -61,6 +62,13 @@ const ProjectsDashboard = () => {
                 <Col style={{marginTop:'1em'}} sm={12} md={8}>
                     <Paper elevation={2} square>
                         <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                    </Paper>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{marginTop: '1em'}} sm={12} md={4}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectPhaseChart/>} title="Project Phase" content={null}/>
                     </Paper>
                 </Col>
             </Row>
