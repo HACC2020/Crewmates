@@ -54,7 +54,7 @@ const ProjectsDashboard = () => {
         <Container style={{padding:'0'}} fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper elevation={2} square>
+                    <Paper style={{height:'100%'}} elevation={2} square>
                         <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
                     </Paper>
                 </Col>
@@ -90,7 +90,7 @@ const GraphCard = ({graph, title, content}) => {
     const classes = useStyles();
 
     return (
-            <Card>
+            <Card style={{borderRadius:'0px', height:'100%'}}>
                 <CardContent>
                     {graph}
                     <Divider/>

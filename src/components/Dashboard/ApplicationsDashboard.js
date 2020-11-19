@@ -133,7 +133,7 @@ const ApplicationsDashboard = () => {
             </Col>
 
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                <Paper elevation={2} square>
+                <Paper style={{height:'100%'}} elevation={2} square>
                     <Graph 
                         graph={<FunctionalVsTechnicalGraph/>} 
                         title="Measure of Functional and Technical Ratings of All Applications" 
@@ -222,7 +222,7 @@ const Graph = ({graph, title, content}) => {
     const classes = useStyles();
 
     return (
-            <Card>
+            <Card style={{height:'100%', borderRadius:'0px'}}>
                 <CardContent>
 
                     {/* <CardHeader title={title}/> */}
