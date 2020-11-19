@@ -13,7 +13,7 @@ import Popper from '@material-ui/core/Popper';
 
 import './ITRoadmapTimeline.css';
 
-const ITRoadmapTimeline = () => {
+const ApplicationTimeline = () => {
     const { applications } = useData();
     const filteredApplications = _.filter(applications, app => app['lifecycle:active'] && app['lifecycle:endOfLife']); 
 
@@ -189,7 +189,6 @@ const ITRoadmapTimeline = () => {
                     <circle cx={121} r={5} strokeWidth={0} fill={`var(--warning-color-red)`}/>
                     <text x={127} y={2.5} fontSize="8" >Eliminate</text>
                 </g>
-
             </g>
         );
     };
@@ -239,4 +238,4 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     );
 });
 
-export default ITRoadmapTimeline;
+export default ApplicationTimeline;
