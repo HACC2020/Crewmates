@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+import ProjectRiskChart from '../../graphs/Projects/ProjectRiskChart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -64,6 +65,13 @@ const ProjectsDashboard = () => {
                     </Paper>
                 </Col>
             </Row>
+            <Row>
+                <Col style={{marginTop:'1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
+                    </Paper>
+                </Col>
+            </Row>
         </Container>
     );
 };
@@ -122,6 +130,31 @@ const GraphCard = ({graph, title, content}) => {
             </Card>
     );
 }
+
+const ProjectRiskDescription = (<React.Fragment>
+      <h3>What do these Risks Mean?</h3>
+      <ul>
+          <li>
+              <b>Low Risk:</b> No risks or a minor risk that can be easily mitigated.
+          </li>
+
+          <li>
+              <b>Moderate Risk:</b> Some effects on quality, timeline or budget that can be mitigated by project management.
+          </li>
+
+          <li>
+              <b>High Risk:</b> Remarkable effects on quality, timeline or budget require management support.
+          </li>
+
+          <li>
+              <b>Severe Risk:</b> Intolerable effects on quality and/or timeline and/or budget of a project, requires dedicated management attention and support.
+          </li>
+
+          <li>
+              <b>Missing Data:</b> Data on project risk was not provided.
+          </li>
+        </ul>
+</React.Fragment>);
 
 const BusinessValueVsProjectRiskDescription = (<>
               <h3>What is Business Value?</h3>
