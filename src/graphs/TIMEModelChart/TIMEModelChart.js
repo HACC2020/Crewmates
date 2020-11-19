@@ -50,21 +50,22 @@ const TIMEModelChart = () => {
                 x={x(d.name)+(x.bandwidth()/2)} 
                 y={y(d.value)-2}
                 fill="black"
-                textAnchor="middle" 
+                textAnchor="middle"
+                fontSize="7"
                 >{d.value}</text>
         </g>);
 
     // const titleX = margin.left+((width-margin.left)/2);
     const titleX = width/2;
-    const titleY = height-(margin.bottom/2)+5;
+    const titleY = margin.top;
 
-    const yTitle = <text x={titleX} y={titleY}>TIME Model</text>;
+    const yTitle = <text textAnchor="middle" fontSize="7" x={titleX} y={titleY}>IT Applications - TIME Tag</text>;
 
     const labels = TIMEData.map((d, index) => {
         const labelX = x(d.name)+(x.bandwidth()/2);
-        const labelY = (height-margin.bottom+4);
+        const labelY = (height-margin.bottom+7);
         return (
-            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY} textAnchor="middle">{d.name}</text>
+            <text fontSize="6" key={`TIME Label:${d.name}`} x={labelX} y={labelY} textAnchor="middle">{d.name}</text>
         );
     });
     return (
@@ -72,7 +73,7 @@ const TIMEModelChart = () => {
         {
             isLoading ? <CircularProgress/>
             :
-            <svg fontSize={`4`} viewBox={`0, 0, ${width}, ${height}`}>
+            <svg viewBox={`0, 0, ${width}, ${height}`}>
                 {bars}
                 {yTitle}
                 {labels}
