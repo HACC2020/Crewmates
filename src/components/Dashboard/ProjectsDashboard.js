@@ -139,7 +139,7 @@ const BusinessValueVsProjectRiskDescription = (<>
                   </li>
 
                   <li>
-                      <b>Signifiant Benefit:</b> Significant improvements in quality and/or financials.
+                      <b>Significant Benefit:</b> Significant improvements in quality and/or financials.
                   </li>
                 </ul>
 </>);
