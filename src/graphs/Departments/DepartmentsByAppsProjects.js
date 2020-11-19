@@ -31,7 +31,7 @@ const DepartmentsByAppsProjects = () => {
 
     const bars = data.map((d, index) => {
         return (
-            <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <g key={`${d.department}-${index}`} transform={`translate(${margin.left}, ${margin.top})`}>
                 <text textAnchor='end' x={-5} y={y(index)+(y.bandwidth()/2)}>{d.department}</text>
                 <g>
                     <rect 

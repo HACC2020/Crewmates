@@ -8,8 +8,6 @@ import _ from 'lodash';
 // Material UI
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 
 const ITRoadmap = () => {
@@ -18,8 +16,6 @@ const ITRoadmap = () => {
     const averageProject = getAverageLifeSpan(projectData);
     const modeProject = getMode(projectData);
 
-    console.log(projects.length);
-    console.log(projectData.length);
     return(
     <Container style={{padding:'0'}} fluid>
         <Row>

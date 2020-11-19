@@ -1,8 +1,7 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
-import { scaleTime, scaleBand, min, max, axisBottom, axisTop, select } from 'd3';
+import { scaleTime, scaleBand, axisTop, select } from 'd3';
 import moment from 'moment';
-import _ from 'lodash';
 import { buildData, getMinDate, getMaxDate } from './projectTimelineFunctions';
 
 const ProjectTimeline = () => {
@@ -36,7 +35,7 @@ const ProjectTimeline = () => {
                     let projectName = d.name;
                     if(d.name.length > MAX_LENGTH) projectName = projectName.slice(0, MAX_LENGTH) + '...'
                     return (
-                        <>
+                        <React.Fragment key={`project-timeline-${d.name}-${d.id}`}>
                         {index % 2 !== 0 ? null :
                             <rect
                                 y={y(d.id)}
@@ -67,7 +66,7 @@ const ProjectTimeline = () => {
                             fontSize={7} 
                             x={x(moment(d['lifecycleCustom:projectedCompletion']).toDate())+2}
                             y={y(d.id)+(y.bandwidth())-1}>{moment(d['lifecycleCustom:projectedCompletion']).format('MMM YYYY')}</text>
-                        </>
+                        </React.Fragment>
                     );
                 })
             }
