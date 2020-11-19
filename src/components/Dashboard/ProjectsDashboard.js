@@ -66,7 +66,7 @@ const ProjectsDashboard = () => {
                 </Col>
             </Row>
             <Row>
-                <Col style={{marginTop: '1em'}} sm={12} md={4}>
+                <Col style={{marginTop: '1em'}} sm={12} md={6}>
                     <Paper elevation={2} square>
                         <GraphCard graph={<ProjectPhaseChart/>} title="Project Phase" content={null}/>
                     </Paper>

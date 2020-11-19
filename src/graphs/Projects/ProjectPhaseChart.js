@@ -8,12 +8,11 @@ const ProjectPhaseChart = () => {
 
     const data = buildData(projects);
 
-    const totalProjects = projects.length;
 
-    const width = 150;
+    const width = 200;
     const height = 135;
     const margin = 40;
-    const radius = width / 2 - margin;
+    const radius = width / 3 - 25;  // pie chart to take up about 1/3 of the width
     const colors = ['blue', 'red', 'green', 'yellow', 'pink', 'purple', 'grey'];
 
     const pieChart = () => {
@@ -23,15 +22,45 @@ const ProjectPhaseChart = () => {
         let dataReady = myPie(data);
 
         let myArc = arc()
-            .innerRadius(0)
+            .innerRadius(23)
             .outerRadius(radius)
 
-        const transform = `translate(${(width / 3)}, ${height / 2})`;
+        const transform = `translate(${(width / 2)}, ${height / 2})`;
+        
+        const textTransform = i => {
+            let arc = myArc.centroid(dataReady[i]);
+            let x = arc[0];
+            let y = arc[1];
+            let h = Math.sqrt((x * x) + (y * y));
+
+            arc[0] += x/h * 14;
+            arc[1] += y/h * 20 + i;
+
+            return arc;
+        }
+
+        // text anchor based on which side of pie we are on
+        const anchor = i => {
+            if (i === 3) {  // manually set for 'projected completion'
+                return "start";
+            } else if ((dataReady[i].endAngle + dataReady[i].startAngle)/2 > Math.PI) {
+                return "end";
+            } else {
+                return "start";
+            }
+        }
 
         return (
             <g  transform={transform} >
                 {colors.map((c, index) => 
                     <React.Fragment key={`${c}`}>
+                        <line 
+                            x1={myArc.centroid(dataReady[index])[0]}
+                            x2={textTransform(index)[0]}
+                            y1={myArc.centroid(dataReady[index])[1]}
+                            y2={textTransform(index)[1]}
+                            stroke='black'
+                            strokeWidth='.5px' />
                         <path
                             className='line'
                             d={myArc(dataReady[index])}
@@ -40,11 +69,12 @@ const ProjectPhaseChart = () => {
                             strokeWidth='0px'
                         />
                         <text
-                            transform={`translate(${myArc.centroid(dataReady[index])})`}
-                            fontSize={4}
-                            fill='white'
-                            textAnchor='middle'>
-                            {data[index].key}
+                            transform={`translate(${textTransform(index)})`}
+                            fontSize={4.5}
+                            fontWeight='normal'
+                            fill='black'
+                            textAnchor={anchor(index)}>
+                            {`${data[index].key} ${data[index].value}`}
                         </text>
                     </React.Fragment>
                     )
@@ -54,25 +84,9 @@ const ProjectPhaseChart = () => {
 
     }
 
-    const legend = () => {
-        const x = width / 3 * 2 - 5;
-        const y = height / 4;
-        return (
-            <React.Fragment>
-            {colors.map((d, index) => 
-                <g fill={colors[index]}key={`${d}`}>
-                    <circle cx={x} cy={y + index * 6} r={2}/>
-                    <text x={x + 5} y={y + 2 + index * 6} fontSize={'5px'}>{data[index].key}</text>
-                </g>
-            )}
-            </React.Fragment>
-        );
-    }
-
     return (
     <svg style={{overflow: 'visible'}} fontSize={`2`} viewBox={`0, 0, ${width}, ${height}`}>
         {pieChart()}
-        {/*{legend()}*/}
     </svg>);
 }
 
