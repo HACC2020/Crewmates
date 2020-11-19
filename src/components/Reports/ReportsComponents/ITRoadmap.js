@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ApplicationTimeline from '../../../graphs/ITRoadmapTimeline/ApplicationTimeline';
 import ProjectTimeline from '../../../graphs/ITRoadmapTimeline/ProjectTimeline';
+import ITRoadmapTimeline from '../../../graphs/ITRoadmapTimeline/ITRoadmapTimeline';
 import { buildData, getAverageLifeSpan, getMode } from '../../../graphs/ITRoadmapTimeline/projectTimelineFunctions';
 import { useData } from '../../../providers/DataProvider';
 import _ from 'lodash';
@@ -19,6 +20,23 @@ const ITRoadmap = () => {
     return(
     <Container style={{padding:'0'}} fluid>
         <Row>
+            <Col>
+                <Paper style={{ padding:'2em', backgroundColor:'var(--theme-color-2)', color:'white'}} elevation={2} square>
+                    <Typography variant="h3">IT Roadmap</Typography>
+                    <Typography variant="body1">Viewing projects and associated applications.</Typography>
+                </Paper>
+            </Col>
+        </Row>
+
+        <Row style={{marginTop:'1em'}}>
+            <Col>
+                <Paper style={{ padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2} square>
+                    <ITRoadmapTimeline/>
+                </Paper>
+            </Col>
+        </Row>
+
+        <Row style={{marginTop:'1em'}}>
             <Col>
                 <Paper style={{ padding:'2em', backgroundColor:'var(--theme-color-2)', color:'white'}} elevation={2} square>
                     <Typography variant="h3">Project Timeline</Typography>
