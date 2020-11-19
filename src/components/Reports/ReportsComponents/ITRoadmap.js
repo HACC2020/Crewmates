@@ -29,11 +29,7 @@ const ITRoadmap = () => {
         </Row>
 
         <Row style={{marginTop:'1em'}}>
-            <Col>
-                <Paper style={{ padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2} square>
-                    <ITRoadmapTimeline/>
-                </Paper>
-            </Col>
+            <ITRoadmapTimeline/>
         </Row>
 
         <Row style={{marginTop:'1em'}}>
@@ -46,21 +42,21 @@ const ITRoadmap = () => {
         </Row>
 
         <Row style={{marginTop:'1em'}}>
-            <Col style={{marginTop:'1em'}} sm={12} md={3}>
+            <Col style={{marginTop:'1em'}} sm={12} md={6} lg={6} xl={3}>
                 <Paper style={{ padding:'2em', height:'100%'}} elevation={2} square>
                     <Typography variant="h5">Viewing:</Typography>
                     <Divider/>
                     <Typography style={{marginTop:'0.5em'}} variant="h3">{projectData.length} <Typography variant="h6" component="span">projects</Typography></Typography>                    
                 </Paper>
             </Col>
-            <Col style={{marginTop:'1em'}} sm={12} md={3}>
+            <Col style={{marginTop:'1em'}} sm={12} md={6} lg={6} xl={3}>
                 <Paper style={{ padding:'2em', height:'100%'}} elevation={2} square>
                     <Typography variant="h5">Average Time Between Project Start and Completion</Typography>
                     <Divider/>
                     <Typography style={{marginTop:'0.5em'}} variant="h3">{averageProject} <Typography variant="h6" component="span">months</Typography></Typography>                    
                 </Paper>
             </Col>
-            <Col style={{marginTop:'1em'}} sm={12} md={3}>
+            <Col style={{marginTop:'1em'}} sm={12} md={6} lg={6} xl={3}>
                 <Paper style={{ padding:'2em', height:'100%'}} elevation={2} square>
                     <Typography variant="h5">Most Common Time Between Project Start and Completion</Typography>
                     <Divider/>
@@ -68,7 +64,7 @@ const ITRoadmap = () => {
                     
                 </Paper>
             </Col>
-            <Col style={{marginTop:'1em'}} sm={12} md={3}>
+            <Col style={{marginTop:'1em'}} sm={12} md={6} lg={6} xl={3}>
                 <Paper style={{ padding:'2em', height:'100%'}} elevation={2} square>
                     <Typography variant="h5">Projects with Missing Data</Typography>
                     <Divider/>
