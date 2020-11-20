@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+import ProjectBusinessValueChart from '../../graphs/Projects/ProjectBusinessValueChart';
 import ProjectRiskChart from '../../graphs/Projects/ProjectRiskChart';
 import ProjectStatusChart from '../../graphs/Projects/ProjectStatusChart';
 
@@ -78,6 +79,13 @@ const ProjectsDashboard = () => {
                     </Paper>
                 </Col>
             </Row>
+            <Row>
+                <Col style={{marginTop:'1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectBusinessValueChart/>} title="Project Business Value" content={ProjectBusinessValueDescription}/>
+                    </Paper>
+                </Col>
+            </Row>
         </Container>
     );
 };
@@ -136,6 +144,27 @@ const GraphCard = ({graph, title, content}) => {
             </Card>
     );
 }
+
+const ProjectBusinessValueDescription = (<>
+      <h3>What is Business Value?</h3>
+      <ul>
+          <li>
+              <b>Marginal Benefit:</b> Small quality or financial improvements.
+          </li>
+
+          <li>
+              <b>Little Benefit:</b> Some quality and financial improvements.
+          </li>
+
+          <li>
+              <b>Large Benefit:</b> Remarkable quality and/or financial improvements.
+          </li>
+
+          <li>
+              <b>Signifiant Benefit:</b> Significant improvements in quality and/or financials.
+          </li>
+        </ul>
+</>);
 
 const ProjectRiskDescription = (<React.Fragment>
       <h3>What do these Risks Mean?</h3>
