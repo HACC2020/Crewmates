@@ -53,7 +53,7 @@ const TIMEModelChart = () => {
                             Category
                         </Typography>
                         :
-                        <Typography variant='h6'>{d.value} Applications Missing Data
+                        <Typography variant='h6'>{d.value} applications missing data
                         </Typography>
                     }
                 </React.Fragment>
