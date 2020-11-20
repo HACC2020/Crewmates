@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+import ProjectStatusChart from '../../graphs/Projects/ProjectStatusChart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -61,6 +62,11 @@ const ProjectsDashboard = () => {
                 <Col style={{marginTop:'1em'}} sm={12} md={8}>
                     <Paper elevation={2} square>
                         <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                    </Paper>
+                </Col>
+                <Col style={{marginTop:'1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
                     </Paper>
                 </Col>
             </Row>
@@ -122,6 +128,26 @@ const GraphCard = ({graph, title, content}) => {
             </Card>
     );
 }
+
+const ProjectStatusDescription = (
+    <React.Fragment>
+        <h3>Different Values of Project Status</h3>
+        <ul>
+            <li>
+                <b>Green:</b> No impact on time, budget, or quality.
+            </li>
+            <li>
+                <b>Yellow:</b> Impact on one of time, budget, or quality.
+            </li>
+            <li>
+                <b>Red:</b> Impact on all three: time, budget, and quality.
+            </li>
+            <li>
+                <b>Missing:</b> No data provided.
+            </li>
+        </ul>
+    </React.Fragment>
+);
 
 const BusinessValueVsProjectRiskDescription = (<>
               <h3>What is Business Value?</h3>
