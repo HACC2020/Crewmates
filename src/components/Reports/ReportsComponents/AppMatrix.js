@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useData } from '../../../providers/DataProvider';
 import { Table } from 'react-bootstrap';
 import _ from 'lodash';
-import Chip from '@material-ui/core/Chip';
 
 // Material UI
 import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
