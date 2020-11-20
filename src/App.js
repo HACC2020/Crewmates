@@ -127,8 +127,8 @@ function App(props) {
           {/* // <ListItemLink key={`link.name-${index}`} style={{padding:'1em', color:'white'}}  href={link.link}>
           //   <ListItemText primary={link.name} />
           // </ListItemLink> */}
-          <ListItem>
-            <NavLink style={{color:'white'}} key={`link.name-${index}`} to={link.link}>{link.name}</NavLink>
+          <ListItem key={`link.name-${index}`}>
+            <NavLink style={{color:'white'}}  to={link.link}>{link.name}</NavLink>
           </ListItem>
         </>
         ))}

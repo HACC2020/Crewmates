@@ -2,6 +2,9 @@ import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, range } from 'd3';
 import _ from 'lodash';
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const DepartmentsByAppsProjects = () => {
     const { departments, applications, projects } = useData();
@@ -31,16 +34,22 @@ const DepartmentsByAppsProjects = () => {
 
     const bars = data.map((d, index) => {
         return (
-            <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <g key={`${d.department}-${index}`} transform={`translate(${margin.left}, ${margin.top})`}>
                 <text textAnchor='end' x={-5} y={y(index)+(y.bandwidth()/2)}>{d.department}</text>
                 <g>
-                    <rect 
-                        x={0} 
-                        y={y(index)}
-                        width={x(d.applications)}
-                        height={y.bandwidth()/2}
-                        fill={`var(--theme-color-1)`}
-                        />
+                    <Tooltip placement='top' title={
+                        <React.Fragment>
+                            <Typography variant='h6'>{d.applications} Applications</Typography>
+                        </React.Fragment>
+                    }>
+                        <rect 
+                            x={0} 
+                            y={y(index)}
+                            width={x(d.applications)}
+                            height={y.bandwidth()/2}
+                            fill={`var(--theme-color-1)`}
+                            />
+                    </Tooltip>
                     <text
                         x={x(d.applications)+2} 
                         y={y(index)+(y.bandwidth()/4)+2}
@@ -48,13 +57,19 @@ const DepartmentsByAppsProjects = () => {
                     >{d.applications}</text>
                 </g>
                 <g>
-                    <rect 
-                        x={0} 
-                        y={y(index)+(y.bandwidth()/2)}
-                        width={x(d.projects)}
-                        height={y.bandwidth()/2}
-                        fill={`var(--theme-color-3)`}
-                        />
+                    <Tooltip placement='top' title={
+                            <React.Fragment>
+                                <Typography variant='h6'>{d.projects} Projects</Typography>
+                            </React.Fragment>
+                        }>
+                        <rect 
+                            x={0} 
+                            y={y(index)+(y.bandwidth()/2)}
+                            width={x(d.projects)}
+                            height={y.bandwidth()/2}
+                            fill={`var(--theme-color-3)`}
+                            />
+                    </Tooltip>
                     <text
                         x={x(d.projects)+2} 
                         y={y(index)+(y.bandwidth()*(3/4))+2}
