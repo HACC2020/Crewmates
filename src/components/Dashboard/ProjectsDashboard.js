@@ -4,6 +4,8 @@ import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
 import ProjectBusinessValueChart from '../../graphs/Projects/ProjectBusinessValueChart';
+import ProjectRiskChart from '../../graphs/Projects/ProjectRiskChart';
+import ProjectStatusChart from '../../graphs/Projects/ProjectStatusChart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -55,13 +57,25 @@ const ProjectsDashboard = () => {
         <Container style={{padding:'0'}} fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper elevation={2} square>
+                    <Paper style={{height:'100%'}} elevation={2} square>
                         <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
                     </Paper>
                 </Col>
                 <Col style={{marginTop:'1em'}} sm={12} md={8}>
                     <Paper elevation={2} square>
                         <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
+                    </Paper>
+                </Col>
+                <Col style={{marginTop:'1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
+                    </Paper>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{marginTop:'1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
                     </Paper>
                 </Col>
             </Row>
@@ -98,7 +112,7 @@ const GraphCard = ({graph, title, content}) => {
     const classes = useStyles();
 
     return (
-            <Card>
+            <Card style={{borderRadius:'0px', height:'100%'}}>
                 <CardContent>
                     {graph}
                     <Divider/>
@@ -152,6 +166,51 @@ const ProjectBusinessValueDescription = (<>
         </ul>
 </>);
 
+const ProjectRiskDescription = (<React.Fragment>
+      <h3>What do these Risks Mean?</h3>
+      <ul>
+          <li>
+              <b>Low Risk:</b> No risks or a minor risk that can be easily mitigated.
+          </li>
+
+          <li>
+              <b>Moderate Risk:</b> Some effects on quality, timeline or budget that can be mitigated by project management.
+          </li>
+
+          <li>
+              <b>High Risk:</b> Remarkable effects on quality, timeline or budget require management support.
+          </li>
+
+          <li>
+              <b>Severe Risk:</b> Intolerable effects on quality and/or timeline and/or budget of a project, requires dedicated management attention and support.
+          </li>
+
+          <li>
+              <b>Missing Data:</b> Data on project risk was not provided.
+          </li>
+        </ul>
+</React.Fragment>);
+
+const ProjectStatusDescription = (
+    <React.Fragment>
+        <h3>Different Values of Project Status</h3>
+        <ul>
+            <li>
+                <b>Green:</b> No impact on time, budget, or quality.
+            </li>
+            <li>
+                <b>Yellow:</b> Impact on one of time, budget, or quality.
+            </li>
+            <li>
+                <b>Red:</b> Impact on all three: time, budget, and quality.
+            </li>
+            <li>
+                <b>Missing:</b> No data provided.
+            </li>
+        </ul>
+    </React.Fragment>
+);
+
 const BusinessValueVsProjectRiskDescription = (<>
               <h3>What is Business Value?</h3>
               <ul>
@@ -168,7 +227,7 @@ const BusinessValueVsProjectRiskDescription = (<>
                   </li>
 
                   <li>
-                      <b>Signifiant Benefit:</b> Significant improvements in quality and/or financials.
+                      <b>Significant Benefit:</b> Significant improvements in quality and/or financials.
                   </li>
                 </ul>
 </>);

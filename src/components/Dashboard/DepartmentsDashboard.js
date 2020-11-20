@@ -10,7 +10,7 @@ const DepartmentsDashboard = () => {
     return (
         <Container style={{padding:'0'}} fluid>
             <Row>
-                <Col style={{marginTop:'1em'}} sm={12} md={8}>
+                <Col style={{marginTop:'1em'}} sm={12}>
                     <Paper elevation={2} square>
                         <Card>
                             <CardContent>

@@ -12,7 +12,7 @@ const ApplicationCard = ({data, showDate}) => {
       timeTag, hostingTypeTag } = data;
     return (
       <Paper square elevation={2}>
-        <Card style={{width:'250px', marginBottom:'1em', background:'var(--theme-color-5)'}}>
+        <Card style={{width:'250px', marginBottom:'1em', background:'var(--theme-color-5)', borderRadius:'0px'}}>
         <CardContent>
           {!showDate ? null :
             <>
