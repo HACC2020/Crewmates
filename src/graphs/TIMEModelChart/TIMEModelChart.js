@@ -2,6 +2,9 @@ import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, max } from 'd3';
 import CircularProgress from '@material-ui/core/CircularProgress';
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const TIMEModelChart = () => {
     const { applications, calculateTIMEMetric } = useData();
@@ -41,11 +44,26 @@ const TIMEModelChart = () => {
 
     const bars = TIMEData.map((d, index) => 
         <g key={`TIMEDataBars-${x(d.name)}-${y(d.value)}`} fill={d.color}>
-            <rect 
-                x={x(d.name)} 
-                y={y(d.value)}
-                height={y(0)-y(d.value)}
-                width={x.bandwidth()}/>
+            <Tooltip placement="right" title={
+                <React.Fragment>
+                    {
+                        d.name !== 'Missing' ?
+                        <Typography variant='h6'>{d.value} Applications in the 
+                            <span style={{color:d.color, background:'var(--theme-color-5)', padding:'0.2em'}}>{d.name} </span> 
+                            Category
+                        </Typography>
+                        :
+                        <Typography variant='h6'>{d.value} applications missing data
+                        </Typography>
+                    }
+                </React.Fragment>
+            }>
+                <rect 
+                    x={x(d.name)} 
+                    y={y(d.value)}
+                    height={y(0)-y(d.value)}
+                    width={x.bandwidth()}/>
+            </Tooltip>
             <text
                 x={x(d.name)+(x.bandwidth()/2)} 
                 y={y(d.value)-2}
