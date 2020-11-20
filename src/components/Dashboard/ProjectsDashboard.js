@@ -57,34 +57,35 @@ const ProjectsDashboard = () => {
         <Container style={{padding:'0'}} fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper style={{height:'100%'}} elevation={2} square>
+                    <Paper elevation={2} square>
                         <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
                     </Paper>
                 </Col>
-                <Col style={{marginTop:'1em'}} sm={12} md={8}>
-                    <Paper elevation={2} square>
-                        <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={BusinessValueVsProjectRiskDescription}/>
-                    </Paper>
-                </Col>
-                <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                    <Paper elevation={2} square>
-                        <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
-                    </Paper>
-                </Col>
-            </Row>
-            <Row>
-                <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                    <Paper elevation={2} square>
-                        <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
-                    </Paper>
-                </Col>
-            </Row>
-            <Row>
-                <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                    <Paper elevation={2} square>
+
+                <Col style={{marginTop:'1em'}} sm={12} md={4}>
+                    <Paper style={{height:'100%'}} elevation={2} square>
                         <GraphCard graph={<ProjectBusinessValueChart/>} title="Project Business Value" content={ProjectBusinessValueDescription}/>
                     </Paper>
                 </Col>
+
+                <Col style={{marginTop:'1em'}} sm={12} md={4}>
+                    <Paper style={{height:'100%'}} elevation={2} square>
+                        <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
+                    </Paper>
+                </Col>
+
+                <Col style={{marginTop:'1em'}} sm={12} md={8}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={null}/>
+                    </Paper>
+                </Col>
+
+                <Col style={{marginTop:'1em'}} sm={12} md={4}>
+                    <Paper style={{height:'100%'}} elevation={2} square>
+                        <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
+                    </Paper>
+                </Col>
+
             </Row>
         </Container>
     );

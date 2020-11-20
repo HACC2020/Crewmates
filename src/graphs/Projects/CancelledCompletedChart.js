@@ -79,11 +79,16 @@ const CancelledCompletedChart = () => {
             </>
         );
     }
-
+    const Title = () => {
+        return (
+            <text fontSize={8} textAnchor='middle' x={width/2} y={15}>IT Projects - Cancelled Vs. Completed</text>
+        );
+    }
     return (
     <svg style={{overflow: 'visible'}} fontSize={`2`} viewBox={`0, 0, ${width}, ${height}`}>
         {pieChart()}
         {legend()}
+        <Title/>
     </svg>);
 }
 

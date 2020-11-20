@@ -11,7 +11,7 @@ const DepartmentsDashboard = () => {
         <Container style={{padding:'0'}} fluid>
             <Row>
                 <Col style={{marginTop:'1em'}} sm={12}>
-                    <Paper elevation={2} square>
+                    <Paper style={{height:'75vh', overflow:'scroll'}} elevation={2} square>
                         <Card>
                             <CardContent>
                                 <DepartmentsByAppsProjects/>

@@ -128,7 +128,7 @@ const ApplicationsDashboard = () => {
         <Row >
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
                 <Paper elevation={2} square>
-                    <Graph graph={<BusinessCriticalityChart/>} title="Business Criticality Chart" content={BusinessCriticalityDescription}/>
+                    <Graph graph={<BusinessCriticalityChart/>} title="IT Applications - Business Criticality Chart" content={BusinessCriticalityDescription}/>
                 </Paper>
             </Col>
 
@@ -136,16 +136,16 @@ const ApplicationsDashboard = () => {
                 <Paper style={{height:'100%'}} elevation={2} square>
                     <Graph 
                         graph={<FunctionalVsTechnicalGraph/>} 
-                        title="Measure of Functional and Technical Ratings of All Applications" 
+                        title="IT Applications - Functional and Technical Fit" 
                         content={null}/>
                 </Paper>
             </Col>
         </Row>
 
         <Row >
-            <Col style={{marginTop:'1em'}} sm={12} md={6}>
+            <Col style={{marginTop:'1em'}} sm={12} >
                 <Paper elevation={2} square>
-                    <Graph graph={<ApplicationHostingTypeChart/>} title="Hosting Type" content={HostingTypeDescription}/>
+                    <Graph graph={<ApplicationHostingTypeChart/>} title="IT Applications - Hosting Type" content={HostingTypeDescription}/>
                 </Paper>
             </Col>
         </Row>
