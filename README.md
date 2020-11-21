@@ -15,7 +15,7 @@ We plan on creating a user friendly visualization from the data provided.
 
 #### How To Run
 
-The webapp can be previewed [here](https://sharp-borg-ed125d.netlify.app/).
+Our application is deployed [here](https://sharp-borg-ed125d.netlify.app/).
 
 In order to run this application on your machine, you will need Node, which can be installed [here](https://nodejs.org/en/download/).
 
