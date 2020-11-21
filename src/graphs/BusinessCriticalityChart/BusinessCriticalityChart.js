@@ -1,7 +1,9 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, max } from 'd3';
-
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const BusinessCriticalityChart = () => {
     const { applications, calculateBusinessCriticalityMetric } = useData();
@@ -38,11 +40,26 @@ const BusinessCriticalityChart = () => {
 
     const bars = CRITICALITY_DATA.map((d, index) => 
         <g key={`BusinessCriticality-${x(d.name)*index}-${y(d.value)*index}`} fill={d.color}>
-            <rect 
-                x={x(d.name)} 
-                y={y(d.value)}
-                height={y(0)-y(d.value)}
-                width={x.bandwidth()}/>
+            <Tooltip placement="right" title={
+                <React.Fragment>
+                    {
+                        d.name !== 'Missing' ?
+                        <Typography variant='body1'>{d.value} are 
+                            <span style={{borderRadius:'10px',color:d.color, background:'var(--theme-color-5)', padding:'0.2em'}}>  {d.name}  </span> 
+                            applications
+                        </Typography>
+                        :
+                        <Typography variant='h6'>{d.value} applications missing data
+                        </Typography>
+                    }
+                </React.Fragment>
+                }>
+                <rect 
+                    x={x(d.name)} 
+                    y={y(d.value)}
+                    height={y(0)-y(d.value)}
+                    width={x.bandwidth()}/>
+            </Tooltip>
             <text
                 x={x(d.name)+(x.bandwidth()/2)} 
                 y={y(d.value)-2}
@@ -72,7 +89,6 @@ const BusinessCriticalityChart = () => {
                 : null
 
             }
-
         </React.Fragment>
         );
     });

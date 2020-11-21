@@ -1,6 +1,9 @@
 import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { pie, arc } from 'd3';
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const CancelledCompletedChart = () => {
     const { projects, calculateProjectCancelledCompleted } = useData();
@@ -34,13 +37,22 @@ const CancelledCompletedChart = () => {
             <g  transform={transform} >
                 {colors.map((c, index) => 
                     <React.Fragment key={`${c}`}>
-                        <path
-                            className='line'
-                            d={myArc(dataReady[index])}
-                            fill={colors[index]}
-                            stroke='black'
-                            strokeWidth='0px'
-                        />
+                        <Tooltip placement="right" title={
+                            <React.Fragment>
+                                { data[index].key === 'Missing Data' ? 
+                                    <Typography variant='h6'>{percentages[index]} IT projects are missing data.</Typography>
+                                    : <Typography variant='h6'>{percentages[index]} IT projects have a {data[index].key} date.</Typography>
+                                }
+                            </React.Fragment>
+                        }>
+                            <path
+                                className='line'
+                                d={myArc(dataReady[index])}
+                                fill={colors[index]}
+                                stroke='black'
+                                strokeWidth='0px'
+                            />
+                        </Tooltip>
                         <text
                             transform={`translate(${myArc.centroid(dataReady[index])})`}
                             fontSize={4}
@@ -49,11 +61,8 @@ const CancelledCompletedChart = () => {
                             {percentages[index]}
                         </text>
                     </React.Fragment>
-                    )
-                }
-            </g>
-        )
-
+                    )}
+            </g>)
     }
 
     const legend = () => {
@@ -70,11 +79,16 @@ const CancelledCompletedChart = () => {
             </>
         );
     }
-
+    const Title = () => {
+        return (
+            <text fontSize={8} textAnchor='middle' x={width/2} y={15}>IT Projects - Cancelled Vs. Completed</text>
+        );
+    }
     return (
     <svg style={{overflow: 'visible'}} fontSize={`2`} viewBox={`0, 0, ${width}, ${height}`}>
         {pieChart()}
         {legend()}
+        <Title/>
     </svg>);
 }
 

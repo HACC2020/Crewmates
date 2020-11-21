@@ -5,7 +5,7 @@ import TIMEModelChart from '../../graphs/TIMEModelChart/TIMEModelChart';
 import BusinessCriticalityChart from '../../graphs/BusinessCriticalityChart/BusinessCriticalityChart';
 import ActiveAppTimeline from '../../graphs/ActiveAppTimelineChart/ActiveAppTimeline';
 import FunctionalVsTechnicalGraph from '../../graphs/FunctionalVsTechnicalGraph/FunctionalVsTechnicalGraph';
-
+import ApplicationHostingTypeChart from '../../graphs/ApplicationHostingTypeChart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -128,16 +128,24 @@ const ApplicationsDashboard = () => {
         <Row >
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
                 <Paper elevation={2} square>
-                    <Graph graph={<BusinessCriticalityChart/>} title="Business Criticality Chart" content={BusinessCriticalityDescription}/>
+                    <Graph graph={<BusinessCriticalityChart/>} title="IT Applications - Business Criticality Chart" content={BusinessCriticalityDescription}/>
                 </Paper>
             </Col>
 
             <Col style={{marginTop:'1em'}} sm={12} md={6}>
-                <Paper elevation={2} square>
+                <Paper style={{height:'100%'}} elevation={2} square>
                     <Graph 
                         graph={<FunctionalVsTechnicalGraph/>} 
-                        title="Measure of Functional and Technical Ratings of All Applications" 
+                        title="IT Applications - Functional and Technical Fit" 
                         content={null}/>
+                </Paper>
+            </Col>
+        </Row>
+
+        <Row >
+            <Col style={{marginTop:'1em'}} sm={12} >
+                <Paper elevation={2} square>
+                    <Graph graph={<ApplicationHostingTypeChart/>} title="IT Applications - Hosting Type" content={HostingTypeDescription}/>
                 </Paper>
             </Col>
         </Row>
@@ -222,7 +230,7 @@ const Graph = ({graph, title, content}) => {
     const classes = useStyles();
 
     return (
-            <Card>
+            <Card style={{height:'100%', borderRadius:'0px'}}>
                 <CardContent>
 
                     {/* <CardHeader title={title}/> */}
@@ -325,6 +333,36 @@ const TIMEModelDescription = (
 
     </div>
 );
+
+const HostingTypeDescription = (<>
+      <h3>What are the Hosting Types?</h3>
+      <ul>
+          <li>
+              <b>On Premise:</b> The server is hosted on premise (in the building) of where the software is used.
+          </li>
+
+          <li>
+              <b>Co Located:</b> Space is leased in a data service center similar to renting a storage unit. 
+          </li>
+
+          <li>
+              <b>IaaS:</b> Infrastructure as a Service, provides high-level APIs used to dereference various low-level
+              details of underlying network infrastructure like physical computing resources, location, data partitioning,
+              scaling, security, backup etc.
+          </li>
+
+          <li>
+              <b>PaaS:</b> Platform as a Service, provides a platform allowing customers to develop, run, and manage
+              applications without the complexity of building and maintaining the infrastructure typically associated
+              with developing and launching an app.
+          </li>
+
+          <li>
+              <b>SaaS:</b> Software as a Service, a software licensing and delivery model in which software is licensed
+              on a subscription basis and is centrally hosted.
+          </li>
+        </ul>
+</>);
 
 const BusinessCriticalityDescription = (<>
                     <Typography variant="h3" paragraph>

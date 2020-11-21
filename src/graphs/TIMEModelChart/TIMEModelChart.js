@@ -2,6 +2,9 @@ import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, max } from 'd3';
 import CircularProgress from '@material-ui/core/CircularProgress';
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const TIMEModelChart = () => {
     const { applications, calculateTIMEMetric } = useData();
@@ -41,30 +44,46 @@ const TIMEModelChart = () => {
 
     const bars = TIMEData.map((d, index) => 
         <g key={`TIMEDataBars-${x(d.name)}-${y(d.value)}`} fill={d.color}>
-            <rect 
-                x={x(d.name)} 
-                y={y(d.value)}
-                height={y(0)-y(d.value)}
-                width={x.bandwidth()}/>
+            <Tooltip placement="right" title={
+                <React.Fragment>
+                    {
+                        d.name !== 'Missing' ?
+                        <Typography variant='h6'>{d.value} Applications in the 
+                            <span style={{color:d.color, background:'var(--theme-color-5)', padding:'0.2em'}}>{d.name} </span> 
+                            Category
+                        </Typography>
+                        :
+                        <Typography variant='h6'>{d.value} applications missing data
+                        </Typography>
+                    }
+                </React.Fragment>
+            }>
+                <rect 
+                    x={x(d.name)} 
+                    y={y(d.value)}
+                    height={y(0)-y(d.value)}
+                    width={x.bandwidth()}/>
+            </Tooltip>
             <text
                 x={x(d.name)+(x.bandwidth()/2)} 
                 y={y(d.value)-2}
                 fill="black"
-                textAnchor="middle" 
+                textAnchor="middle"
+                fontSize="7"
                 >{d.value}</text>
         </g>);
 
     // const titleX = margin.left+((width-margin.left)/2);
     const titleX = width/2;
-    const titleY = height-(margin.bottom/2)+5;
+    const titleY = margin.top;
 
-    const yTitle = <text x={titleX} y={titleY}>TIME Model</text>;
+    const yTitle = <text textAnchor="middle" fontSize="7" x={titleX} y={titleY}>IT Applications - TIME Tag</text>;
 
     const labels = TIMEData.map((d, index) => {
         const labelX = x(d.name)+(x.bandwidth()/2);
-        const labelY = (height-margin.bottom+4);
+        const labelY = (height-margin.bottom+7);
         return (
-            <text key={`TIME Label:${d.name}`} x={labelX} y={labelY} textAnchor="middle">{d.name}</text>
+            <text fontSize="6" key={`TIME Label:${d.name}`} x={labelX} y={labelY} textAnchor="middle">{d.name}</text>
         );
     });
     return (
@@ -72,7 +91,7 @@ const TIMEModelChart = () => {
         {
             isLoading ? <CircularProgress/>
             :
-            <svg fontSize={`4`} viewBox={`0, 0, ${width}, ${height}`}>
+            <svg viewBox={`0, 0, ${width}, ${height}`}>
                 {bars}
                 {yTitle}
                 {labels}

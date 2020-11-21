@@ -2,6 +2,9 @@ import React from 'react';
 import { useData } from '../../providers/DataProvider';
 import { scaleLinear, scaleBand, min, max } from 'd3';
 import _ from 'lodash';
+// Material UI
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 const FunctionalVsTechnicalGraph = () => {
     const { applications } = useData();
@@ -52,6 +55,8 @@ const FunctionalVsTechnicalGraph = () => {
 
     /* The heart of this graph */
     const Cells = () => {
+        const ratingLabels = ['Poor', 'Insufficient', 'Adequate', 'Excellent'];
+
         return (
         <g transform={`translate(${margin.left},${margin.top})`}>
             {data.map((xCell, xIndex) => {
@@ -62,8 +67,17 @@ const FunctionalVsTechnicalGraph = () => {
                         const calculatedOpacity = colorScale(yCell);
                         return (
                             <g key={`fnVsTec:${x(xIndex)},${y(yIndex+1)}`} transform={`translate(${x(xIndex)},${y(yIndex+1)})`}>
-                                <rect width={x.bandwidth()} height={y.bandwidth()} opacity={calculatedOpacity} fill={color}/>
-                                <text fontWeight={"bold"}
+                                <Tooltip title={
+                                    <React.Fragment>
+                                        <Typography variant='h6'>
+                                            {yCell} applications have {ratingLabels[xIndex]} Functional Fit
+                                            and {ratingLabels[yIndex]} Technical Fit.
+                                        </Typography>
+                                    </React.Fragment>
+                                }>
+                                    <rect width={x.bandwidth()} height={y.bandwidth()} opacity={calculatedOpacity} fill={color}/>
+                                </Tooltip>
+                                <text fontSize={16}
                                     textAnchor="middle" x={x.bandwidth()/2} y={y.bandwidth()/2} fill="black">{yCell}</text>
                             </g>
                         )

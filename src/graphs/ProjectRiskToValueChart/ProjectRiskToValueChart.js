@@ -109,7 +109,7 @@ const ProjectRiskToValueChart = ({data}) => {
     }
 
     // chart title
-    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={margin.top}>Project Risk Vs. Business Value</text>;
+    const title = <text textAnchor={'middle'} fontSize={'16px'} x={ width / 2 } y={margin.top}>IT Projects - Risk Vs. Business Value</text>;
 
     return (
         <div>

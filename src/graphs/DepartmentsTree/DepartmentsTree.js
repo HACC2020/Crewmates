@@ -1,7 +1,6 @@
 import { useData } from '../../providers/DataProvider';
 import _ from 'lodash';
 import Tree from 'react-d3-tree';
-
 // Material UI
 import Paper from '@material-ui/core/Paper';
 
@@ -40,34 +39,15 @@ const DepartmentsTree = () => {
             transitionDuration={250} 
             initialDepth={1} 
             data={root}
-            depthFactor={150}
-            separation={{siblings: 1, nonSiblings: 3}}
-            textLayout={{textAnchor: "middle", x: 0, y: -20, transform: `rotate(-10)` }}
+            // depthFactor={150}
+            depthFactor={500}
+            separation={{siblings: 1, nonSiblings: 5}}
+            textLayout={{textAnchor: "start", x: 10, y: -20, transform: `rotate(0)` }}
             styles={customTreeStyle}/>
         </Paper>
         );
 
 };
-
-// const buildData = (departments, applications) => {
-//     let tree = [];
-//     tree.push({id: "Departments/Agencies", parentId: ""});
-//     tree.push({id: "Legislature", parentId: "Departments/Agencies"});
-//     _.forEach(departments, dep => {
-//         tree.push({
-//             id: dep.name,
-//             parentId: dep.parent || "Departments/Agencies"
-//         })
-//     })
-//     _.forEach(applications, app => {
-//         tree.push({
-//             id: app.name,
-//             parentId: app.ownerAgencyName,
-//             data: app
-//         })
-//     });
-//     return tree;
-// };
 
 const buildTree =  (departments, applications) => {
     let root = {
@@ -91,7 +71,14 @@ const buildTree =  (departments, applications) => {
         let childAppsWithData = [];
         _.forEach(childApps, c => {
             childAppsWithData.push({
-                ...c,
+                name: c.name,
+                attributes: {
+                    'TIME Tag': c.timeTag || 'missing data',
+                    'Functional Fit': _.startCase(c.functionalFit) || 'missing data',
+                    'Technical Fit': _.startCase(c.technicalFit) || 'missing data',
+                    'Business Criticality': _.startCase(c.technicalFit) || 'missing data',
+                    'Hosting Type': c.hostingTypeTag || 'missing data',
+                },
                 nodeSvgShape: {
                     shape: 'circle',
                     shapeProps: {
@@ -122,8 +109,16 @@ const buildTree =  (departments, applications) => {
 
         let childAppsWithData = [];
         _.forEach(childApps, c => {
+
             childAppsWithData.push({
-                ...c,
+                name: c.name,
+                attributes: {
+                    'TIME Tag': c.timeTag || 'missing data',
+                    'Functional Fit': _.startCase(c.functionalFit) || 'missing data',
+                    'Technical Fit': _.startCase(c.technicalFit) || 'missing data',
+                    'Business Criticality': _.startCase(c.technicalFit) || 'missing data',
+                    'Hosting Type': c.hostingTypeTag || 'missing data',
+                },
                 nodeSvgShape: {
                     shape: 'circle',
                     shapeProps: {
