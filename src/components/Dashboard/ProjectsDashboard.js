@@ -7,6 +7,7 @@ import ProjectPhaseChart from '../../graphs/Projects/ProjectPhaseChart';
 import ProjectBusinessValueChart from '../../graphs/Projects/ProjectBusinessValueChart';
 import ProjectRiskChart from '../../graphs/Projects/ProjectRiskChart';
 import ProjectStatusChart from '../../graphs/Projects/ProjectStatusChart';
+import DepartmentsByAppsProjects from '../../graphs/Departments/DepartmentsByAppsProjects';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -57,41 +58,53 @@ const ProjectsDashboard = () => {
     return (
         <Container style={{padding:'0'}} fluid>
             <Row>
-                <Col style={{marginTop:'1em'}} sm={12} md={4}>
+                <Col style={{marginTop: '1em'}} sm={12} md={4}>
                     <Paper elevation={2} square>
-                        <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
-                    </Paper>
-                </Col>
-
-                <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper style={{height:'100%'}} elevation={2} square>
-                        <GraphCard graph={<ProjectBusinessValueChart/>} title="Project Business Value" content={ProjectBusinessValueDescription}/>
-                    </Paper>
-                </Col>
-
-                <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper style={{height:'100%'}} elevation={2} square>
-                        <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
+                        <GraphCard graph={<ProjectPhaseChart/>} title="Project Phase" content={null}/>
                     </Paper>
                 </Col>
 
                 <Col style={{marginTop:'1em'}} sm={12} md={8}>
-                    <Paper elevation={2} square>
+                    <Paper style={{height:'100%'}} elevation={2} square>
                         <GraphCard graph={<ProjectRiskToValueChart data={projectRiskToValueMetric}/>} title="Project Risk vs Business Value" content={null}/>
                     </Paper>
                 </Col>
 
-                <Col style={{marginTop:'1em'}} sm={12} md={4}>
-                    <Paper style={{height:'100%'}} elevation={2} square>
-                        <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
-                    </Paper>
+                <Col style={{ padding:0}}>
+
+                    <Col style={{marginTop:'1em'}} sm={12} >
+                        <Paper elevation={2} square>
+                            <GraphCard graph={<ProjectBusinessValueChart/>} title="Project Business Value" content={ProjectBusinessValueDescription}/>
+                        </Paper>
+                    </Col>
+
+                    <Col style={{marginTop:'1em'}} sm={12} >
+                        <Paper elevation={2} square>
+                            <GraphCard graph={<ProjectRiskChart/>} title="Project Risk" content={ProjectRiskDescription}/>
+                        </Paper>
+                    </Col>
+
+                    <Col style={{marginTop:'1em'}} sm={12} >
+                        <Paper elevation={2} square>
+                            <GraphCard graph={<ProjectStatusChart/>} title="Project Status" content={ProjectStatusDescription}/>
+                        </Paper>
+                    </Col>
+
+                    <Col style={{marginTop:'1em'}} sm={12} >
+                        <Paper elevation={2} square>
+                            <GraphCard graph={<CancelledCompletedChart/>} title="Cancelled Vs. Completed Projects" content={null}/>
+                        </Paper>
+                    </Col>
+
                 </Col>
 
-            </Row>
-            <Row>
-                <Col style={{marginTop: '1em'}} sm={12} md={6}>
+                <Col style={{ marginTop:'1em'}} sm={12} md={8}>
                     <Paper elevation={2} square>
-                        <GraphCard graph={<ProjectPhaseChart/>} title="Project Phase" content={null}/>
+                        <Card>
+                            <CardContent>
+                                <DepartmentsByAppsProjects/>
+                            </CardContent>
+                        </Card>
                     </Paper>
                 </Col>
             </Row>

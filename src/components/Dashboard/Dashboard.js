@@ -1,7 +1,6 @@
 import React from 'react';
 import ApplicationsDashboard from './ApplicationsDashboard';
 import ProjectsDashboard from './ProjectsDashboard';
-import DepartmentsDashboard from './DepartmentsDashboard';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -11,7 +10,6 @@ const Dashboard = () => {
         <>
         <ApplicationsDashboard/>
         <ProjectsDashboard/>
-        <DepartmentsDashboard/>
         </>
     );
 };
