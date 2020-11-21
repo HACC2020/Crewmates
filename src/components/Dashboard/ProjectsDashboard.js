@@ -3,6 +3,7 @@ import { useData } from '../../providers/DataProvider';
 import { Container, Row, Col} from 'react-bootstrap';
 import CancelledCompletedChart from '../../graphs/Projects/CancelledCompletedChart';
 import ProjectRiskToValueChart from '../../graphs/ProjectRiskToValueChart/ProjectRiskToValueChart';
+import ProjectPhaseChart from '../../graphs/Projects/ProjectPhaseChart';
 import ProjectBusinessValueChart from '../../graphs/Projects/ProjectBusinessValueChart';
 import ProjectRiskChart from '../../graphs/Projects/ProjectRiskChart';
 import ProjectStatusChart from '../../graphs/Projects/ProjectStatusChart';
@@ -86,6 +87,13 @@ const ProjectsDashboard = () => {
                     </Paper>
                 </Col>
 
+            </Row>
+            <Row>
+                <Col style={{marginTop: '1em'}} sm={12} md={6}>
+                    <Paper elevation={2} square>
+                        <GraphCard graph={<ProjectPhaseChart/>} title="Project Phase" content={null}/>
+                    </Paper>
+                </Col>
             </Row>
         </Container>
     );
