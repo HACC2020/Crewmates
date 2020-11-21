@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../../providers/DataProvider';
-import { Table } from 'react-bootstrap';
+import { Table, Container, Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
-
 // Material UI
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
@@ -14,7 +13,6 @@ import Divider from '@material-ui/core/Divider';
 import Popper from '@material-ui/core/Popper';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 
 // react-spring
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -59,94 +57,95 @@ const AppMatrix = () => {
 
     return(
     <ThemeProvider theme={buttonColorTheme}>
-        <Paper square style={{padding:'2em', marginBottom:'1em', width:'calc(100vw - 240px)'}}>
+        <Container style={{padding:0}} fluid>
+            <Row style={{maxWidth:'calc(100vw - 240px - 3em)'}}>
+                <Col sm={12}>
+                <Paper square style={{padding:'2em', marginBottom:'1em'}}>
+                    <ButtonGroup style={{marginBottom:'1em'}} variant="contained" color="primary" aria-label="outlined primary button group">
+                        <Button>View By: </Button>
+                        <Button onClick={handleClick}>{_.startCase(viewOptions[viewField])}
+                        <ArrowDropDownIcon/></Button>
+                    </ButtonGroup>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        {viewOptions.map((option, index) => 
+                            <MenuItem key={`${index}-option`} onClick={()=> {
+                                setViewField(index);
+                                handleClose();
+                            }}>{_.startCase(option)}</MenuItem>)}
+                    </Menu>
+                    <Divider/>
+                    <div style={{marginTop:'1em'}}>
+                        {<CategoryChips field={viewOptions[viewField]}/>}
+                    </div>
+                </Paper>
+                </Col>
+            </Row>
             
-            <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
-                <Button>View By: </Button>
-                <Button onClick={handleClick}>{_.startCase(viewOptions[viewField])}
-                <ArrowDropDownIcon/></Button>
-            </ButtonGroup>
-            {/* <Button variant="contained" color="primary" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-            View By: {_.startCase(viewOptions[viewField])}
-                <ArrowDropDownIcon/>
-            </Button> */}
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                {viewOptions.map((option, index) => 
-                    <MenuItem key={`${index}-option`} onClick={()=> {
-                        setViewField(index);
-                        handleClose();
-                    }}>{_.startCase(option)}</MenuItem>)}
-            </Menu>
-            <Divider/>
-            <div style={{marginTop:'1em'}}>
-                {<CategoryChips field={viewOptions[viewField]}/>}
-            </div>
-        </Paper>
+            <Row style={{}}>
+                <Col sm={12}>
+                <Paper square style={{maxWidth:'calc(100vw - 240px - 4em)', height:'75vh', padding:'2em', backgroundColor:'var(--theme-color-5)', overflowY:'scroll', overflowX:'scroll'}} elevation={2}>
+                        <Table responsive striped bordered size="sm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {capabilities.map(capability => {
+                                        // Render top row headers that represent all the business capabilities
+                                        let headerTitle = '';
+                                        if(capability === null) headerTitle = 'Missing Capability';
+                                            else headerTitle = capability;
+                                        return (
+                                            <th key={capability}>{headerTitle}</th>
+                                        );
+                                    })}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {departments.map(dep => {
+                                const MAX_DISPLAYED_CHARACTERS = 75;
+                                let departmentName = dep.name;
+                                let displayedName;
 
-        <Paper square style={{height:'120vh', width:'calc(100vw - 240px)', padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2}>
+                                // let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
+                                //     return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
+                                // });
 
-            <Divider />
-            <div style={{ height:'95%', width:`95%`, overflowY:'scroll', overflowX:'scroll',}}>
-                <Table striped bordered size="sm">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            {capabilities.map(capability => {
-                                // Render top row headers that represent all the business capabilities
-                                let headerTitle = '';
-                                if(capability === null) headerTitle = 'Missing Capability';
-                                    else headerTitle = capability;
+                                if(departmentName.length > MAX_DISPLAYED_CHARACTERS) {
+                                    displayedName = departmentName.slice(0,MAX_DISPLAYED_CHARACTERS-1);
+                                } else {
+                                    displayedName = departmentName;
+                                }
                                 return (
-                                    <th key={capability}>{headerTitle}</th>
-                                );
+                                    <tr key={dep.id}>
+                                        <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
+                                        {/* <td>{missingBusinessCapabilityApplications.map(o => 
+                                            <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>)}
+                                        </td> */}
+                                        {capabilities.map(capability => {
+                                            const matchingApplications = _.filter(applications, (application) => {
+                                                return (application.ownerAgencyName === departmentName) 
+                                                    && (application.leadingBusinessCapability === capability);
+                                            });
+
+                                            const matchingApplicationsEl = matchingApplications.map(o => 
+                                                <ApplicationChip key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
+                                            
+                                            return (<><td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td></>);
+                                        })}
+                                    </tr>
+                                    );
                             })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {departments.map(dep => {
-                        const MAX_DISPLAYED_CHARACTERS = 75;
-                        let departmentName = dep.name;
-                        let displayedName;
-
-                        // let missingBusinessCapabilityApplications = _.filter(applications, (application) => {
-                        //     return (application.ownerAgencyName === departmentName) && (application.leadingBusinessCapability === null)
-                        // });
-
-                        if(departmentName.length > MAX_DISPLAYED_CHARACTERS) {
-                            displayedName = departmentName.slice(0,MAX_DISPLAYED_CHARACTERS-1);
-                        } else {
-                            displayedName = departmentName;
-                        }
-                        return (
-                            <tr key={dep.id}>
-                                <td>{departmentName.length > MAX_DISPLAYED_CHARACTERS ? `${displayedName}...` : displayedName}</td>
-                                {/* <td>{missingBusinessCapabilityApplications.map(o => 
-                                    <ApplicationCard key={o.id} appData={o} viewBy={viewOptions[viewField]}/>)}
-                                </td> */}
-                                {capabilities.map(capability => {
-                                    const matchingApplications = _.filter(applications, (application) => {
-                                        return (application.ownerAgencyName === departmentName) 
-                                            && (application.leadingBusinessCapability === capability);
-                                    });
-
-                                    const matchingApplicationsEl = matchingApplications.map(o => 
-                                        <ApplicationChip key={o.id} appData={o} viewBy={viewOptions[viewField]}/>);
-                                    
-                                    return (<><td key={`${dep.id}${capability}`}>{matchingApplicationsEl}</td></>);
-                                })}
-                            </tr>
-                            );
-                    })}
-                    </tbody>
-                </Table>
-            </div>
-        </Paper>
+                            </tbody>
+                        </Table>
+                </Paper>
+                </Col>
+            </Row>
+        </Container>
     </ThemeProvider>
     );
 };
@@ -180,7 +179,7 @@ const ApplicationChip = ({appData, viewBy}) => {
     let darkChipColor = chipColor.slice(0, chipColor.length-1) + '-active)';
     const chipStyle = {
         backgroundColor:`${!darken ? chipColor : darkChipColor}`,
-        color: `${rating === 4 ? 'white' : 'black'}`
+        color: `${(rating === 0) ? 'black' : 'white'}`
     }
     const handleMouseEnter = (event) => {
         // setAnchorEl(anchorEl ? null : event.currentTarget);

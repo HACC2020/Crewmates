@@ -28,7 +28,7 @@ const ITRoadmap = () => {
             </Col>
         </Row>
 
-        <Row style={{marginTop:'1em'}}>
+        <Row style={{marginTop:'1em',overflow:'scroll', height:'70vh'}}>
             <ITRoadmapTimeline/>
         </Row>
 
@@ -73,7 +73,7 @@ const ITRoadmap = () => {
             </Col> 
         </Row>
 
-        <Row style={{marginTop:'1em'}}>
+        <Row style={{overflow:'scroll', height:'70vh', marginTop:'1em'}}>
             <Col>
                 <Paper style={{padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2} square>
                     <ProjectTimeline/>
@@ -89,7 +89,7 @@ const ITRoadmap = () => {
                 </Paper>
             </Col>
         </Row>
-        <Row style={{marginTop:'1em'}}>
+        <Row style={{overflow:'scroll', height:'70vh', marginTop:'1em'}}>
             <Col>
                 <Paper style={{padding:'2em', backgroundColor:'var(--theme-color-5)'}} elevation={2} square>
                     <ApplicationTimeline/>

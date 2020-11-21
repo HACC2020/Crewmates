@@ -11,7 +11,7 @@ import { DataProvider } from './providers/DataProvider';
 // import NewNav from './components/Navigation/Navigation.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Filter from './components/Filter/Filter.js';
-import Data from './components/Data/Data.js';
+// import Data from './components/Data/Data.js';
 // import Footer from './components/Footer.js';
 
 // Reports
@@ -110,7 +110,7 @@ function App(props) {
     { name: 'Application Grid', link: '/application-grid'},
     { name: 'Major Information Systems Roadmap', link: '/misroadmap'},
     // { name: 'Filter', link: '/filter'},
-    { name: 'Raw Data', link: '/data'}
+    // { name: 'Raw Data', link: '/data'}
   ];
 
   // function ListItemLink(props) {
@@ -204,7 +204,7 @@ function App(props) {
           <Route exact path="/misroadmap" component={MISRoadmap}/>
           <Route exact path="/departments" component={DepartmentsTreeVisualization}/>
           <Route exact path="/filter" component={Filter}/>
-          <Route exact path="/data" component={Data}/>
+          {/* <Route exact path="/data" component={Data}/> */}
       </main>
       </div>
       </Router>
