@@ -15,6 +15,8 @@ We plan on creating a user friendly visualization from the data provided.
 
 #### How To Run
 
+The webapp can be previewed [here](https://sharp-borg-ed125d.netlify.app/).
+
 In order to run this application on your machine, you will need Node, which can be installed [here](https://nodejs.org/en/download/).
 
 You will need the code which can be cloned or downloaded from the [repository](https://github.com/HACC2020/Crewmates.git):
